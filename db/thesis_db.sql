@@ -65,7 +65,7 @@ CREATE TABLE `department` (
 
 /*Data for the table `department` */
 
-insert  into `department`(`department_id`,`department_name`,`department_code`,`status`) values (1,'Math',1,'D'),(2,'Physics',2,'D'),(3,'Chemistry',3,'A'),(5,'Electrical Eng',4,'D'),(6,'Electronics and Communication',5,'A'),(7,'Mechanical Eng',6,'A'),(8,'Civil Eng',7,'A'),(9,'Basic Industrial Technology',8,'A'),(10,'Civil Engineering Technology',9,'A'),(11,'ALGEBRA',1732,'A'),(12,'Calculus',123,'D'),(13,'Weed',12,'A');
+insert  into `department`(`department_id`,`department_name`,`department_code`,`status`) values (1,'Math',1,'A'),(2,'Physics',2,'A'),(3,'Chemistry',3,'A'),(5,'Electrical Eng',4,'A'),(6,'Electronics and Communication',5,'A'),(7,'Mechanical Eng',6,'A'),(8,'Civil Eng',7,'A'),(9,'Basic Industrial Technology',8,'A'),(10,'Civil Engineering Technology',9,'A'),(11,'ALGEBRA',1732,'A'),(12,'Calculus',123,'A'),(13,'Weed',12,'A');
 
 /*Table structure for table `faculty` */
 
@@ -77,17 +77,17 @@ CREATE TABLE `faculty` (
   `middle_name` char(15) NOT NULL,
   `last_name` char(15) NOT NULL,
   `position_code` char(10) NOT NULL,
-  `contact` varchar(15) NOT NULL,
+  `contact` varchar(20) NOT NULL,
   `department_code` char(15) NOT NULL,
   `prefered_time` time NOT NULL,
   `prefered_subject` char(1) NOT NULL,
   `status` char(1) DEFAULT 'A',
   PRIMARY KEY (`prof_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `faculty` */
 
-insert  into `faculty`(`prof_id`,`first_name`,`middle_name`,`last_name`,`position_code`,`contact`,`department_code`,`prefered_time`,`prefered_subject`,`status`) values (1,'Mary Rose','CotingjoX','Apoyonz','1','909','1','01:00:00','1','A'),(2,'Marose','Contingoz','Flameon','3','123','1','00:00:00','','A'),(3,'Mary Rose','Cotingjoy','Apoyonx','2','2147483647','1','00:00:00','','A'),(4,'Mareese','Contingo','Apoyony','1','456','2','00:00:00','','D'),(5,'Mary Rose','Contingjo','Apoyon','3','2147483647','3','00:00:00','','D'),(6,'Maureese','Contingoc','Apoyonc','3','789','2','00:00:00','','A'),(7,'Rosemary','Contingov','Apoyonv','2','1231','8','00:00:00','','A'),(8,'Fname','Mname','Lname','1','2345','1','00:00:00','','A'),(9,'Chae','Yeon','Lee','2','91213121','9','00:00:00','','D'),(10,'Jesus','Mary','Joseph','3','143','7','00:00:00','','A');
+insert  into `faculty`(`prof_id`,`first_name`,`middle_name`,`last_name`,`position_code`,`contact`,`department_code`,`prefered_time`,`prefered_subject`,`status`) values (1,'Mary Rose','CotingjoX','Apoyonz','4','(+90)912-121-2121','1','01:00:00','1','A'),(2,'Marose','Contingoz','Flameon','4','(+12)311-111-1111','2','00:00:00','','A'),(3,'Mary Rose','Cotingjoy','Apoyonx','2','(+12)311-111-1111','1','00:00:00','','A'),(4,'Mareese','Contingo','Apoyony','1','(+45)613-980-7776','1','00:00:00','','A'),(5,'Mary Rose','Contingjo','Apoyon','3','(+12)311-111-1111','3','00:00:00','','A'),(6,'Maureese','Contingoc','Apoyonc','1','(+78)945-658-3464','6','00:00:00','','A'),(7,'Rosemary','Contingov','Apoyonv','4','(+12)311-111-1111','7','00:00:00','','A'),(8,'Fname','Mname','Lname','2','(+23)451-212-1212','8','00:00:00','','A'),(9,'Chae','Yeon','Lee','2','(+78)945-658-3464','9','00:00:00','','A'),(10,'Jesus','Mary','Joseph','3','(+78)945-658-3464','7','00:00:00','','A'),(11,'Won','Young','Jang','2','(+78)945-658-3464','6','00:00:00','','A'),(12,'Monkey','Dude','Luffy','4','(+63)921-310-3341','1','00:00:00','','D');
 
 /*Table structure for table `policy` */
 
@@ -113,11 +113,11 @@ CREATE TABLE `position` (
   `position_desc` tinytext NOT NULL,
   `position_code` int(10) NOT NULL,
   PRIMARY KEY (`position_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `position` */
 
-insert  into `position`(`position_id`,`position_name`,`position_desc`,`position_code`) values (1,'Dean','Dean ',1),(2,'Department Head','dep',2),(3,'Research','wewewewweeww',3);
+insert  into `position`(`position_id`,`position_name`,`position_desc`,`position_code`) values (1,'Dean','Dean ',1),(2,'Department Head','Head',2),(3,'Research','wewewewweeww',3),(4,'Instructor','Prof\r\n',4);
 
 /*Table structure for table `room` */
 
@@ -192,7 +192,7 @@ CREATE TABLE `subject` (
 
 /*Data for the table `subject` */
 
-insert  into `subject`(`subject_id`,`subject_code`,`subject_name`,`subject_unit`,`subject_hrs`,`subject_type`,`department_code`,`status`) values (1,'1','Programming 1 Lab',0,3,'Programmin',1,'D'),(2,'2','Programming 1  Lecture',0,5,'Programmin',1,'D'),(3,'3','Programming 2  Lab',0,3,'Programmin',1,'D'),(4,'','',0,0,'',1,'D'),(5,'5','Programming 3 Lab',0,3,'Programmin',1,'A'),(6,' 6','Programming 3  Lecture',0,5,' Programmi',1,'A'),(7,'7','Programming 4 Lab',0,3,'Programmin',1,'A'),(8,'8','Programming 4  Lecture',0,5,'Programmin',1,'A'),(9,'9','Database and Designs',0,4,'Database',1,'A'),(10,'10','Free Elective 1',0,4,'Math',1,'A'),(11,'11','Free Elective 2',0,4,' Math',1,'A'),(12,'12','Free Elective 3',0,3,' Math',1,'A'),(13,'13','Free Elective 4',0,3,' Math',1,'A'),(14,'14','Algebra',0,4,' Math',1,'A'),(15,'15','Trigonometry',0,4,' Math',1,'A'),(16,'16','Differential Calculus',0,5,' Math',1,'A'),(17,'17','Integral Calculus',0,5,'Math',1,'A'),(18,'18','Networking Principles',0,5,'Networking',1,'A'),(19,'1','Mathhhh',3,3,'sfhjds',0,'A'),(20,'007','Agent',12,10,'Classified',0,'A');
+insert  into `subject`(`subject_id`,`subject_code`,`subject_name`,`subject_unit`,`subject_hrs`,`subject_type`,`department_code`,`status`) values (1,'1','Programming 1 Lab',0,3,'Programmin',1,'A'),(2,'2','Programming 1 Lecture',0,5,'Programmin',1,'D'),(3,'3','Programming 2 Lab',0,3,'Programmin',1,'D'),(4,'4','Programming 2 Lecture',0,0,'Programmin',1,'D'),(5,'5','Programming 3 Lab',0,0,'Programin',1,'A'),(6,'6','Programming 3 Lecture',0,5,'Programmin',1,'D'),(7,'7','Programming 4 Lab',0,3,'Programmin',1,'A'),(8,'8','Programming 4 Lecture',0,5,'Programmin',1,'A'),(9,'9','Database and Designs',0,4,'Database',1,'A'),(10,'10','Free Elective 1',0,4,'Math',1,'A'),(11,'11','Free Elective 2',0,4,'Math',1,'A'),(12,'12','Free Elective 3',0,3,'Math',1,'A'),(13,'13','Free Elective 4',0,3,'Math',1,'A'),(14,'14','Algebra',0,4,'Math',1,'A'),(15,'15','Trigonometry',0,4,'Math',1,'A'),(16,'16','Differential Calculus',0,5,'Math',1,'A'),(17,'17','Integral Calculus',0,5,'Math',1,'A'),(18,'18','Networking Principles',0,5,'Networking',1,'A'),(19,'1','Mathhhh',3,3,'sfhjds',0,'A'),(20,'007','Agent',12,10,'Classified',0,'A');
 
 /*Table structure for table `user` */
 

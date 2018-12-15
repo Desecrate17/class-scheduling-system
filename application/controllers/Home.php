@@ -11,7 +11,7 @@ class Home extends CI_Controller {
 	public function index(){
 		if($this->session->userdata("logged_in")){
 			if($userdata[0] == 'faculty'){
-				redirect(base_url('welcome_faculty'));
+				redirect(base_url('welcome_faculty'), $data);
 			}
 			else if($userdata[0] == 'admin'){
 				redirect(base_url('welcome_admin'));		

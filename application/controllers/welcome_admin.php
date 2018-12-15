@@ -11,13 +11,12 @@ class welcome_admin extends CI_Controller {
 		
 	}
 	
-	public function index(){
-		
+	public function index(){		
 		$this->load->view('template/header');
 		$this->load->view('adminDashboards/admin');
 		$this->load->view('template/footer');
 	}
-
+	//FACULTY//
 	public function faculty(){
 		$data['data'] = $this->Admin_model->view_faculty();
 		$data['department'] = $this->Admin_model->view_department();
@@ -25,28 +24,18 @@ class welcome_admin extends CI_Controller {
 		$data['position'] = $this->Admin_model->view_position();
 		$this->load->view('template/header');
 		$this->load->view('data/faculty',$data);
-		$this->load->view('template/footer');
-		
+		$this->load->view('template/footer');		
 	}
-	public function department(){
-		$data['data'] = $this->Admin_model->view_faculty();
+
+	public function viewFaculty($id){
+		$data['data'] =$this->Admin_model->view_faculty_name($id);
+		$data['info'] =$this->Admin_model->view_faculty_info($id);
 		$data['department'] = $this->Admin_model->view_department();
 		$data['subjects'] = $this->Admin_model->view_subjects();
 		$data['position'] = $this->Admin_model->view_position();
 		$this->load->view('template/header');
-		$this->load->view('data/department',$data);
+		$this->load->view('adminDashboards/viewFaculty',$data);
 		$this->load->view('template/footer');
-		
-	}
-	public function subjects(){
-		$data['data'] = $this->Admin_model->view_faculty();
-		$data['department'] = $this->Admin_model->view_department();
-		$data['subjects'] = $this->Admin_model->view_subjects();
-		$data['position'] = $this->Admin_model->view_position();
-		$this->load->view('template/header');
-		$this->load->view('data/subjects',$data);
-		$this->load->view('template/footer');
-		
 	}
 
 	public function addFaculty(){
@@ -66,13 +55,23 @@ class welcome_admin extends CI_Controller {
 		echo json_encode($response);    
 	}
 
-	public function viewFaculty($id){
-		$data['data'] =$this->Admin_model->view_faculty_name($id);
-		$data['info'] =$this->Admin_model->view_faculty_info($id);
-		$this->load->view('template/header');
-		$this->load->view('adminDashboards/viewFaculty',$data);
-		$this->load->view('template/footer');
+	public function editFaculty(){
+		$response = array();
+		$this->form_validation->set_rules('fname', 'First Name', 'required');
+		$this->form_validation->set_rules('mname', 'Middle Name', 'required');
+		$this->form_validation->set_rules('lname', 'Last Name', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$data = $this->Admin_model->edit_faculty();
+			$response['status'] = TRUE;
+			$response[] = $data;
+		}
+		else {
+			$response['status'] = FALSE;
+	    	$response['notif']	= validation_errors();
+		}
+		echo json_encode($response);    
 	}
+
 	public function activateFaculty($id){
 		
 	    $this->Admin_model->act_faculty($id);
@@ -83,6 +82,25 @@ class welcome_admin extends CI_Controller {
 		
 	    $this->Admin_model->del_faculty($id);
 	    redirect('welcome_admin/faculty');
+	}
+	//FACULTY//
+
+	//DEPARTMENT//
+	public function department(){
+		$data['data'] = $this->Admin_model->view_faculty();
+		$data['department'] = $this->Admin_model->view_department();
+		$data['subjects'] = $this->Admin_model->view_subjects();
+		$data['position'] = $this->Admin_model->view_position();
+		$this->load->view('template/header');
+		$this->load->view('data/department',$data);
+		$this->load->view('template/footer');	
+	}
+
+	public function viewDepartment($id){
+		$data['data'] =$this->Admin_model->view_department_name($id);
+		$this->load->view('template/header');
+		$this->load->view('adminDashboards/viewDepartment',$data);
+		$this->load->view('template/footer');
 	}
 
 	public function addDepartment(){
@@ -101,13 +119,20 @@ class welcome_admin extends CI_Controller {
 		echo json_encode($response);    
 	}
 
-
-	public function viewDepartment($id){
-		$data['data'] =$this->Admin_model->view_department_name($id);
-		// $data['info'] =$this->Admin_model->view_faculty_info($id);
-		$this->load->view('template/header');
-		$this->load->view('adminDashboards/viewDepartment',$data);
-		$this->load->view('template/footer');
+	public function editDepartment(){
+		$response = array();
+		$this->form_validation->set_rules('depname', 'Department Name', 'required');
+		$this->form_validation->set_rules('depcode', 'Department Code', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$data = $this->Admin_model->edit_department();
+			$response['status'] = TRUE;
+			$response[] = $data;
+		}
+		else {
+			$response['status'] = FALSE;
+	    	$response['notif']	= validation_errors();
+		}
+		echo json_encode($response);    
 	}
 
 	public function activateDepartment($id){
@@ -118,6 +143,18 @@ class welcome_admin extends CI_Controller {
 	public function deleteDepartment($id){
 	    $this->Admin_model->del_department($id);
 	    redirect('welcome_admin/department');
+	}
+	//DEPARTMENT//
+
+	//SUBJECT//
+	public function subjects(){
+		$data['data'] = $this->Admin_model->view_faculty();
+		$data['department'] = $this->Admin_model->view_department();
+		$data['subjects'] = $this->Admin_model->view_subjects();
+		$data['position'] = $this->Admin_model->view_position();
+		$this->load->view('template/header');
+		$this->load->view('data/subjects',$data);
+		$this->load->view('template/footer');		
 	}
 
 	public function addSubject(){
@@ -137,14 +174,6 @@ class welcome_admin extends CI_Controller {
 	    	$response['notif']	= validation_errors();
 		}
 		echo json_encode($response);    
-
-	}
-
-	public function getSubject(){
-		$id = $_POST['id']; 
-		$response = $this->Admin_model->edit_subjects($id);
-		echo json_encode($response);    
-
 	}
 
 	public function editSubject($id){		
@@ -164,8 +193,6 @@ class welcome_admin extends CI_Controller {
 	    	$response['notif']	= validation_errors();
 		}
 		echo json_encode($response);    
-
-
 	}
 
 	public function deleteSubject($id){
@@ -179,6 +206,13 @@ class welcome_admin extends CI_Controller {
 	    $this->Admin_model->act_subject($id);
 	    redirect('welcome_admin/subjects');
 	}
+
+	public function getSubject(){
+		$id = $_POST['id']; 
+		$response = $this->Admin_model->edit_subjects($id);
+		echo json_encode($response);    
+	}
+	//SUBJECT//
 	public function viewSched(){
 		$this->load->view('template/header');
 		$this->load->view('adminDashboards/view_schedule');
