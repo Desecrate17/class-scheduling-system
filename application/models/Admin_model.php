@@ -10,10 +10,8 @@ class Admin_model extends CI_Model{
 			SELECT f.prof_id, f.first_name, f.middle_name, f.last_name, p.position_name, f.contact, d.department_name, f.status fs,
 			d.status ds
 			FROM faculty as f
-			LEFT JOIN department as d
-			ON f.department_code = d.department_code
-			LEFT JOIN position as p
-			ON f.position_code = p.position_code
+			LEFT JOIN department as d ON f.department_code = d.department_code
+			LEFT JOIN position as p ON f.position_code = p.position_code
 		");
 		if ($query->num_rows() > 0){
 			return $query->result();
@@ -37,14 +35,25 @@ class Admin_model extends CI_Model{
 
 	public function view_faculty_info($id){
 		$query = $this->db->query("
-			SELECT p.position_name, f.contact, d.department_name,s.subject_name, f.prefered_time, d.department_name, s.subject_name, s.subject_unit, s.subject_hrs, s.subject_type
+			SELECT f.prof_id, p.position_name, f.contact, d.department_name, d.department_code, f.prefered_time, p.position_code
 			FROM faculty as f
-			LEFT JOIN department as d
-			ON f.department_code = d.department_code
-			LEFT JOIN position as p
-			ON f.position_code = p.position_code
-			LEFT JOIN subject as s 
-			ON f.prefered_subject = s.subject_code
+			INNER JOIN department as d ON f.department_code = d.department_code
+			INNER JOIN position as p ON f.position_code = p.position_code
+			WHERE f.prof_id = '$id'
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+	public function view_faculty_info2($id){
+		$query = $this->db->query("
+			SELECT s.subject_name
+			FROM faculty as f
+			LEFT JOIN subject_list as sl ON f.prof_id = sl.faculty_id
+			LEFT JOIN subject as s ON sl.subject_code = s.subject_code
 			WHERE f.prof_id = '$id'
 			");
 		if ($query->num_rows() > 0){
@@ -67,6 +76,7 @@ class Admin_model extends CI_Model{
 		);
 		$this->db->insert('faculty', $data);
 
+
 	}
 	public function edit_faculty(){
 		$first_name = $this->input->post('fname');
@@ -86,6 +96,12 @@ class Admin_model extends CI_Model{
 		$this->db->where('prof_id', $prof_id);
 
 		$result = $this->db->update('faculty');
+		
+		// $data2 = array(
+		// 	'faculty_id'=>$this->input->post('fid'),
+		// 	'subject_code'=>$this->input->post('sub_list')
+		// );
+		// $this->db->insert('subject_list', $data2);
 		return $result;
 
 	}
@@ -130,22 +146,38 @@ class Admin_model extends CI_Model{
 
 	public function view_department_info($id){
 		$query = $this->db->query("
-			SELECT p.position_name, f.contact, d.department_name,s.subject_name, f.prefered_time
+			SELECT f.prof_id, f.first_name, f.middle_name, f.last_name, p.position_name, f.contact, d.department_name, f.status fs,
+			d.status ds, f.position_code pc
 			FROM faculty as f
-			LEFT JOIN department as d
-			ON f.department_code = d.department_code
-			LEFT JOIN position as p
-			ON f.position_id = p.position_id
-			LEFT JOIN subject as s 
-			ON f.prefered_subject = s.subject_code
-			WHERE f.prof_id = '$id'
-			");
+			LEFT JOIN department as d ON f.department_code = d.department_code
+			LEFT JOIN position as p ON f.position_code = p.position_code
+			WHERE f.department_code = $id
+		");
 		if ($query->num_rows() > 0){
 			return $query->result();
 		}else{
 			return NULL;
 		}
 	}
+
+	// public function view_department_info($id){
+	// 	$query = $this->db->query("
+	// 		SELECT p.position_name, f.contact, d.department_name,s.subject_name, f.prefered_time
+	// 		FROM faculty as f
+	// 		LEFT JOIN department as d
+	// 		ON f.department_code = d.department_code
+	// 		LEFT JOIN position as p
+	// 		ON f.position_id = p.position_id
+	// 		LEFT JOIN subject as s 
+	// 		ON f.prefered_subject = s.subject_code
+	// 		WHERE f.prof_id = '$id'
+	// 		");
+	// 	if ($query->num_rows() > 0){
+	// 		return $query->result();
+	// 	}else{
+	// 		return NULL;
+	// 	}
+	// }
 
 	public function add_department(){
 		$data = array(
@@ -202,7 +234,7 @@ class Admin_model extends CI_Model{
 	public function get_subjects($id){
 		$query = $this->db->query("
 			SELECT *
-			FROM subject
+			FROM subject as s
 			WHERE subject_id = $id 
 			");
 		if ($query->num_rows() > 0){
@@ -215,7 +247,7 @@ class Admin_model extends CI_Model{
 	public function view_subjects(){
 		$query = $this->db->query("
 			SELECT *
-			FROM subject
+			FROM subject as s
 			");
 		if ($query->num_rows() > 0){
 			return $query->result();

@@ -5,13 +5,13 @@
         <img class="mx-auto d-block" src="<?php echo base_url('assets/images/user.png');?>" alt="Card image cap">
         <h5 class="text-sm-center mt-2 mb-1"><?php                                           
           foreach ($data as $row) { ?>
-              <?php echo $row->last_name.', '.$row->first_name.' '.$row->middle_name; ?>
+              <?php echo $row->last_name.', '.$row->first_name.' '.$row->middle_name[0].'.'; ?>
           <?php
               }?>
         </h5>
         <p class="text-sm-center mt-2 mb-1"> <?php                                          
           foreach ($data as $row) { ?>
-              <?php echo $row->contact; ?>
+              <?php echo $row->prof_id; ?>
           <?php
           }?>
         </p>                                                                                                       
@@ -21,14 +21,16 @@
           <div class="card-header">
             <i class="fa fa-info-circle"></i>
             <strong class="card-title">Professor Information</strong>
-            <button type="button" class="btn btn-sm btn-info" data-target="#editfaculty" data-toggle="modal" data-backdrop="static">Edit</button><span class="fa fa-pencil"></span>
-        </div>
+            <button type="button" class="btn btn-sm btn-info" data-target="#editfaculty" data-toggle="modal" data-backdrop="static" title="Edit Information">Edit</button><span class="fa fa-pencil"></span>
+          </div>
         <div class="card-body">
         <?php foreach ($info as $row) { ?>
             <h6>Position:</h6><p><?php echo $row->position_name; ?></p>
             <h6>Department:</h6><p><?php echo $row->department_name; ?></p>
-            <h6>Subjects:</h6><p><?php echo $row->subject_name; ?></p>
-            <h6>Prefered Time:</h6><p><?php echo $row->prefered_time; ?></p>
+            <h6>Preferred Time:</h6><p><?php echo $row->prefered_time; ?></p>
+        <?php } ?><h6>Preferred Subjects:</h6>
+        <?php foreach ($info2 as $row) { ?>
+            <p><?php echo $row->subject_name; ?></p>
         <?php } ?>
           </div>
         </div>
@@ -63,7 +65,7 @@
               <div class="col-12 col-md-4"><input type="contact" value="<?php echo $data[0]->contact;?>" id="fcontact_upd" name="fcontact" placeholder="Contact No." class="form-control"></div>
               <div class="col-12 col-md-4">
                   <select name="fposition" id="fposition_upd" class="form-control">
-                      <option name="fposition" id="fposition" value="<?php echo $data[0]->prof_id;?>"><?php echo $info[0]->position_name;?></option>
+                      <option value="<?php echo $info[0]->position_code;?>"><?php echo $info[0]->position_name;?></option>
                       <?php
                           foreach($position as $row) { ?>
                           <option value="<?php echo $row->position_code ?>"><?php echo $row->position_name ?></option>
@@ -73,8 +75,8 @@
                   </select>
               </div>
               <div class="col-12 col-md-4">
-                  <select name="fdepCode" id="fdepCode_upd" class="form-control" >
-                      <option value="<?php echo $data[0]->prof_id;?>"><?php echo $info[0]->department_name;?></option>
+                  <select name="fdepCodes" id="fdepCode_upd" class="form-control" >
+                      <option value="<?php echo $info[0]->department_code;?>"><?php echo $info[0]->department_name;?></option>
                       <?php
                           foreach($department as $row) { ?>
                           <option value="<?php echo $row->department_code ?>"><?php echo $row->department_name ?></option>
@@ -84,6 +86,18 @@
                   </select>
               </div>    
             </div>
+            <!-- <div class="row form-group">    
+              <div class="col-12 col-md-4">
+                  <select name="sub_list" id="sub_list[]" class="form-control" multiple="multiple">
+                      <?php
+                          foreach($subjects as $row) { ?>
+                          <option value="<?php echo $row->subject_code ?>"><?php echo $row->subject_name ?></option>
+                      <?php
+                          }
+                      ?>
+                  </select>
+              </div>    
+            </div> -->
           </div>
           <div class="modal-footer">
             <input type="hidden" name="prof_id" id="profid" value="<?php echo $data[0]->prof_id;?>">

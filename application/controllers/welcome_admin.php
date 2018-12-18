@@ -26,10 +26,11 @@ class welcome_admin extends CI_Controller {
 		$this->load->view('data/faculty',$data);
 		$this->load->view('template/footer');		
 	}
-
+	
 	public function viewFaculty($id){
 		$data['data'] =$this->Admin_model->view_faculty_name($id);
 		$data['info'] =$this->Admin_model->view_faculty_info($id);
+		$data['info2'] =$this->Admin_model->view_faculty_info2($id);
 		$data['department'] = $this->Admin_model->view_department();
 		$data['subjects'] = $this->Admin_model->view_subjects();
 		$data['position'] = $this->Admin_model->view_position();
@@ -85,9 +86,17 @@ class welcome_admin extends CI_Controller {
 	}
 	//FACULTY//
 
+	//ROOMS//
+	public function rooms(){
+		$this->load->view('template/header');
+		$this->load->view('data/rooms');
+		$this->load->view('template/footer');		
+	}
+	//ROOMS//
+
 	//DEPARTMENT//
 	public function department(){
-		$data['data'] = $this->Admin_model->view_faculty();
+		$data['data2'] = $this->Admin_model->view_faculty();
 		$data['department'] = $this->Admin_model->view_department();
 		$data['subjects'] = $this->Admin_model->view_subjects();
 		$data['position'] = $this->Admin_model->view_position();
@@ -98,6 +107,7 @@ class welcome_admin extends CI_Controller {
 
 	public function viewDepartment($id){
 		$data['data'] =$this->Admin_model->view_department_name($id);
+		$data['data2'] = $this->Admin_model->view_department_info($id);
 		$this->load->view('template/header');
 		$this->load->view('adminDashboards/viewDepartment',$data);
 		$this->load->view('template/footer');

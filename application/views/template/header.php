@@ -44,8 +44,9 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="<?php echo site_url('welcome_admin');?>"><img style="width: 50px; height: 50px; margin: 20px 20px;" src="<?php echo base_url('assets/img/logo.jpg'); ?>"> EZ LOGO</a>
-                <a class="navbar-brand hidden" href="<?php echo site_url('welcome_admin');?>"><img style="width: 30px; height: 30px; " src="<?php echo base_url('assets/images/logo.jpg'); ?>"</a></a>
+                <a class="navbar-brand" href="<?php echo site_url('welcome_admin');?>"><img style="width: 50px; height: 50px;" src="<?php echo base_url('assets/img/logo.jpg'); ?>">College of Science</a>
+                <a class="navbar-brand hidden" href="<?php echo site_url('welcome_admin');?>"><img style="width: 30px; height: 30px;" 
+                    src="<?php echo base_url('assets/img/logo.jpg'); ?>"></a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -61,7 +62,7 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-address-card-o"></i><a href="<?php echo site_url('welcome_admin/faculty');?>">Faculty</a></li>
                             <li><i class="fa fa-hotel"></i><a href="<?php echo site_url('welcome_admin/view_sched');?>">Section</a></li>
-                            <li><i class="fa fa-building-o"></i><a href="<?php echo site_url('welcome_admin/view_sched');?>">Rooms</a></li>
+                            <li><i class="fa fa-building-o"></i><a href="<?php echo site_url('welcome_admin/rooms');?>">Rooms</a></li>
                             <li><i class="fa fa-graduation-cap"></i><a href="<?php echo site_url('welcome_admin/view_sched');?>">Courses</a></li>
                             <li><i class="fa fa-suitcase"></i><a href="<?php echo site_url('welcome_admin/department');?>">Departments</a></li>
                             <li><i class="fa fa-book"></i><a href="<?php echo site_url('welcome_admin/subjects');?>">Subjects</a></li>
@@ -101,8 +102,7 @@
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="user-avatar rounded-circle" src="<?php echo base_url('assets/images/admin.jpg');?>" alt="User Avatar">
-                            <p><?php echo $this->session->userdata('user'); ?></p>
-                        
+                            <span><?php echo $this->session->userdata('user'); ?></span>
                         </a>
 
                         <div class="user-menu dropdown-menu">

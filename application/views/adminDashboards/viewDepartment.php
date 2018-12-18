@@ -24,10 +24,21 @@
 	                        <button type="button" class="btn btn-sm btn-info" data-target="#editdepartment" data-toggle="modal" data-backdrop="static">Edit</button><span class="fa fa-pencil"></span>
 	                    </div>
 	                    <div class="card-body">
-	                	<?php foreach($data as $row){ ?>
-		                    <h6> Department Dean: </h6><p><?php echo $row->department_name; ?></p>
-		                    <h6> Department Head: </h6><p><?php echo $row->department_name; ?></p>
-	                	<?php } ?>
+	                    <h6> Department Dean : </h6><p>
+	                	<?php 
+	                	foreach($data2 as $row){
+	                	  if($row->pc == 'Dean'){
+	                	  ?>
+		                   	<?php echo $row->last_name.', '.$row->first_name.' '.$row->middle_name; ?>
+		                	<?php }} ?></p>
+		                <h6> Department Head : </h6><p>
+		                <?php 
+	                	foreach($data2 as $row){
+	                	  if($row->pc == 'Head'){
+	                	  ?>
+		                   	<?php echo $row->last_name.', '.$row->first_name.' '.$row->middle_name; ?>
+		                	<?php }} ?></p>
+		                  
 	                    </div>
 	                </div>
 	            </div>         

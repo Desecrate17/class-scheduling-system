@@ -40,7 +40,7 @@
           });
 
           //CONTACT
-          $('input[name="fcontact"]').inputmask("(+99)999-999-9999", {"placeholder": "(+XX)XXX-XXX-XXXX"});
+          $('input[name="fcontact"]').inputmask("(+63)999-999-9999", {"placeholder": "(+63)XXX-XXX-XXXX"});
 
 
           // FACULTY //
@@ -86,6 +86,7 @@
               var fcontact = $('#fcontact_upd').val();
               var fposition = $('#fposition_upd').val();
               var fdepCode = $('#fdepCode_upd').val();
+              // var sub_list = $('#sub_list').val();
               var fid = $('#profid').val();
               $.ajax({
                   type: 'post',
@@ -97,6 +98,7 @@
                         contact: fcontact,
                         position: fposition,
                         depCode: fdepCode,
+                        // sub_list: sub_list,
                         fid : fid
                   },
                 dataType: 'JSON',
