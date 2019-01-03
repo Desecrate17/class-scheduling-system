@@ -1,4 +1,5 @@
 <div class="col-md-12">
+  <div class="animated fadeIn">
   <div class="card">
     <div class="card-body">
       <div class="mx-auto d-block">
@@ -10,8 +11,8 @@
               }?>
         </h5>
         <p class="text-sm-center mt-2 mb-1"> <?php                                          
-          foreach ($data as $row) { ?>
-              <?php echo $row->prof_id; ?>
+          foreach ($info as $row) { ?>
+              <?php echo $row->position_name; ?>
           <?php
           }?>
         </p>                                                                                                       
@@ -25,7 +26,6 @@
           </div>
         <div class="card-body">
         <?php foreach ($info as $row) { ?>
-            <h6>Position:</h6><p><?php echo $row->position_name; ?></p>
             <h6>Department:</h6><p><?php echo $row->department_name; ?></p>
             <h6>Preferred Time:</h6><p><?php echo $row->prefered_time; ?></p>
         <?php } ?><h6>Preferred Subjects:</h6>
@@ -37,9 +37,10 @@
       </div>
     </div>
   </div>
+  </div>
 </div>
 <!--EDIT FACULTY MODAL +++++++++++++++++++++++++++++++++++++++++-->
-  <div class="modal fade" id="editfaculty">
+  <div class="modal fade" id="editfaculty" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">

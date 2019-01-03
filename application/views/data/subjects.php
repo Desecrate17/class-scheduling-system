@@ -7,6 +7,17 @@
         </div>
       </div>
     </div>
+    <div class="col-sm-8">
+      <div class="page-header float-right">
+          <div class="page-title">
+              <ol class="breadcrumb text-right">
+                  <li><a href="<?php echo site_url('welcome_admin');?>">Home</a></li>
+                  <li><a href="#">Data</a></li>
+                  <li class="active">Subjects</li>
+              </ol>
+          </div>
+      </div>
+    </div>
   </div>
 
   <div class="content mt-3">
@@ -140,7 +151,7 @@
   
 
 <!--ADD SUBJECTS MODAL ++++++++++++++++++++++++++++++++++++++++++-->
-  <div class="modal fade" id="addsubjects">
+  <div class="modal fade" id="addsubjects" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <form class="form-horizontal">

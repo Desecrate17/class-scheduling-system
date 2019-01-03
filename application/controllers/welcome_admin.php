@@ -13,7 +13,19 @@ class welcome_admin extends CI_Controller {
 	
 	public function index(){		
 		$this->load->view('template/header');
-		$this->load->view('adminDashboards/admin');
+		$data = array(
+			'faculty' => $this->Admin_model->faculty_count(),
+			'faculty_on' => $this->Admin_model->faculty_count2(),
+			'faculty_off' => $this->Admin_model->faculty_count3(),
+			'department' => $this->Admin_model->department_count(),
+			'department_on' => $this->Admin_model->department_count2(),
+			'department_off' => $this->Admin_model->department_count3(),
+			'subjects' => $this->Admin_model->subjects_count(),
+			'subjects_on' => $this->Admin_model->subjects_count2(),
+			'subjects_off' => $this->Admin_model->subjects_count3(),
+			'rooms' => $this->Admin_model->rooms_count()
+		);
+		$this->load->view('adminDashboards/admin', $data);
 		$this->load->view('template/footer');
 	}
 	//FACULTY//

@@ -20,6 +20,8 @@ class Admin_model extends CI_Model{
 		}
 	}
 
+
+
 	public function view_faculty_name($id){
 		$query = $this->db->query("
 			SELECT f.prof_id, f.first_name, f.middle_name, f.last_name, f.contact
@@ -298,6 +300,93 @@ class Admin_model extends CI_Model{
 		}
 	}
 
+	// ID COUNT //
+	public function faculty_count(){
+		$query = $this->db->query("
+			SELECT COUNT(prof_id) AS prof_id
+			FROM faculty
+			");
+		return $query->result();
+	}
 
+	public function faculty_count2(){
+		$query = $this->db->query("
+			SELECT COUNT(prof_id) AS prof_id
+			FROM faculty
+			WHERE status = 'A'
+			");
+		return $query->result();
+	}
+
+	public function faculty_count3(){
+		$query = $this->db->query("
+			SELECT COUNT(prof_id) AS prof_id
+			FROM faculty
+			WHERE status = 'D'
+			");
+		return $query->result();
+	}
+
+	public function department_count(){
+		$query = $this->db->query("
+			SELECT COUNT(department_id) AS dep_id
+			FROM department
+			");
+		return $query->result();
+	}
+
+	public function department_count2(){
+		$query = $this->db->query("
+			SELECT COUNT(department_id) AS dep_id
+			FROM department
+			WHERE status = 'A'
+			");
+		return $query->result();
+	}
+
+	public function department_count3(){
+		$query = $this->db->query("
+			SELECT COUNT(department_id) AS dep_id
+			FROM department
+			WHERE status = 'D'
+			");
+		return $query->result();
+	}	
+
+	public function subjects_count(){
+		$query = $this->db->query("
+			SELECT COUNT(subject_id) AS sub_id
+			FROM subject
+			");
+		return $query->result();
+	}
+
+	public function subjects_count2(){
+		$query = $this->db->query("
+			SELECT COUNT(subject_id) AS sub_id
+			FROM subject
+			WHERE status = 'A'
+			");
+		return $query->result();
+	}
+
+	public function subjects_count3(){
+		$query = $this->db->query("
+			SELECT COUNT(subject_id) AS sub_id
+			FROM subject
+			WHERE status = 'D'
+			");
+		return $query->result();
+	}
+
+	public function rooms_count(){
+		$query = $this->db->query("
+			SELECT COUNT(room_id) AS room_id
+			FROM room
+			");
+		return $query->result();
+	}
+
+	// ID COUNT //
 
 }

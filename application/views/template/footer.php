@@ -1,10 +1,11 @@
-</div><!-- /#right-panel -->
+</div></div><!-- /#right-panel -->
     <!-- Right Panel -->
  
     <script src="<?php echo base_url('assets/vendors/jquery/dist/jquery.min.js');?>"></script>
     <script src="<?php echo base_url('assets/vendors/popper.js/dist/umd/popper.min.js');?>"></script>
     <script src="<?php echo base_url('assets/vendors/bootstrap/dist/js/bootstrap.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/main.js');?>"></script>
+
     <script src="<?php echo base_url('assets/vendors/chart.js/dist/Chart.bundle.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/dashboard.js');?>"></script>
     <script src="<?php echo base_url('assets/js/widgets.js');?>"></script>

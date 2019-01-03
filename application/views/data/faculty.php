@@ -7,6 +7,17 @@
         </div>
       </div>
     </div>
+    <div class="col-sm-8">
+      <div class="page-header float-right">
+          <div class="page-title">
+              <ol class="breadcrumb text-right">
+                  <li><a href="<?php echo site_url('welcome_admin');?>">Home</a></li>
+                  <li><a href="#">Data</a></li>
+                  <li class="active">Faculty</li>
+              </ol>
+          </div>
+      </div>
+    </div>
   </div>
 
   <div class="content mt-3">
@@ -196,7 +207,7 @@
   </div> <!-- .content -->
 
 <!--ADD FACULTY MODAL ++++++++++++++++++++++++++++++++++++++++++-->
-  <div class="modal fade" id="addfaculty">
+  <div class="modal fade" id="addfaculty" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -208,7 +219,7 @@
         <form class="form-horizontal">
           <div class="modal-body">
             <div class="form-group">
-              <div class="alert alert-danger" align="center" style="display: none;"></div>
+              <div class="alert alert-danger alert-dismissible fade show" align="center" style="display: none;"></div>
             </div>
             <div class="row form-group">
               <div class="col-12 col-md-4"><input type="text" id="ffname" name="ffname" placeholder="First Name" class="form-control">
@@ -221,7 +232,7 @@
             <div class="row form-group">
               <div class="col-12 col-md-4"><input type="contact" id="fcontact" name="fcontact" placeholder="Contact No." class="form-control"></div>
               <div class="col-12 col-md-4">
-                  <select name="fposition" id="fposition" class="form-control" >
+                  <select data-placeholder="Subject" name="fposition" id="fposition" multiple class="form-control">
                       <?php
                           foreach($position as $row) { ?>
                           <option value="<?php echo $row->position_code ?>"><?php echo $row->position_name ?></option>
@@ -251,4 +262,3 @@
     </div>
   </div>
 <!--ADD FACULTY MODAL ++++++++++++++++++++++++++++++++++++++++++++-->
-

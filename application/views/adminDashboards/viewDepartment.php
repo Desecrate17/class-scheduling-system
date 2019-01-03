@@ -1,4 +1,5 @@
 	<div class="col-md-12">
+ 	 <div class="animated fadeIn">
 	    <div class="card">
 	        <div class="card-body">
 	            <div class="mx-auto d-block">
@@ -44,10 +45,11 @@
 	            </div>         
 	        </div>                        
 	    </div>
+   </div>
 	</div>
 
 <!--EDIT FACULTY MODAL +++++++++++++++++++++++++++++++++++++++++-->
-  <div class="modal fade" id="editdepartment">
+  <div class="modal fade" id="editdepartment" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
