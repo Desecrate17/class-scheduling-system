@@ -76,17 +76,18 @@ CREATE TABLE `faculty` (
   `first_name` char(15) NOT NULL,
   `middle_name` char(15) NOT NULL,
   `last_name` char(15) NOT NULL,
-  `position_code` varchar(20) NOT NULL,
+  `position_code` char(10) NOT NULL,
   `contact` varchar(20) NOT NULL,
   `department_code` char(15) NOT NULL,
   `prefered_time` time NOT NULL,
+  `prefered_subject` char(1) NOT NULL,
   `status` char(1) DEFAULT 'A',
   PRIMARY KEY (`prof_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `faculty` */
 
-insert  into `faculty`(`prof_id`,`first_name`,`middle_name`,`last_name`,`position_code`,`contact`,`department_code`,`prefered_time`,`status`) values (1,'Mary Rose','CotingjoX','Apoyonz','Instructor','(+63)909-121-2121','5','01:00:00','A'),(2,'Marose','Contingoz','Flameon','Instructor','(+12)311-111-1111','2','00:00:00','A'),(3,'Mary Rose','Cotingjoyz','Apoyonxz','Head','(+63)123-111-1100','1','00:00:00','A'),(4,'Mareese','Contingo','Apoyony','Dean','(+45)613-980-7776','1','00:00:00','A'),(5,'Mary Rose','Contingjo','Apoyon','Research','(+12)311-111-1111','1','00:00:00','A'),(6,'Maureese','Contingoc','Apoyonc','Dean','(+78)945-658-3464','6','00:00:00','A'),(7,'Rosemary','Contingov','Apoyonv','Instructor','(+12)311-111-1111','7','00:00:00','A'),(8,'Fname','Mname','Lname','Head','(+23)451-212-1212','8','00:00:00','A'),(9,'Chae','Yeon','Lee','Head','(+78)945-658-3464','9','00:00:00','A'),(10,'Jesus','Mary','Joseph','Research','(+78)945-658-3464','2','00:00:00','A'),(11,'Won','Young','Jang','Head','(+78)945-658-3464','6','00:00:00','A'),(12,'Monkey','Dude','Luffy','Instructor','(+63)921-310-3341','1','00:00:00','D'),(13,'Chae','Won','Moon','Head','(+63)921-313-2141','8','00:00:00','A');
+insert  into `faculty`(`prof_id`,`first_name`,`middle_name`,`last_name`,`position_code`,`contact`,`department_code`,`prefered_time`,`prefered_subject`,`status`) values (1,'Mary Rose','CotingjoX','Apoyonz','4','(+63)909-121-2121','1','01:00:00','1','A'),(2,'Marose','Contingoz','Flameon','4','(+12)311-111-1111','2','00:00:00','','D'),(3,'Mary Rose','Cotingjoy','Apoyonx','2','(+12)311-111-1111','1','00:00:00','','A'),(4,'Mareese','Contingo','Apoyony','1','(+45)613-980-7776','1','00:00:00','','A'),(5,'Mary Rose','Contingjo','Apoyon','3','(+12)311-111-1111','3','00:00:00','','A'),(6,'Maureese','Contingoc','Apoyonc','1','(+78)945-658-3464','6','00:00:00','','A'),(7,'Rosemary','Contingov','Apoyonv','4','(+12)311-111-1111','7','00:00:00','','A'),(8,'Fname','Mname','Lname','2','(+23)451-212-1212','8','00:00:00','','A'),(9,'Chae','Yeon','Lee','2','(+78)945-658-3464','9','00:00:00','','A'),(10,'Jesus','Mary','Joseph','3','(+78)945-658-3464','7','00:00:00','','A'),(11,'Won','Young','Jang','2','(+78)945-658-3464','6','00:00:00','','A'),(12,'Monkey','Dude','Luffy','4','(+63)921-310-3341','1','00:00:00','','D');
 
 /*Table structure for table `policy` */
 
@@ -110,13 +111,13 @@ CREATE TABLE `position` (
   `position_id` int(10) NOT NULL AUTO_INCREMENT,
   `position_name` char(25) NOT NULL,
   `position_desc` tinytext NOT NULL,
-  `position_code` varchar(20) NOT NULL,
+  `position_code` int(10) NOT NULL,
   PRIMARY KEY (`position_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `position` */
 
-insert  into `position`(`position_id`,`position_name`,`position_desc`,`position_code`) values (1,'Dean','Dean ','Dean'),(2,'Department Head','Head','Head'),(3,'Research','wewewewweeww','Research'),(4,'Instructor','Prof\r\n','Instructor');
+insert  into `position`(`position_id`,`position_name`,`position_desc`,`position_code`) values (1,'Dean','Dean ',1),(2,'Department Head','Head',2),(3,'Research','wewewewweeww',3),(4,'Instructor','Prof\r\n',4);
 
 /*Table structure for table `room` */
 
@@ -125,15 +126,13 @@ DROP TABLE IF EXISTS `room`;
 CREATE TABLE `room` (
   `room_id` int(10) NOT NULL AUTO_INCREMENT,
   `room_no` int(10) NOT NULL,
-  `room_status` char(15) NOT NULL DEFAULT 'A',
+  `room_status` char(15) NOT NULL,
   `room_type` char(10) NOT NULL,
   `department_code` int(10) NOT NULL,
   PRIMARY KEY (`room_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*Data for the table `room` */
-
-insert  into `room`(`room_id`,`room_no`,`room_status`,`room_type`,`department_code`) values (1,301,'A','Lecture',1),(2,302,'A','Lecture',1),(3,303,'A','Lecture',1),(4,304,'A','Lecture',1),(5,305,'A','Lecture',1),(6,306,'A','Lecture',1),(7,0,'A','Laboratory',1),(8,0,'A','Laboratory',1),(9,0,'A','Laboratory',1);
 
 /*Table structure for table `schedule` */
 
@@ -181,7 +180,7 @@ DROP TABLE IF EXISTS `subject`;
 
 CREATE TABLE `subject` (
   `subject_id` int(10) NOT NULL AUTO_INCREMENT,
-  `subject_code` char(15) NOT NULL,
+  `subject_code` varchar(15) NOT NULL,
   `subject_name` char(30) NOT NULL,
   `subject_unit` int(11) NOT NULL,
   `subject_hrs` int(3) NOT NULL,
@@ -200,15 +199,15 @@ insert  into `subject`(`subject_id`,`subject_code`,`subject_name`,`subject_unit`
 DROP TABLE IF EXISTS `subject_list`;
 
 CREATE TABLE `subject_list` (
-  `subjectlist_id` int(10) NOT NULL AUTO_INCREMENT,
+  `subject_list_id` int(10) NOT NULL AUTO_INCREMENT,
   `faculty_id` int(10) DEFAULT NULL,
-  `subject_code` varchar(12) DEFAULT NULL,
-  PRIMARY KEY (`subjectlist_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  `subject_code` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`subject_list_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `subject_list` */
 
-insert  into `subject_list`(`subjectlist_id`,`faculty_id`,`subject_code`) values (1,1,'1'),(2,2,'3'),(3,1,'2'),(4,1,'5'),(5,1,'4'),(6,3,'1'),(7,3,'5'),(8,3,'10');
+insert  into `subject_list`(`subject_list_id`,`faculty_id`,`subject_code`) values (1,1,'1'),(2,1,'2'),(3,1,'3'),(4,2,'1'),(5,3,'2');
 
 /*Table structure for table `user` */
 
