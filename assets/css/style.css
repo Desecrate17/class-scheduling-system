@@ -625,11 +625,11 @@
   border-color: #343a40; }
 
 .social-box {
-  min-height: 160px;
+ /* min-height: 160px;
   margin-bottom:24px;
   margin-bottom: 1.5rem;
   text-align: center;
-  background: #fff; }
+ */ background: #fff; }
   .social-box i {
     display: block;
     margin: -1px -1px 0;
@@ -1081,6 +1081,7 @@ aside.left-panel {
         background: none !important;
         color: #c8c9ce !important;
         display: inline-block;
+        font-family: 'Open Sans';
         font-size: 14px;
         line-height: 30px;
         padding: 10px 0;
@@ -1269,7 +1270,7 @@ body.open .navbar .navbar-brand.hidden {
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease; }
   .right-panel .breadcrumbs {
-    background-color: #f3c300;
+    background-color: #fff;
     display: inline-block;
     margin-top: 0;
     padding: 0 5px;
@@ -2463,8 +2464,12 @@ header .form-inline {
         .right-panel .content #bootstrap-data-table_wrapper .table th {
           padding: 5px; } }
 
+
+        .table thead tr {
+        	text-align: center;
+
         /* Table */
-        .table {
+/*        .table {
             border-collapse: collapse;
             font-size: 14px;
             min-width: 537px;
@@ -2491,23 +2496,23 @@ header .form-inline {
 
         .table tbody tr:hover td {
             background-color: #ffffa2;
-        }
+        }*/
 
 /* buttons */
 
-.btn {
+/*.btn {
     text-align: center;
     line-height: 1.1;
     border-radius: 0;
     color: #fff;
     position: relative;
- /* -webkit-box-shadow: 0 2px 15px 3px rgba(39, 39, 39, 0.1);
-          box-shadow: 0 2px 15px 3px rgba(39, 39, 39, 0.1); }*/
+  -webkit-box-shadow: 0 2px 15px 3px rgba(39, 39, 39, 0.1);
+          box-shadow: 0 2px 15px 3px rgba(39, 39, 39, 0.1); }
 }
 .btn-secondary {
     background: #064b7f none repeat scroll 0 0;
-    /*border: medium none;
-    border-radius: 8px;*/
+    border: medium none;
+    border-radius: 8px;
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 2px;
@@ -2524,3 +2529,4 @@ header .form-inline {
     background: #393939;
     border-color: #393939;
 }
+*/

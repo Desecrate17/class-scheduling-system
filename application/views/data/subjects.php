@@ -45,7 +45,7 @@
                                 <strong class="card-title">Data Table</strong>
                             </div>
                             <div class="card-body">
-                              <table id="bootstrap-data-table" class="table table-hover">
+                              <table id="bootstrap-data-table" class="table table-striped table-hover">
                                 <thead>
                                   <tr>
                                     <th>ID</th>

@@ -1,3 +1,28 @@
+  <div class="breadcrumbs">
+    <div class="col-sm-4">
+      <div class="page-header float-left">
+        <div class="page-title">
+            <h1>Faculty</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="page-header float-right">
+          <div class="page-title">
+              <ol class="breadcrumb text-right">
+                  <li><a href="<?php echo site_url('welcome_admin');?>">Home</a></li>
+                  <li><a href="#">Data</a></li>
+                  <li><a href="<?php echo site_url('welcome_admin/department');?>">Department</a></li>
+                  <li class="active">
+                    <?php foreach ($data as $row) { ?>
+                        <?php echo $row->department_name; ?> Department
+                    <?php }?></li>
+              </ol>
+          </div>
+      </div>
+    </div>
+  </div>
+
 	<div class="col-md-12">
  	 <div class="animated fadeIn">
 	    <div class="card">

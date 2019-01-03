@@ -45,7 +45,7 @@
                             <strong class="card-title">Data Table</strong>
                         </div>
                         <div class="card-body" >
-                          <table id="bootstrap-data-table" class="table table-hover">
+                          <table id="bootstrap-data-table" class="table table-striped table-hover">
                             <thead>
                               <tr>
                                 <th>ID</th>
@@ -232,7 +232,7 @@
             <div class="row form-group">
               <div class="col-12 col-md-4"><input type="contact" id="fcontact" name="fcontact" placeholder="Contact No." class="form-control"></div>
               <div class="col-12 col-md-4">
-                  <select data-placeholder="Subject" name="fposition" id="fposition" multiple class="form-control">
+                  <select data-placeholder="Subject" name="fposition" id="fposition" class="form-control">
                       <?php
                           foreach($position as $row) { ?>
                           <option value="<?php echo $row->position_code ?>"><?php echo $row->position_name ?></option>

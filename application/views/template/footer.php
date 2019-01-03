@@ -1,4 +1,4 @@
-</div></div><!-- /#right-panel -->
+</div><!-- /#right-panel -->
     <!-- Right Panel -->
  
     <script src="<?php echo base_url('assets/vendors/jquery/dist/jquery.min.js');?>"></script>

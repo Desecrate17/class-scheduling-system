@@ -1,4 +1,5 @@
 <!-- Header-->
+<div class="animated fadeIn">
   <div class="breadcrumbs">
     <div class="col-sm-4">
       <div class="page-header float-left">
@@ -138,6 +139,5 @@
           </div>
       </div>
     </div>
-
-
   </div>
+</div>
