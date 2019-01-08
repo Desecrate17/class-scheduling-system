@@ -28,6 +28,14 @@ class welcome_admin extends CI_Controller {
 		$this->load->view('adminDashboards/admin', $data);
 		$this->load->view('template/footer');
 	}
+
+	public function facsub(){
+		$subject['sub'] = $this->input->post('sub_list');
+		foreach($subject['sub'] as $subjid){
+			$data = $this->Admin_model->facsub($subjid);	
+		}
+		echo json_encode($data);
+	}
 	//FACULTY//
 	public function faculty(){
 		$data['data'] = $this->Admin_model->view_faculty();

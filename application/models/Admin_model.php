@@ -4,6 +4,13 @@ class Admin_model extends CI_Model{
 		parent:: __construct();
 	}
 
+
+	public function facsub($sub){
+		$faculty_id = $this->input->post('fid');
+		$this->db->set('faculty_id', $faculty_id);
+		$this->db->set('subject_code', $sub);
+		$this->db->insert('subject_list');
+	}
 	// FACULTY //
 	public function view_faculty(){
 		$query = $this->db->query("
@@ -19,7 +26,6 @@ class Admin_model extends CI_Model{
 			return NULL;
 		}
 	}
-
 
 
 	public function view_faculty_name($id){
@@ -52,7 +58,7 @@ class Admin_model extends CI_Model{
 
 	public function view_faculty_info2($id){
 		$query = $this->db->query("
-			SELECT s.subject_name
+			SELECT s.subject_name, s.status
 			FROM faculty as f
 			LEFT JOIN subject_list as sl ON f.prof_id = sl.faculty_id
 			LEFT JOIN subject as s ON sl.subject_code = s.subject_code
@@ -248,7 +254,7 @@ class Admin_model extends CI_Model{
 
 	public function view_subjects(){
 		$query = $this->db->query("
-			SELECT *
+			SELECT s.subject_id, s.subject_code, s.subject_name, s.subject_unit, s.subject_hrs, s.subject_type, s.department_code, s.status
 			FROM subject as s
 			");
 		if ($query->num_rows() > 0){

@@ -10,15 +10,15 @@ class Home extends CI_Controller {
 	
 	public function index(){
 		if($this->session->userdata("logged_in")){
-			if($userdata[0] == 'faculty'){
-				redirect(base_url('welcome_faculty'), $data);
-			}
-			else if($userdata[0] == 'admin'){
-				redirect(base_url('welcome_admin'));		
-			}
-			else if($userdata[0] == 'dep'){
-				redirect(base_url('welcome_dep'));		
-			}
+			// if($userdata[0] == 'faculty'){
+				redirect(base_url('welcome_admin'));
+			// }
+			// else if($userdata[0] == 'admin'){
+			// 	redirect(base_url('welcome_admin'));		
+			// }
+			// else if($userdata[0] == 'dep'){
+			// 	redirect(base_url('welcome_dep'));		
+			// }
 		}else {
 		    $data = array('alert' => false);  
             $this->load->view('home',$data);

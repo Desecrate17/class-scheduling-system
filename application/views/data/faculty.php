@@ -53,7 +53,6 @@
                                 <th>Position</th>
                                 <th>Department Code</th>
                                 <th>Contact</th>
-                                <th>Status</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -70,7 +69,7 @@
                                         <td><center><?php echo $row->position_name; ?></center></td>
                                         <td><center><?php echo $row->department_name; ?></center></td>
                                         <td><center><?php echo $row->contact; ?></center></td>
-                                        <td><center><?php echo $row->fs; ?></center></td>
+                                        <!-- <td><center><?php echo $row->fs; ?></center></td> -->
                                         <td><center>
                                           <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->prof_id.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
                                           <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->prof_id.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
@@ -110,7 +109,6 @@
                                   <th>Department Code</th>
                                   <th>Contact</th>
                                   <th>Action</th>
-                                  <th>Status</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -125,7 +123,7 @@
                                           <td><center><?php echo $row->position_name; ?></center></td>
                                           <td><center><?php echo $row->department_name; ?></center></td>
                                           <td><center><?php echo $row->contact; ?></center></td>
-                                          <td><center><?php echo $row->fs; ?></center></td>
+                                          <!-- <td><center><?php echo $row->fs; ?></center></td> -->
                                           <td><center>
                                             <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->prof_id.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
                                             <a href="<?php echo site_url('welcome_admin/activateFaculty/'.$row->prof_id.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
@@ -254,8 +252,12 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" id="btn_faculty" name="btn_faculty" class="btn btn-primary">Confirm</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: white;
+  color: #495057;
+  border: 2px solid red">Cancel</button>
+            <button type="button" id="btn_faculty" name="btn_faculty" class="btn btn-primary" style="background-color: white;
+  color: #495057;
+  border: 2px solid green;">Confirm</button>
           </div>
         </form>
       </div>

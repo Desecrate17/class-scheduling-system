@@ -5,7 +5,8 @@
     <script src="<?php echo base_url('assets/vendors/popper.js/dist/umd/popper.min.js');?>"></script>
     <script src="<?php echo base_url('assets/vendors/bootstrap/dist/js/bootstrap.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/main.js');?>"></script>
-
+    <script src="<?php echo base_url('assets/js/jquery.lwMultiSelect.min.js');?>"></script>
+  
     <script src="<?php echo base_url('assets/vendors/chart.js/dist/Chart.bundle.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/dashboard.js');?>"></script>
     <script src="<?php echo base_url('assets/js/widgets.js');?>"></script>
@@ -31,8 +32,8 @@
     <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.print.min.js');?>"></script>
     <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.colVis.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/init-scripts/data-table/datatables-init.js');?>"></script>
-    <script type="text/javascript">
-    jQuery(document).ready(function($) {
+     <script type="text/javascript">
+        jQuery(document).ready(function($) {
           // MODAL
           $('.modal').on('hidden.bs.modal', function () {
             $(this).find('form')[0].reset();
@@ -41,7 +42,45 @@
           });
 
           //CONTACT
-          $('input[name="fcontact"]').inputmask("(+63)999-999-9999", {"placeholder": "(+63)XXX-XXX-XXXX"});
+          $('input[name="fcontact"]').inputmask("(+63)999-999-9999", {"placeholder": "(+63)xxx-xxx-xxxx"});
+
+          //MULTIPLE SELECT
+          $('#selectmenu').lwMultiSelect({
+            maxSelect: 4,
+            maxText: 'Max. of 4 Subjects'
+          }); //initialize the plugin 
+          // $('#selectmenu').val(); //get currently selected values.
+          //access to public methods via data properties.
+          // $('#selectmenu').data('plugin_lwMultiSelect').updateList(); //refresh the containers with the current options in #selectmenu
+          // $('#selectmenu').data('plugin_lwMultiSelect').selectAll(); //select all visible items on the left container
+          // $('#selectmenu').data('plugin_lwMultiSelect').removeAll(); //remove all selected  items
+        });
+    </script>
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+          
+
+          $('#btn_faculty_sub').on('click', function(){
+              var sub_list = $('[name="sub_list[]"]').val();
+              var fid = $('#profid').val();
+              $.ajax({
+                  type: 'post',
+                  url: "<?php echo site_url('welcome_admin/facsub'); ?>",
+                  data: {
+                        sub_list : sub_list,
+                        fid : fid
+                  },
+                dataType: 'JSON',
+                success: function(data){
+                  alert("Subject successfully added!");
+                  location.reload();
+                  $('#infosub').modal('hide');
+                },
+                error: function(){
+                  alert('ERROR!');
+                }
+            });
+          });
 
 
           // FACULTY //

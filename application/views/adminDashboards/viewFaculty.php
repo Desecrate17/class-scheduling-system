@@ -47,16 +47,19 @@
           <div class="card-header">
             <i class="fa fa-info-circle"></i>
             <strong class="card-title">Professor Information</strong>
-            <button type="button" class="btn btn-sm btn-info" data-target="#editfaculty" data-toggle="modal" data-backdrop="static" title="Edit Information">Edit</button><span class="fa fa-pencil"></span>
           </div>
-        <div class="card-body">
-        <?php foreach ($info as $row) { ?>
-            <h6>Department:</h6><p><?php echo $row->department_name; ?></p>
-            <h6>Preferred Time:</h6><p><?php echo $row->prefered_time; ?></p>
-        <?php } ?><h6>Preferred Subjects:</h6>
-        <?php foreach ($info2 as $row) { ?>
-            <p><?php echo $row->subject_name; ?></p>
-        <?php } ?>
+          <div class="card-body">
+            <?php foreach ($info as $row) { ?>
+                <h6>Department:</h6><p><?php echo $row->department_name; ?></p>
+                <h6>Preferred Time:</h6><p><?php echo $row->prefered_time; ?></p>
+            <?php } ?><h6>Preferred Subjects:</h6>
+            <?php foreach ($info2 as $row) { if($row->status == 'A') { ?>
+                <p><?php echo $row->subject_name; ?></p>
+            <?php } } ?>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-sm btn-info" data-target="#editfaculty" data-toggle="modal" data-backdrop="static" title="Edit Information">Edit</button>
+            <button type="button" class="btn btn-sm btn-info" data-target="#infosub" data-toggle="modal" data-backdrop="static" title="Add Subject">Add Subject</button>
           </div>
         </div>
       </div>
@@ -112,9 +115,9 @@
                   </select>
               </div>    
             </div>
-            <!-- <div class="row form-group">    
+            <div class="row form-group">    
               <div class="col-12 col-md-4">
-                  <select name="sub_list" id="sub_list[]" class="form-control" multiple="multiple">
+                  <select name="sub_list" id="sub_list" multiple class="form-control">
                       <?php
                           foreach($subjects as $row) { ?>
                           <option value="<?php echo $row->subject_code ?>"><?php echo $row->subject_name ?></option>
@@ -123,7 +126,7 @@
                       ?>
                   </select>
               </div>    
-            </div> -->
+            </div>
           </div>
           <div class="modal-footer">
             <input type="hidden" name="prof_id" id="profid" value="<?php echo $data[0]->prof_id;?>">
@@ -135,3 +138,46 @@
     </div>
   </div>
 <!--EDIT FACULTY MODAL +++++++++++++++++++++++++++++++++++++++++++-->
+
+
+  <div class="modal fade" id="infosub" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><strong>Add Subject <?php echo $data[0]->prof_id;?></strong></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="form-horizontal" >
+          <div class="modal-body">
+            <div class="form-group">
+              <div class="alert alert-danger" align="center" style="display: none;"></div>
+            </div>  
+            <div class="row form-group">    
+              <div class="col-12 col-md-4">
+                  <select name="sub_list[]" id="selectmenu" multiple>
+                      <?php
+                          foreach($subjects as $row) {
+                            if($row->status == 'A') { 
+                              ?>
+                                <option value="<?php echo $row->subject_code ?>"><?php echo $row->subject_name ?></option>
+                              <?php
+                            }
+                          }
+                      ?>
+                  </select>
+              </div>    
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="hidden" name="prof_id" id="profid" value="<?php echo $data[0]->prof_id;?>">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" id="btn_faculty_sub" name="btn_faculty" class="btn btn-primary">Confirm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+       

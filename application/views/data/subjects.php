@@ -69,7 +69,7 @@
                                             <td><center><?php echo $row->subject_name; ?></center></td>
                                             <td><center><?php echo $row->subject_unit; ?></center></td>
                                             <td><center><?php echo $row->subject_hrs; ?></center></td>
-                                            <td><center><?php echo $row->status; ?></center></td>
+                                            <td><center><?php echo $row->subject_type; ?></center></td>
                                             <td><center>
                                               <button href="#editsubjects" data-toggle="modal" id="editsub" value="<?php echo $row->subject_id;?>" class="btn btn-sm btn-info" title="Update Subject"><i class="fa fa-edit"></i></button>
                                               <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->subject_id.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
