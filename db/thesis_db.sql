@@ -83,11 +83,11 @@ CREATE TABLE `faculty` (
   `prefered_subject` char(1) NOT NULL,
   `status` char(1) DEFAULT 'A',
   PRIMARY KEY (`prof_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `faculty` */
 
-insert  into `faculty`(`prof_id`,`first_name`,`middle_name`,`last_name`,`position_code`,`contact`,`department_code`,`prefered_time`,`prefered_subject`,`status`) values (1,'Mary Rose','CotingjoX','Apoyonz','4','(+63)909-121-2121','1','01:00:00','1','A'),(2,'Marose','Contingoz','Flameon','4','(+12)311-111-1111','2','00:00:00','','D'),(3,'Mary Rose','Cotingjoy','Apoyonx','2','(+12)311-111-1111','1','00:00:00','','A'),(4,'Mareese','Contingo','Apoyony','1','(+45)613-980-7776','1','00:00:00','','A'),(5,'Mary Rose','Contingjo','Apoyon','3','(+12)311-111-1111','3','00:00:00','','A'),(6,'Maureese','Contingoc','Apoyonc','1','(+78)945-658-3464','6','00:00:00','','A'),(7,'Rosemary','Contingov','Apoyonv','4','(+12)311-111-1111','7','00:00:00','','A'),(8,'Fname','Mname','Lname','2','(+23)451-212-1212','8','00:00:00','','A'),(9,'Chae','Yeon','Lee','2','(+78)945-658-3464','9','00:00:00','','A'),(10,'Jesus','Mary','Joseph','3','(+78)945-658-3464','7','00:00:00','','A'),(11,'Won','Young','Jang','2','(+78)945-658-3464','6','00:00:00','','A'),(12,'Monkey','Dude','Luffy','4','(+63)921-310-3341','1','00:00:00','','D');
+insert  into `faculty`(`prof_id`,`first_name`,`middle_name`,`last_name`,`position_code`,`contact`,`department_code`,`prefered_time`,`prefered_subject`,`status`) values (1,'Mary Roses','CotingjoX','Apoyonz','4','(+63)909-121-2121','1','01:00:00','1','A'),(2,'Marose','Contingoz','Flameon','4','(+12)311-111-1111','2','00:00:00','','D'),(3,'Mary Rose','Cotingjoy','Apoyonx','2','(+12)311-111-1111','1','00:00:00','','A'),(4,'Mareese','Contingo','Apoyony','1','(+45)613-980-7776','1','00:00:00','','A'),(5,'Mary Rose','Contingjo','Apoyon','3','(+12)311-111-1111','3','00:00:00','','A'),(6,'Maureese','Contingoc','Apoyonc','1','(+78)945-658-3464','6','00:00:00','','A'),(7,'Rosemary','Contingov','Apoyonv','4','(+12)311-111-1111','7','00:00:00','','A'),(8,'Fname','Mname','Lname','2','(+23)451-212-1212','8','00:00:00','','A'),(9,'Chae','Yeon','Lee','2','(+78)945-658-3464','9','00:00:00','','A'),(10,'Jesus','Mary','Joseph','3','(+78)945-658-3464','7','00:00:00','','A'),(11,'Won','Young','Jang','2','(+78)945-658-3464','6','00:00:00','','A'),(12,'Monkey','Dude','Luffy','4','(+63)921-310-3341','1','00:00:00','','D'),(13,'One','Two','Three','1','(+63)123-312-3231','1','00:00:00','','A'),(14,'Ones','Twos','Threes','2','(+63)123-311-1111','2','00:00:00','','A'),(15,'wew','wew','ewe','2','(+63)131-231-3231','2','00:00:00','','A');
 
 /*Table structure for table `policy` */
 
@@ -203,11 +203,11 @@ CREATE TABLE `subject_list` (
   `faculty_id` int(10) DEFAULT NULL,
   `subject_code` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`subject_list_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `subject_list` */
 
-insert  into `subject_list`(`subject_list_id`,`faculty_id`,`subject_code`) values (1,1,'1'),(2,1,'2'),(3,1,'3'),(4,2,'1'),(5,3,'2');
+insert  into `subject_list`(`subject_list_id`,`faculty_id`,`subject_code`) values (1,1,'9'),(2,1,'15'),(3,1,'18'),(4,1,'007');
 
 /*Table structure for table `user` */
 
