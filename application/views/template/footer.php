@@ -250,6 +250,142 @@
             });return false;
           });
           // SUBJECT //
+
+                    //room//
+
+          $(document).ready(function(){  
+           $(function(){  
+                $("#rooms").val();  
+           });  
+           $('#room_sched').click(function(){  
+                 var rooms = $("#rooms").val();    
+                     $.ajax({  
+                          url:'<?php echo site_url(); ?>welcome_admin/room_view',  
+                          method:'POST',  
+                          data:{
+                            rooms:rooms
+                          }, 
+                          dataType: 'JSON', 
+                          success:function(data)  
+                          {  
+                             // $('#datatable2').html(response);
+                             var html = '';
+                             var i;
+                              for(i=0; i<data.length; i++) {
+                                if (data[i].sched_days == 'monday')
+                                {
+
+                                 html += '<tr>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+data[i].sched_name+'<br>'+data[i].subject_name+'<br>'+data[i].first_name+' '+""+''+data[i].last_name+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '</tr>';
+                                }
+                                if (data[i].sched_days == 'tuesday')
+                                  {
+
+                                 html += '<tr>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+data[i].sched_name+'<br>'+data[i].subject_name+'<br>'+data[i].first_name+' '+""+''+data[i].last_name+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '</tr>';
+                                }
+
+                                if (data[i].sched_days == 'wednesday')
+                                  {
+
+                                 html += '<tr>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                   '<td><center>'+data[i].sched_name+'<br>'+data[i].subject_name+'<br>'+data[i].first_name+' '+""+''+data[i].last_name+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '</tr>';
+                                }
+
+                                if (data[i].sched_days == 'thursday')
+                                  {
+
+                                 html += '<tr>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+data[i].sched_name+'<br>'+data[i].subject_name+'<br>'+data[i].first_name+' '+""+''+data[i].last_name+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '</tr>';
+                                }
+
+                                if (data[i].sched_days == 'friday')
+                                  {
+
+                                 html += '<tr>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+data[i].sched_name+'<br>'+data[i].subject_name+'<br>'+data[i].first_name+' '+""+''+data[i].last_name+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '</tr>';
+                                }
+
+                                if (data[i].sched_days == 'saturday')
+                                  {
+
+                                 html += '<tr>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+data[i].sched_name+'<br>'+data[i].subject_name+'<br>'+data[i].first_name+' '+""+''+data[i].last_name+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '</tr>';
+                                }
+
+                                if (data[i].sched_days == 'sunday')
+                                  {
+
+                                 html += '<tr>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+""+'</center></td>'+
+                                    '<td><center>'+data[i].sched_name+'<br>'+data[i].subject_name+'<br>'+data[i].first_name+' '+""+''+data[i].last_name+'</center></td>'+
+                                    '</tr>';
+                                }
+
+                              }
+
+                               $('#room_sched_list').html(html);
+                          }  
+                     });  
+                   
+           });  
+      }); 
+
+          //room//
     
     });
     </script>

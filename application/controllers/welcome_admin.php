@@ -106,13 +106,13 @@ class welcome_admin extends CI_Controller {
 	}
 	//FACULTY//
 
-	//ROOMS//
-	public function rooms(){
-		$this->load->view('template/header');
-		$this->load->view('data/rooms');
-		$this->load->view('template/footer');		
-	}
-	//ROOMS//
+	// //ROOMS//
+	// public function rooms(){
+	// 	$this->load->view('template/header');
+	// 	$this->load->view('data/rooms');
+	// 	$this->load->view('template/footer');		
+	// }
+	// //ROOMS//
 
 	//DEPARTMENT//
 	public function department(){
@@ -248,6 +248,26 @@ class welcome_admin extends CI_Controller {
 		$this->load->view('adminDashboards/view_schedule');
 		$this->load->view('template/footer');
 	}
+
+	//ROOMS//
+	public function rooms(){
+		$data['room'] =$this->Admin_model->view_room_name();
+		$data['room_sched'] = $this->Admin_model->view_room_all();
+		$this->load->view('template/header');
+		$this->load->view('data/rooms',$data);
+		$this->load->view('template/footer');
+	}
+				
+	//ROOMS//
+
+	//ROOMS//
+	public function room_view(){
+		$rooms= $this->input->post('rooms');
+		$data=$this->Admin_model->view_room_schedule($rooms);
+		echo json_encode($data);
+				
+	}
+	//ROOMS//
 
 	
 	

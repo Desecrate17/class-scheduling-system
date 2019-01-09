@@ -27,14 +27,41 @@
               <!--ACTIVE -->
               <div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="row">
+
+                  <!-- DROPDOWN -->
+
+                  <div class="col-lg-6">
+                        
+                                <div class="row form-group">
+                                    <div class="col col-md-12">
+                                        <div class="input-group">
+                                            <select name="rooms" id="rooms" class="form-control" >
+                                                <?php
+                                                    foreach($room as $row) { ?>
+                                                    <option value="<?php echo $row->room_id ?>"><?php echo $row->room_no ?></option>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </select>
+                                            <button type="button" value="submit" class="btn btn-primary" style="border-radius: 2px; background-color: #c51e3a; border-color: #c51e3a;" id="room_sched">submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                                                
+                        
+                        </div>
+
+                  <!-- DROPDOWN -->
                   <!--TABLE+++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
                     <div class="col-md-12">
                       <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Data Table</strong>
                         </div>
                         <div class="card-body" >
-                          <table class="table table-bordered table-hover">
+                          <table id="datatable" class="table table-bordered table-hover">
                             <thead>
                               <tr>
                                 <th class="time">TIME</th>
@@ -46,52 +73,163 @@
                                 <th>Saturay</th>
                                 <th>Sunday</th>
                               </tr>
+                            </thead>
+                            <tbody id="room_sched_list">
+                               <tr>
+                                <td>06:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
                               <tr>
                                 <td>07:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
                                 <td>08:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
                                 <td>09:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
                                 <td>10:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
                                 <td>11:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
                                 <td>12:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
-                                <td>01:00</td>
+                                <td>13:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
-                                <td>02:00</td>
+                                <td>14:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
-                                <td>03:00</td>
+                                <td>15:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
-                                <td>04:00</td>
+                                <td>16:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
-                                <td>05:00</td>
+                                <td>17:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
-                                <td>06:00</td>
+                                <td>18:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
-                                <td>07:00</td>
+                                <td>19:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
-                                <td>08:00</td>
+                                <td>20:00</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
-                            </thead>
-                            <tbody>
-                               
+
+
+                             
                             </tbody>
+                            
                           </table>
                         </div>
                       </div>
