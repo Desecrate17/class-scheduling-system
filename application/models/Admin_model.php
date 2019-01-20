@@ -409,7 +409,7 @@ class Admin_model extends CI_Model{
 
 	public function view_room_all(){
 		$query = $this->db->query("
-			SELECT s.sched_name, s.sched_from, s.sched_to, s.sched_days, f.first_name, f.middle_name, f.last_name, subj.subject_name, r.room_no, r.room_id
+			SELECT s.sched_name, s.sched_from, s.sched_days, f.first_name, f.middle_name, f.last_name, subj.subject_name, r.room_no, r.room_id
 			FROM schedule as s
 			LEFT JOIN faculty as f
 			ON s.sched_prof = f.prof_id
@@ -429,7 +429,7 @@ class Admin_model extends CI_Model{
 
 	public function view_room_schedule($rooms){
 		$query = $this->db->query("
-			SELECT s.sched_name, s.sched_from, s.sched_to, s.sched_days, f.first_name, f.middle_name, f.last_name, subj.subject_name, r.room_no, r.room_id
+			SELECT s.sched_id, s.sched_name, s.sched_from, s.sched_days, f.first_name, f.middle_name, f.last_name, subj.subject_name, r.room_no, r.room_id, s.sched_length
 			FROM schedule as s
 			LEFT JOIN faculty as f
 			ON s.sched_prof = f.prof_id

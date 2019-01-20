@@ -262,9 +262,9 @@ class welcome_admin extends CI_Controller {
 
 	//ROOMS//
 	public function room_view(){
-		$rooms= $this->input->post('rooms');
-		$data=$this->Admin_model->view_room_schedule($rooms);
-		echo json_encode($data);
+		$rooms= $this->input->post("rooms");
+		$data['hey']=$this->Admin_model->view_room_schedule($rooms);
+		$this->load->view('data/displayroom',$data);
 				
 	}
 	//ROOMS//

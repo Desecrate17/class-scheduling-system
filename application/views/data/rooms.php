@@ -29,9 +29,9 @@
                 <div class="row">
 
                   <!-- DROPDOWN -->
-
+                  
                   <div class="col-lg-6">
-                        
+                         <form method="POST" id="formsubmit">
                                 <div class="row form-group">
                                     <div class="col col-md-12">
                                         <div class="input-group">
@@ -43,14 +43,15 @@
                                                     }
                                                 ?>
                                             </select>
-                                            <button type="button" value="submit" class="btn btn-primary" style="border-radius: 2px; background-color: #c51e3a; border-color: #c51e3a;" id="room_sched">submit
-                                            </button>
+                                            
+                                            <button  style="border-radius: 2px; background-color: #c51e3a; border-color: #c51e3a;" type="button" value="submit" class="btn btn-primary" id="roombut">submit</button>
                                         </div>
                                     </div>
                                 </div>
                                                                 
-                        
+                         </form>
                         </div>
+                     
 
                   <!-- DROPDOWN -->
                   <!--TABLE+++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -75,158 +76,23 @@
                               </tr>
                             </thead>
                             <tbody id="room_sched_list">
-                               <tr>
-                                <td>06:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>07:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>08:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>09:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>10:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>11:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>12:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>13:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>14:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>15:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>16:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>17:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>18:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>19:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>20:00</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
 
-
+                            <?php 
+                              $times = array("6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00"
+                                ,"16:00","17:00","18:00","19:00","20:00");
+                              foreach($times as $t){
+                                echo ' <tr>
+                                <td>'.$t.'</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                </tr>';
+                              }
+                            ?>                             
                              
                             </tbody>
                             
