@@ -17,7 +17,7 @@
           <div class="default-tab">
             <nav>
               <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link fa fa-plus" id="nav-home-tab" data-toggle="modal" title="Add Data" href="#addfaculty" role="tab" aria-controls="nav-home" aria-selected="true"></a>
+                <a class="nav-item nav-link fa fa-plus" id="nav-home-tab" data-toggle="modal" title="Add Data" href="#addRoom" role="tab" aria-controls="nav-home" aria-selected="true"></a>
                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#active" role="tab" aria-controls="nav-profile" aria-selected="false">Active</a>
                 <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#inactive" role="tab" aria-controls="nav-contact" aria-selected="false">Inactive</a>
                 <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#unassigned" role="tab" aria-controls="nav-contact" aria-selected="false">Unassigned</a>
@@ -180,3 +180,50 @@
     </div>
     </div>
   </div> <!-- .content -->
+
+
+<!--ADD FACULTY MODAL ++++++++++++++++++++++++++++++++++++++++++-->
+  <div class="modal fade" id="addRoom" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Room</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="post" action="<?php echo site_url('welcome_admin/add_room');?>">
+          <div class="modal-body">
+            <div class="form-group">
+              <div class="alert alert-danger alert-dismissible fade show" align="center" style="display: none;"></div>
+            </div>
+            <div class="row form-group">
+              <div class="col-12 col-md-4"><input type="text" id="room_no" name="room_no" placeholder="Room Number" class="form-control">
+              </div>
+              <div class="col-12 col-md-4"><input type="text" id="room_stat" name="room_stat" placeholder="Room Status" class="form-control">
+              </div>
+              <div class="col-12 col-md-4"><input type="text" id="room_type" name="room_type" placeholder="Room Type" class="form-control">
+              </div>
+            </div> 
+            <div class="row form-group">
+              <div class="col-12 col-md-4">
+                  <select data-placeholder="Department" name="dep" id="dep" class="form-control">
+                      <?php
+                          foreach($dep_list as $row) { ?>
+                          <option value="<?php echo $row->department_id ?>"><?php echo $row->department_name ?></option>
+                      <?php
+                          }
+                      ?>
+                  </select>
+              </div>    
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary-danger" data-dismiss="modal">Cancel</button>
+            <button type="submit" id="btn_add_room" name="btn_add_room" class="btn btn-primary">Confirm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<!--ADD FACULTY MODAL ++++++++++++++++++++++++++++++++++++++++++++-->

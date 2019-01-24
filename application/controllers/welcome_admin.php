@@ -252,6 +252,7 @@ class welcome_admin extends CI_Controller {
 	//ROOMS//
 	public function rooms(){
 		$data['room'] =$this->Admin_model->view_room_name();
+		$data["dep_list"] = $this->Admin_model->departments();
 		$data['room_sched'] = $this->Admin_model->view_room_all();
 		$this->load->view('template/header');
 		$this->load->view('data/rooms',$data);
@@ -266,6 +267,12 @@ class welcome_admin extends CI_Controller {
 		$data['hey']=$this->Admin_model->view_room_schedule($rooms);
 		$this->load->view('data/displayroom',$data);
 				
+	}
+
+
+	public function add_room(){
+		$this->Admin_model->add_room();
+		redirect('welcome_admin/rooms');
 	}
 	//ROOMS//
 

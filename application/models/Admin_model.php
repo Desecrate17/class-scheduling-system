@@ -447,4 +447,30 @@ class Admin_model extends CI_Model{
 		}
 	}
 
+		public function departments(){
+		$query = $this->db->query("
+			SELECT * 
+			FROM department 
+		");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+	public function add_room(){
+		$data = array(
+			'room_no'=>$this->input->post('room_no'),
+			'room_type'=>$this->input->post('room_type'),
+			'room_status'=>$this->input->post('room_stat'),
+			'department_code'=>$this->input->post('dep'),
+		
+		);
+		$this->db->insert('room', $data);
+
+
+	}
+
+
 }

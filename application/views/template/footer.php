@@ -65,7 +65,7 @@
               var fid = $('#profid').val();
               $.ajax({
                   type: 'post',
-                  url: "<?php echo site_url('welcome_admin/facsub'); ?>",
+                  url: "<?php echo site_url('welcome_faculty/facsub'); ?>",
                   data: {
                         sub_list : sub_list,
                         fid : fid
@@ -274,6 +274,38 @@
            });
     
     });
+
+ $('#btn_add_room').on('click', function(){
+              var room_no = $('#room_no').val();
+              var room_stat = $('#room_stat').val();
+              var room_type = $('#room_type').val();
+              var dep = $('#dep').val();
+              $.ajax({
+                  type: 'post',
+                  url: "<?php echo site_url('welcome_admin/addRoom'); ?>",
+                  data: {
+                        room_no : room_no,
+                        room_stat : room_stat,
+                        room_type : room_type,
+                        dep :  dep
+                  },
+                dataType: 'JSON',
+                success: function(data){
+                    if (data.status) {
+                        alert("Faculty successfully added!");
+                        location.reload();
+                        // $('#datatable').modal('hide');
+                      }
+                    // }else{
+                    //     $('.alert').css('display', 'block');
+                    //     $('.alert').html(data.notif);   
+                    // }
+                },
+                error: function(request, status, error){
+                  alert(request.responseText);
+                }
+            });return false;
+          });
     </script>
     
 </body>
