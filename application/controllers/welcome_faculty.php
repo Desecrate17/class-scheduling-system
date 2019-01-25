@@ -17,7 +17,7 @@ class welcome_faculty extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
-	public function subjects(){
+	public function prefer(){
 		$data['data'] = $this->Faculty_model->view_faculty();
 		$data['choice'] = $this->Faculty_model->view_subjects();
 		$data['subjects'] = $this->Faculty_model->yourSubjects($_SESSION['id']);
@@ -34,7 +34,18 @@ class welcome_faculty extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	 public function delete_subj()
+    {
+        $ids = $this->input->post('ids');
+ 
+        $this->db->where_in('subjectlist_id', explode(",", $ids));
+        $this->db->delete('subject_list');
+ 
+        echo json_encode(['success'=>"Item Deleted successfully."]);
+    }
+ 
+}
+
 
 	
 
-}

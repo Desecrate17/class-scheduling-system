@@ -105,12 +105,8 @@
                         <a href="<?php echo site_url('welcome_faculty');?>"> <i class="menu-icon fa fa-home"></i>Home</a>
                     </li>
 
-                    <li class="menu-item-has-children dropdown"">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Information</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-address-card-o"></i><a href="<?php echo site_url('welcome_faculty/subjects');?>">Subjects</a></li>
-                            <li><i class="fa fa-clock-o"></i><a href="<?php echo site_url('welcome_admin/view_sched');?>">Time</a></li>
-                        </ul>
+                    <li>
+                        <a href="<?php echo site_url('welcome_faculty/prefer');?>"> <i class="menu-icon fa fa-users"></i>Information</a>
                     </li>
                     
                     <li>

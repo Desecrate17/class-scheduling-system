@@ -4,7 +4,7 @@
     <div class="col-sm-4">
       <div class="page-header float-left">
         <div class="page-title">
-            <h1>Your Subject List</h1>
+            <h1>Preferences</h1>
         </div>
       </div>
     </div>
@@ -14,9 +14,11 @@
   <div class="content mt-3">
     <div class="row">
      <div class="card-body col-6">
+      <button style="margin-bottom: 10px" class="btn btn-danger delete_all">Delete</button>
         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
             <thead>
               <tr>
+                <th width="10px"><input type="checkbox" id="master"></th>
                 <th>Subject List</th>
               </tr>
             </thead>
@@ -26,7 +28,10 @@
                  foreach ($subjects as $row) {
                     ?> 
               <tr>
-                <td><center><?php echo $row->subject_name; ?> </center></td>
+                <td>
+                  <input type="checkbox" class="del_subj" data-id="<?php echo $row->subjectlist_id; ?>" >
+                </td>
+                <td><?php echo $row->subject_name; ?></td>
               </tr>
                <?php
                        }
@@ -67,4 +72,19 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="card-body col-12">
+        <div class="timepicker">
+          <div class="top">
+            <span class="h">10</span>:<span class="m">15</span>
+          </div>
+          <div class="circle">
+          </div>
+          <div class="actions">
+            <div class="action cancel">Abbrechen</div>
+            <div class="action ok">OK</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
