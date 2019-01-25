@@ -464,13 +464,15 @@ class Admin_model extends CI_Model{
 			'room_no'=>$this->input->post('room_no'),
 			'room_type'=>$this->input->post('room_type'),
 			'room_status'=>$this->input->post('room_stat'),
-			'department_code'=>$this->input->post('dep'),
+			'department_code'=>$this->input->post('dep')
 		
 		);
-		$this->db->insert('room', $data);
+		$result = $this->db->insert('room', $data);
+		return $result;
 
 
 	}
+
 
 
 }

@@ -11,7 +11,7 @@ class Faculty_model extends CI_Model{
 			LEFT JOIN faculty AS f
 			ON sl.faculty_id = f.prof_id
 			LEFT JOIN SUBJECT AS s
-			ON sl.subjectlist_id = s.subject_id
+			ON sl.subject_code = s.subject_id
 			WHERE f.prof_id = '$id'
 		");
 		if ($query->num_rows() > 0){
@@ -48,9 +48,9 @@ class Faculty_model extends CI_Model{
 		}
 	}
 
-	public function facsub($sub){
+	public function facsub($sub, $id){
 		$faculty_id = $this->input->post('fid');
-		$this->db->set('faculty_id', $faculty_id);
+		$this->db->set('faculty_id', $id);
 		$this->db->set('subject_code', $sub);
 		$this->db->insert('subject_list');
 	}

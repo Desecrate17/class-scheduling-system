@@ -24,7 +24,7 @@
                                   if($h->sched_from==$t&&$h->sched_days=="monday")
                                   {
                                     echo '
-                                      <td rowspan = ".<?php echo $h->sched_length; ?>.">'.$h->subject_name.'<br>'.$h->last_name.'&nbsp'.$h->first_name.'&nbsp '.$h->middle_name.'</td>';
+                                      <td rowspan = "\<?php echo $h->sched_length; ?>\">'.$h->subject_name.'<br>'.$h->last_name.'&nbsp'.$h->first_name.'&nbsp '.$h->middle_name.'</td>';
                                       $result = 1;
 
 

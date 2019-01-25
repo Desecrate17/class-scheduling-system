@@ -29,10 +29,11 @@ class welcome_faculty extends CI_Controller {
 	public function facsub(){
 		$subject['sub'] = $this->input->post('sub_list');
 		foreach($subject['sub'] as $subjid){
-			$data = $this->Faculty_model->facsub($subjid);	
+			$data = $this->Faculty_model->facsub($subjid, $_SESSION['id']);	
 		}
 		echo json_encode($data);
 	}
+
 
 	
 

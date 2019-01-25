@@ -60,27 +60,27 @@
     jQuery(document).ready(function($) {
           
 
-          $('#btn_faculty_sub').on('click', function(){
-              var sub_list = $('[name="sub_list[]"]').val();
-              var fid = $('#profid').val();
-              $.ajax({
-                  type: 'post',
-                  url: "<?php echo site_url('welcome_faculty/facsub'); ?>",
-                  data: {
-                        sub_list : sub_list,
-                        fid : fid
-                  },
-                dataType: 'JSON',
-                success: function(data){
-                  alert("Subject successfully added!");
-                  location.reload();
-                  $('#infosub').modal('hide');
-                },
-                error: function(){
-                  alert('ERROR!');
-                }
-            });
-          });
+          // $('#btn_faculty_sub').on('click', function(){
+          //     var sub_list = $('[name="sub_list[]"]').val();
+          //     var fid = $('#profid').val();
+          //     $.ajax({
+          //         type: 'post',
+          //         url: "<?php echo site_url('welcome_admin/facsub'); ?>",
+          //         data: {
+          //               sub_list : sub_list,
+          //               fid : fid
+          //         },
+          //       dataType: 'JSON',
+          //       success: function(data){
+          //         alert("Subject successfully added!");
+          //         location.reload();
+          //         $('#infosub').modal('hide');
+          //       },
+          //       error: function(){
+          //         alert('ERROR!');
+          //       }
+          //   });
+          // });
 
 
           // FACULTY //
@@ -272,40 +272,76 @@
                     }
                 });
            });
-    
-    });
 
- $('#btn_add_room').on('click', function(){
-              var room_no = $('#room_no').val();
-              var room_stat = $('#room_stat').val();
-              var room_type = $('#room_type').val();
-              var dep = $('#dep').val();
+
+          $('#btn_room').click(function () {
+             if ((document.getElementById('room_no').value === '' ) || (document.getElementById('room_type').value === '' ) || (document.getElementById('room_stat').value === '' )|| (document.getElementById('dep').value === '' )){
+            alert('Please Fill all the Fields!');
+          }else{
+            $('#addRoom').modal('hide');
+            $('#confirm_modal').modal({
+                backdrop: 'static'
+            });
+          }
+             });
+            $('#btn_confirm').click(function () {
+                 $('#confirm_modal').modal('hide');
+               
+                    var room_no = $('#room_no').val();
+                    var room_type = $('#room_type').val();
+                    var room_stat = $('#room_stat').val();
+                    var dep = $('#dep').val();
+                    $.ajax({
+                        type : "POST",
+                        url  : "<?php echo site_url('welcome_admin/add_room')?>",
+                        dataType : "JSON",
+                        data : {
+                            room_no: room_no,
+                            room_type: room_type,
+                            room_stat: room_stat,
+                            dep: dep
+                        },
+                        success: function(data){
+                            if (data.status) {
+                                alert("Room successfully added!");
+                                location.reload();
+                                $('#confirm_modal').modal('hide');
+                            }else{
+                                $('.alert').css('display', 'block');
+                                $('.alert').html(data.notif);   
+                            }
+                        },
+                        error: function(request, status, error){
+                          alert(request.responseText);
+                        }
+                    });return false;
+          });
+
+
+            $('#btn_add_sub').on('click', function(){
+              var sub_list = $('[name="sub_list[]"]').val();
               $.ajax({
                   type: 'post',
-                  url: "<?php echo site_url('welcome_admin/addRoom'); ?>",
+                  url: "<?php echo site_url('welcome_faculty/facsub'); ?>",
                   data: {
-                        room_no : room_no,
-                        room_stat : room_stat,
-                        room_type : room_type,
-                        dep :  dep
+                        sub_list : sub_list
                   },
                 dataType: 'JSON',
                 success: function(data){
-                    if (data.status) {
-                        alert("Faculty successfully added!");
-                        location.reload();
-                        // $('#datatable').modal('hide');
-                      }
-                    // }else{
-                    //     $('.alert').css('display', 'block');
-                    //     $('.alert').html(data.notif);   
-                    // }
+                  alert("Subject successfully added!");
+                  location.reload();
+                  $('#infosub').modal('hide');
                 },
-                error: function(request, status, error){
-                  alert(request.responseText);
+                error: function(){
+                  alert('ERROR!');
                 }
-            });return false;
+            });
           });
+
+    
+    });
+
+ 
     </script>
     
 </body>

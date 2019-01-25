@@ -192,7 +192,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="post" action="<?php echo site_url('welcome_admin/add_room');?>">
+        <form>
           <div class="modal-body">
             <div class="form-group">
               <div class="alert alert-danger alert-dismissible fade show" align="center" style="display: none;"></div>
@@ -220,10 +220,34 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary-danger" data-dismiss="modal">Cancel</button>
-            <button type="submit" id="btn_add_room" name="btn_add_room" class="btn btn-primary">Confirm</button>
+            <button type="button" value="submit" id="btn_room" name="btn_room" class="btn btn-primary">Confirm</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 <!--ADD FACULTY MODAL ++++++++++++++++++++++++++++++++++++++++++++-->
+
+ <form>
+            <div class="modal fade" id="confirm_modal">
+              <div class="modal-dialog" style="width: 30%">
+                <div class="modal-content" style="background-color: #edfafd">
+                  <div class="modal-header" style="background-color: #aed9da">
+                    <h4><center>Confirmation</center></h4>
+                  </div>
+                  <div class="modal-body">
+                    
+                      <div class="container">
+                        <div class="row">
+                            Are you sure you want to save this data?
+                        </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer" style="background-color: #aed9da">
+                    <button type="button" class="btn btn-sm" data-dismiss="modal">Cancel</button>
+                    <button type="button" type="button" id="btn_confirm" class="btn btn-primary btn-sm">Confirm</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            </form>
