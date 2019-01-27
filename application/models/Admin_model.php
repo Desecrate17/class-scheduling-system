@@ -395,4 +395,84 @@ class Admin_model extends CI_Model{
 
 	// ID COUNT //
 
+	public function view_room_name(){
+
+		$query = $this->db->query("
+				SELECT * FROM room
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+	public function view_room_all(){
+		$query = $this->db->query("
+			SELECT s.sched_name, s.sched_from, s.sched_days, f.first_name, f.middle_name, f.last_name, subj.subject_name, r.room_no, r.room_id
+			FROM schedule as s
+			LEFT JOIN faculty as f
+			ON s.sched_prof = f.prof_id
+			LEFT JOIN subject as subj
+			ON s.subject_code = subj.subject_code
+			LEFT JOIN room as r
+			ON s.room_id = r.room_id
+			
+
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+	public function view_room_schedule($rooms){
+		$query = $this->db->query("
+			SELECT s.sched_id, s.sched_name, s.sched_from, s.sched_days, f.first_name, f.middle_name, f.last_name, subj.subject_name, r.room_no, r.room_id, s.sched_length
+			FROM schedule as s
+			LEFT JOIN faculty as f
+			ON s.sched_prof = f.prof_id
+			LEFT JOIN subject as subj
+			ON s.subject_code = subj.subject_code
+			LEFT JOIN room as r
+			ON s.room_id = r.room_id
+			WHERE r.room_id = '$rooms'
+
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+		public function departments(){
+		$query = $this->db->query("
+			SELECT * 
+			FROM department 
+		");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+	public function add_room(){
+		$data = array(
+			'room_no'=>$this->input->post('room_no'),
+			'room_type'=>$this->input->post('room_type'),
+			'room_status'=>$this->input->post('room_stat'),
+			'department_code'=>$this->input->post('dep')
+		
+		);
+		$result = $this->db->insert('room', $data);
+		return $result;
+
+
+	}
+
+
+
 }

@@ -106,13 +106,13 @@ class welcome_admin extends CI_Controller {
 	}
 	//FACULTY//
 
-	//ROOMS//
-	public function rooms(){
-		$this->load->view('template/header');
-		$this->load->view('data/rooms');
-		$this->load->view('template/footer');		
-	}
-	//ROOMS//
+	// //ROOMS//
+	// public function rooms(){
+	// 	$this->load->view('template/header');
+	// 	$this->load->view('data/rooms');
+	// 	$this->load->view('template/footer');		
+	// }
+	// //ROOMS//
 
 	//DEPARTMENT//
 	public function department(){
@@ -248,6 +248,47 @@ class welcome_admin extends CI_Controller {
 		$this->load->view('adminDashboards/view_schedule');
 		$this->load->view('template/footer');
 	}
+
+	//ROOMS//
+	public function rooms(){
+		$data['room'] =$this->Admin_model->view_room_name();
+		$data['dep_list'] = $this->Admin_model->departments();
+		$data['room_sched'] = $this->Admin_model->view_room_all();
+		$this->load->view('template/header');
+		$this->load->view('data/rooms',$data);
+		$this->load->view('template/footer');
+	}
+				
+	//ROOMS//
+
+	//ROOMS//
+	public function room_view(){
+		$rooms= $this->input->post("rooms");
+		$data['hey']=$this->Admin_model->view_room_schedule($rooms);
+		$this->load->view('data/displayroom',$data);
+				
+	}
+
+
+	public function add_room(){
+		$response = array();
+		$this->form_validation->set_rules('room_no', 'First Name', 'required');
+		$this->form_validation->set_rules('room_type', 'Middle Name', 'required');
+		$this->form_validation->set_rules('room_stat', 'Last Name', 'required');
+		$this->form_validation->set_rules('dep', 'Last Name', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$data = $this->Admin_model->add_room();
+			$response['status'] = TRUE;
+			$response[] = $data;
+		}
+		else {
+			$response['status'] = FALSE;
+	    	$response['notif']	= validation_errors();
+		}
+		echo json_encode($response);
+
+	}
+	//ROOMS//
 
 	
 	

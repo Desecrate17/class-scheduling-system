@@ -58,8 +58,8 @@
             <?php } } ?>
           </div>
           <div class="card-footer">
-            <button type="button" class="btn btn-sm btn-info" data-target="#editfaculty" data-toggle="modal" data-backdrop="static" title="Edit Information">Edit</button>
-            <button type="button" class="btn btn-sm btn-info" data-target="#infosub" data-toggle="modal" data-backdrop="static" title="Add Subject">Add Subject</button>
+            <!-- <button type="button" class="btn btn-sm btn-info" data-target="#editfaculty" data-toggle="modal" data-backdrop="static" title="Edit Information">Edit</button>
+            <button type="button" class="btn btn-sm btn-info" data-target="#infosub" data-toggle="modal" data-backdrop="static" title="Add Subject">Add Subject</button> -->
           </div>
         </div>
       </div>
@@ -140,7 +140,7 @@
 <!--EDIT FACULTY MODAL +++++++++++++++++++++++++++++++++++++++++++-->
 
 
-  <div class="modal fade" id="infosub" tabindex="-1" role="dialog">
+<!--   <div class="modal fade" id="infosub" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -178,6 +178,6 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> -->
 
        
