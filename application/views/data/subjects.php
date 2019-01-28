@@ -51,8 +51,10 @@
                                     <th>ID</th>
                                     <th>Subject</th>
                                     <th>Descriptive Title</th>
-                                    <th>Units</th>
-                                    <th>Hours</th>
+                                    <th>Lec Hours</th>
+                                    <th>Lec Units</th>
+                                    <th>Lab Hours</th>
+                                    <th>Lab Units</th>
                                     <th>Type</th>
                                     <th>Action</th>
                                   </tr>
@@ -61,18 +63,20 @@
                                    <?php
                                     if ($subjects!=NULL) {
                                       foreach ($subjects as $row) {
-                                        if($row->status == 'A') {
+                                        if($row->Status == 'A') {
                                         ?>
                                           <tr>
-                                            <td><center><?php echo $row->subject_id; ?></center></td>
-                                            <td><center><?php echo $row->subject_code; ?></center></td>
-                                            <td><center><?php echo $row->subject_name; ?></center></td>
-                                            <td><center><?php echo $row->subject_unit; ?></center></td>
-                                            <td><center><?php echo $row->subject_hrs; ?></center></td>
-                                            <td><center><?php echo $row->subject_type; ?></center></td>
+                                            <td><center><?php echo $row->SubjectID; ?></center></td>
+                                            <td><center><?php echo $row->SubjectCode; ?></center></td>
+                                            <td><center><?php echo $row->SubjectName; ?></center></td>
+                                            <td><center><?php echo $row->LecHours; ?></center></td>
+                                            <td><center><?php echo $row->LecUnits; ?></center></td>
+                                            <td><center><?php echo $row->LabHours; ?></center></td>
+                                            <td><center><?php echo $row->LabUnits; ?></center></td>
+                                            <td><center><?php echo $row->SubjectType; ?></center></td>
                                             <td><center>
-                                              <button href="#editsubjects" data-toggle="modal" id="editsub" value="<?php echo $row->subject_id;?>" class="btn btn-sm btn-info" title="Update Subject"><i class="fa fa-edit"></i></button>
-                                              <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->subject_id.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
+                                              <button href="#editsubjects" data-toggle="modal" id="editsub" value="<?php echo $row->SubjectID;?>" class="btn btn-sm btn-info" title="Update Subject"><i class="fa fa-edit"></i></button>
+                                              <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->SubjectID.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
                                             </center></td>
                                           </tr>
                                         <?php
@@ -105,8 +109,10 @@
                                     <th>ID</th>
                                     <th>Subject</th>
                                     <th>Descriptive Title</th>
-                                    <th>Units</th>
-                                    <th>Hours</th>
+                                    <th>Lec Hours</th>
+                                    <th>Lec Units</th>
+                                    <th>Lab Hours</th>
+                                    <th>Lab Units</th>
                                     <th>Type</th>
                                     <th>Action</th>
                                   </tr>
@@ -115,15 +121,17 @@
                                    <?php
                                     if ($subjects!=NULL) {
                                       foreach ($subjects as $row) {
-                                        if($row->status == 'D') {
+                                        if($row->Status == 'D') {
                                         ?>
                                           <tr>
-                                            <td><center><?php echo $row->subject_id; ?></center></td>
-                                            <td><center><?php echo $row->subject_code; ?></center></td>
-                                            <td><center><?php echo $row->subject_name; ?></center></td>
-                                            <td><center><?php echo $row->subject_unit; ?></center></td>
-                                            <td><center><?php echo $row->subject_hrs; ?></center></td>
-                                            <td><center><?php echo $row->status; ?></center></td>
+                                            <td><center><?php echo $row->SubjectID; ?></center></td>
+                                            <td><center><?php echo $row->SubjectCode; ?></center></td>
+                                            <td><center><?php echo $row->SubjectName; ?></center></td>
+                                            <td><center><?php echo $row->LecHours; ?></center></td>
+                                            <td><center><?php echo $row->LecUnits; ?></center></td>
+                                            <td><center><?php echo $row->LabHours; ?></center></td>
+                                            <td><center><?php echo $row->LabUnits; ?></center></td>
+                                            <td><center><?php echo $row->SubjectType; ?></center></td>
                                             <td><center>
                                               <a href="<?php echo site_url('welcome_admin/activateSubject/'.$row->subject_id.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
                                             </center></td>
@@ -175,7 +183,13 @@
             </div> 
             <div class="row form-group">
               <div class="col-12 col-md-4"><input type="contact" id="hrs" name="hrs" placeholder="No. of hrs" class="form-control"></div>
-              <div class="col-12 col-md-4"><input type="contact" id="type" name="type" placeholder="Subject Type" class="form-control"></div>
+              <div class="col-12 col-md-4">
+                <select name="type" id="type" class="form-control">
+                  <option value="Laboratory">Laboratory</option>
+                  <option value="Lecture">Lecture</option>
+                </select>
+              </div>
+
 
             </div>
           </div> 

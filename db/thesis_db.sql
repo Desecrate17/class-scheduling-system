@@ -15,38 +15,56 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`thesis` /*!40100 DEFAULT CHARACTER SET 
 
 USE `thesis`;
 
+/*Table structure for table `colleges` */
+
+DROP TABLE IF EXISTS `colleges`;
+
+CREATE TABLE `colleges` (
+  `CollegeID` int(10) NOT NULL AUTO_INCREMENT,
+  `CollegeName` char(50) DEFAULT NULL,
+  `CollegeCode` char(50) DEFAULT NULL,
+  `CollegeDean` char(50) DEFAULT NULL,
+  PRIMARY KEY (`CollegeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `colleges` */
+
+insert  into `colleges`(`CollegeID`,`CollegeName`,`CollegeCode`,`CollegeDean`) values (1,'College of Science','COS',NULL);
+
 /*Table structure for table `course` */
 
 DROP TABLE IF EXISTS `course`;
 
 CREATE TABLE `course` (
-  `course_id` int(10) NOT NULL AUTO_INCREMENT,
-  `course_code` int(10) NOT NULL,
-  `course_name` char(15) NOT NULL,
-  `course_major` char(15) NOT NULL,
-  `course_type` char(15) NOT NULL,
-  `course_completion` char(15) NOT NULL,
-  `department_code` int(10) NOT NULL,
-  PRIMARY KEY (`course_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `CourseID` int(10) NOT NULL AUTO_INCREMENT,
+  `CourseCode` varchar(10) NOT NULL,
+  `CourseName` char(15) NOT NULL,
+  `CourseMajor` tinytext NOT NULL,
+  `CourseType` char(15) NOT NULL,
+  `CourseCompletion` tinytext NOT NULL,
+  `DepartmentCode` varchar(10) NOT NULL,
+  PRIMARY KEY (`CourseID`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `course` */
+
+insert  into `course`(`CourseID`,`CourseCode`,`CourseName`,`CourseMajor`,`CourseType`,`CourseCompletion`,`DepartmentCode`) values (1,'BSCS','BACHELOR OF SCI','1','BACCALAUREATE','1','COS'),(3,'BSIS','BACHELOR OF SIE','1','BACCALAUREATE','1','COS'),(2,'BSIT','BACHELOR OF SCI','1','BACCALAUREATE','1','COS');
 
 /*Table structure for table `curriculum` */
 
 DROP TABLE IF EXISTS `curriculum`;
 
 CREATE TABLE `curriculum` (
-  `curriculum_id` int(10) NOT NULL AUTO_INCREMENT,
-  `school_year` year(4) NOT NULL,
-  `course_code` int(10) NOT NULL,
-  `subject_code` int(10) NOT NULL,
-  `semester` int(4) NOT NULL,
-  `year` year(4) NOT NULL,
-  `prereq_1` char(1) DEFAULT NULL,
-  `prereq_2` char(1) DEFAULT NULL,
-  `corequisite` char(1) DEFAULT NULL,
-  PRIMARY KEY (`curriculum_id`)
+  `CurriculumID` int(10) NOT NULL AUTO_INCREMENT,
+  `SchoolYear` varchar(50) NOT NULL,
+  `CourseCode` varchar(50) NOT NULL,
+  `SubjectCode` varchar(50) NOT NULL,
+  `Semester` varchar(50) NOT NULL,
+  `Year` varchar(50) NOT NULL,
+  `Prereq1` varchar(50) DEFAULT NULL,
+  `Prereq2` varchar(50) DEFAULT NULL,
+  `Corequisite` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`CurriculumID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*Data for the table `curriculum` */
@@ -56,49 +74,54 @@ CREATE TABLE `curriculum` (
 DROP TABLE IF EXISTS `department`;
 
 CREATE TABLE `department` (
-  `department_id` int(10) NOT NULL AUTO_INCREMENT,
-  `department_name` char(40) NOT NULL,
-  `department_code` int(20) NOT NULL,
-  `status` char(1) DEFAULT 'A',
-  PRIMARY KEY (`department_id`)
+  `DepartmentID` int(10) NOT NULL AUTO_INCREMENT,
+  `CollegeID` char(10) DEFAULT 'COS',
+  `DepartmentName` char(40) NOT NULL,
+  `DepartmentCode` varchar(10) NOT NULL,
+  `Status` char(1) DEFAULT 'A',
+  PRIMARY KEY (`DepartmentID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 /*Data for the table `department` */
 
-insert  into `department`(`department_id`,`department_name`,`department_code`,`status`) values (1,'Math',1,'A'),(2,'Physics',2,'A'),(3,'Chemistry',3,'A'),(5,'Electrical Eng',4,'A'),(6,'Electronics and Communication',5,'A'),(7,'Mechanical Eng',6,'A'),(8,'Civil Eng',7,'A'),(9,'Basic Industrial Technology',8,'A'),(10,'Civil Engineering Technology',9,'A'),(11,'ALGEBRA',1732,'A'),(12,'Calculus',123,'A'),(13,'Weed',12,'A');
+insert  into `department`(`DepartmentID`,`CollegeID`,`DepartmentName`,`DepartmentCode`,`Status`) values (1,'COS','Math','1','A'),(2,'COS','Physics','2','A'),(3,'COS','Chemistry','3','D'),(5,'COS','Electrical Eng','4','A'),(6,'COS','Electronics and Communication','5','A'),(7,'COS','Mechanical Eng','6','A'),(8,'COS','Civil Eng','7','A'),(9,'COS','Basic Industrial Technology','8','A'),(10,'COS','Civil Engineering Technology','9','A'),(11,'COS','ALGEBRA','10','A'),(12,'COS','Calculus','11','A'),(13,'COS','Weed','12','A');
 
 /*Table structure for table `faculty` */
 
 DROP TABLE IF EXISTS `faculty`;
 
 CREATE TABLE `faculty` (
-  `prof_id` int(10) NOT NULL AUTO_INCREMENT,
-  `first_name` char(15) NOT NULL,
-  `middle_name` char(15) NOT NULL,
-  `last_name` char(15) NOT NULL,
-  `position_code` char(10) NOT NULL,
-  `contact` varchar(20) NOT NULL,
-  `department_code` char(15) NOT NULL,
-  `prefered_time` time NOT NULL,
-  `prefered_subject` char(1) NOT NULL,
-  `status` char(1) DEFAULT 'A',
-  PRIMARY KEY (`prof_id`)
+  `ProfID` int(10) NOT NULL AUTO_INCREMENT,
+  `Firstname` char(15) NOT NULL,
+  `Middlename` char(15) NOT NULL,
+  `Lastname` char(15) NOT NULL,
+  `PositionCode` int(5) DEFAULT NULL,
+  `Contact` varchar(20) NOT NULL,
+  `DepartmentCode` varchar(10) NOT NULL,
+  `PreferredTime` time NOT NULL,
+  `PreferredSubject` char(1) NOT NULL,
+  `Status` char(1) DEFAULT 'A',
+  PRIMARY KEY (`ProfID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `faculty` */
 
-insert  into `faculty`(`prof_id`,`first_name`,`middle_name`,`last_name`,`position_code`,`contact`,`department_code`,`prefered_time`,`prefered_subject`,`status`) values (1,'Mary Roses','CotingjoX','Apoyonz','4','(+63)909-121-2121','1','01:00:00','1','A'),(2,'Marose','Contingoz','Flameon','4','(+12)311-111-1111','2','00:00:00','','D'),(3,'Mary Rose','Cotingjoy','Apoyonx','2','(+12)311-111-1111','1','00:00:00','','A'),(4,'Mareese','Contingo','Apoyony','1','(+45)613-980-7776','1','00:00:00','','A'),(5,'Mary Rose','Contingjo','Apoyon','3','(+12)311-111-1111','3','00:00:00','','A'),(6,'Maureese','Contingoc','Apoyonc','1','(+78)945-658-3464','6','00:00:00','','A'),(7,'Rosemary','Contingov','Apoyonv','4','(+12)311-111-1111','7','00:00:00','','A'),(8,'Fname','Mname','Lname','2','(+23)451-212-1212','8','00:00:00','','A'),(9,'Chae','Yeon','Lee','2','(+78)945-658-3464','9','00:00:00','','A'),(10,'Jesus','Mary','Joseph','3','(+78)945-658-3464','7','00:00:00','','A'),(11,'Won','Young','Jang','2','(+78)945-658-3464','6','00:00:00','','A'),(12,'Monkey','Dude','Luffy','4','(+63)921-310-3341','1','00:00:00','','D'),(13,'One','Two','Three','1','(+63)123-312-3231','1','00:00:00','','A'),(14,'Ones','Twos','Threes','2','(+63)123-311-1111','2','00:00:00','','A'),(15,'wew','wew','ewe','2','(+63)131-231-3231','2','00:00:00','','A');
+insert  into `faculty`(`ProfID`,`Firstname`,`Middlename`,`Lastname`,`PositionCode`,`Contact`,`DepartmentCode`,`PreferredTime`,`PreferredSubject`,`Status`) values (1,'Mary Roses','CotingjoX','Apoyonz',1,'(+63)909-121-2121','1','01:00:00','1','A'),(2,'Marose','Contingoz','Flameon',1,'(+12)311-111-1111','2','00:00:00','','D'),(3,'Mary Rose','Cotingjoy','Apoyonx',2,'(+12)311-111-1111','1','00:00:00','','D'),(4,'Mareese','Contingo','Apoyony',3,'(+45)613-980-7776','1','00:00:00','','D'),(5,'Mary Rose','Contingjo','Apoyon',4,'(+12)311-111-1111','3','00:00:00','','A'),(6,'Maureese','Contingoc','Apoyonc',4,'(+78)945-658-3464','6','00:00:00','','A'),(7,'Rosemary','Contingov','Apoyonv',3,'(+12)311-111-1111','7','00:00:00','','A'),(8,'Fname','Mname','Lname',4,'(+23)451-212-1212','8','00:00:00','','A'),(9,'Chae','Yeon','Lee',4,'(+78)945-658-3464','9','00:00:00','','A'),(10,'Jesus','Mary','Joseph',3,'(+78)945-658-3464','7','00:00:00','','A'),(11,'Won','Young','Jang',4,'(+78)945-658-3464','6','00:00:00','','A'),(12,'Monkey','Dude','Luffy',3,'(+63)921-310-3341','1','00:00:00','','D'),(13,'One','Two','Three',4,'(+63)123-312-3231','1','00:00:00','','A'),(14,'Ones','Twos','Threes',2,'(+63)123-311-1111','2','00:00:00','','A'),(15,'wew','wew','ewe',4,'(+63)131-231-3231','2','00:00:00','','A');
 
 /*Table structure for table `policy` */
 
 DROP TABLE IF EXISTS `policy`;
 
 CREATE TABLE `policy` (
-  `policy_id` int(10) NOT NULL AUTO_INCREMENT,
-  `policy_name` char(15) NOT NULL,
-  `policy_value` char(15) NOT NULL,
-  `policy_desc` char(30) NOT NULL,
-  PRIMARY KEY (`policy_id`)
+  `PolicyID` int(10) NOT NULL AUTO_INCREMENT,
+  `PolicyName` varchar(50) NOT NULL,
+  `PolicyValue` varchar(50) NOT NULL,
+  `PolicyTitle` varchar(50) NOT NULL,
+  `PolicyDescription` varchar(50) DEFAULT NULL,
+  `PolicyDefaultVal` varchar(50) DEFAULT NULL,
+  `PolicyDataType` varchar(50) DEFAULT NULL,
+  `PolicyGroup` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`PolicyID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*Data for the table `policy` */
@@ -108,28 +131,28 @@ CREATE TABLE `policy` (
 DROP TABLE IF EXISTS `position`;
 
 CREATE TABLE `position` (
-  `position_id` int(10) NOT NULL AUTO_INCREMENT,
-  `position_name` char(25) NOT NULL,
-  `position_desc` tinytext NOT NULL,
-  `position_code` int(10) NOT NULL,
-  PRIMARY KEY (`position_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `PositionID` int(10) NOT NULL,
+  `PositionCode` int(5) DEFAULT NULL,
+  `PositionName` char(15) DEFAULT NULL,
+  `PositionDesc` text,
+  PRIMARY KEY (`PositionID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `position` */
 
-insert  into `position`(`position_id`,`position_name`,`position_desc`,`position_code`) values (1,'Dean','Dean ',1),(2,'Department Head','Head',2),(3,'Research','wewewewweeww',3),(4,'Instructor','Prof\r\n',4);
+insert  into `position`(`PositionID`,`PositionCode`,`PositionName`,`PositionDesc`) values (1,1,'Dean',NULL),(2,2,'Department Head',NULL),(3,3,'Instructor',NULL),(4,4,'Research',NULL);
 
 /*Table structure for table `room` */
 
 DROP TABLE IF EXISTS `room`;
 
 CREATE TABLE `room` (
-  `room_id` int(10) NOT NULL AUTO_INCREMENT,
-  `room_no` int(10) NOT NULL,
-  `room_status` char(15) NOT NULL,
-  `room_type` char(10) NOT NULL,
-  `department_code` int(10) NOT NULL,
-  PRIMARY KEY (`room_id`)
+  `RoomID` int(10) NOT NULL AUTO_INCREMENT,
+  `RoomNo` int(10) NOT NULL,
+  `RoomStatus` char(15) NOT NULL DEFAULT 'Physical',
+  `RoomType` char(10) NOT NULL,
+  `DepartmentCode` int(10) NOT NULL,
+  PRIMARY KEY (`RoomID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*Data for the table `room` */
@@ -139,20 +162,19 @@ CREATE TABLE `room` (
 DROP TABLE IF EXISTS `schedule`;
 
 CREATE TABLE `schedule` (
-  `sched_id` int(10) NOT NULL AUTO_INCREMENT,
-  `sched_name` char(15) NOT NULL,
-  `sched_time` time NOT NULL,
-  `sched_days` char(10) NOT NULL,
-  `sched_room` char(10) NOT NULL,
-  `sched_prof` char(25) NOT NULL,
-  `subject_code` int(10) NOT NULL,
-  `subject_name` char(15) NOT NULL,
-  `subject_type` char(15) NOT NULL,
-  `subject_hrs` time NOT NULL,
-  `room_no` int(10) NOT NULL,
-  `deptartment_code` int(10) NOT NULL,
-  `overload` char(15) NOT NULL,
-  PRIMARY KEY (`sched_id`)
+  `SchedID` int(10) NOT NULL AUTO_INCREMENT,
+  `SchedName` varchar(50) NOT NULL,
+  `SchedTime` time NOT NULL,
+  `SchedDays` varchar(50) NOT NULL,
+  `SchedRoom` varchar(50) NOT NULL,
+  `SchedProf` varchar(50) NOT NULL,
+  `SubjectCode` varchar(50) NOT NULL,
+  `SubjectName` varchar(50) NOT NULL,
+  `SubjectType` varchar(50) NOT NULL,
+  `SubjectHours` int(5) NOT NULL,
+  `DepartmentCode` varchar(10) NOT NULL,
+  `Overload` tinyint(1) NOT NULL,
+  PRIMARY KEY (`SchedID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*Data for the table `schedule` */
@@ -162,14 +184,15 @@ CREATE TABLE `schedule` (
 DROP TABLE IF EXISTS `section`;
 
 CREATE TABLE `section` (
-  `section_id` int(10) NOT NULL AUTO_INCREMENT,
-  `section_name` int(5) NOT NULL,
-  `section_code` char(10) NOT NULL,
-  `section_yr` int(5) NOT NULL,
-  `section_sem` int(5) NOT NULL,
-  `course_code` int(10) NOT NULL,
-  `department_code` int(10) NOT NULL,
-  PRIMARY KEY (`section_id`)
+  `SectionID` int(10) NOT NULL AUTO_INCREMENT,
+  `SectionYearLvl` varchar(50) NOT NULL,
+  `SectionCode` varchar(10) NOT NULL,
+  `SectionSchoolYr` varchar(50) NOT NULL,
+  `SectionSemester` varchar(50) NOT NULL,
+  `CourseCode` varchar(10) NOT NULL,
+  `DepartmentCode` varchar(10) NOT NULL,
+  `Timeshift` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`SectionID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*Data for the table `section` */
@@ -179,20 +202,23 @@ CREATE TABLE `section` (
 DROP TABLE IF EXISTS `subject`;
 
 CREATE TABLE `subject` (
-  `subject_id` int(10) NOT NULL AUTO_INCREMENT,
-  `subject_code` varchar(15) NOT NULL,
-  `subject_name` char(30) NOT NULL,
-  `subject_unit` int(11) NOT NULL,
-  `subject_hrs` int(3) NOT NULL,
-  `subject_type` char(10) NOT NULL,
-  `department_code` int(10) NOT NULL,
-  `status` char(1) DEFAULT 'A',
-  PRIMARY KEY (`subject_id`)
+  `SubjectID` int(10) NOT NULL AUTO_INCREMENT,
+  `SubjectCode` varchar(10) NOT NULL,
+  `SubjectName` varchar(50) NOT NULL,
+  `LecHours` int(15) NOT NULL,
+  `LecUnits` int(15) NOT NULL,
+  `LabHours` int(15) NOT NULL,
+  `LabUnits` int(15) NOT NULL,
+  `SubjectDeptCode` varchar(10) DEFAULT NULL,
+  `SubjectType` varchar(20) DEFAULT NULL,
+  `SubjectDay` varchar(20) DEFAULT NULL,
+  `Status` char(1) DEFAULT 'A',
+  PRIMARY KEY (`SubjectID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 /*Data for the table `subject` */
 
-insert  into `subject`(`subject_id`,`subject_code`,`subject_name`,`subject_unit`,`subject_hrs`,`subject_type`,`department_code`,`status`) values (1,'1','Programming 1 Lab',0,3,'Programmin',1,'A'),(2,'2','Programming 1 Lecture',0,5,'Programmin',1,'D'),(3,'3','Programming 2 Lab',0,3,'Programmin',1,'D'),(4,'4','Programming 2 Lecture',0,0,'Programmin',1,'D'),(5,'5','Programming 3 Lab',0,0,'Programin',1,'A'),(6,'6','Programming 3 Lecture',0,5,'Programmin',1,'D'),(7,'7','Programming 4 Lab',0,3,'Programmin',1,'A'),(8,'8','Programming 4 Lecture',0,5,'Programmin',1,'A'),(9,'9','Database and Designs',0,4,'Database',1,'A'),(10,'10','Free Elective 1',0,4,'Math',1,'A'),(11,'11','Free Elective 2',0,4,'Math',1,'A'),(12,'12','Free Elective 3',0,3,'Math',1,'A'),(13,'13','Free Elective 4',0,3,'Math',1,'A'),(14,'14','Algebra',0,4,'Math',1,'A'),(15,'15','Trigonometry',0,4,'Math',1,'A'),(16,'16','Differential Calculus',0,5,'Math',1,'A'),(17,'17','Integral Calculus',0,5,'Math',1,'A'),(18,'18','Networking Principles',0,5,'Networking',1,'A'),(19,'19','Mathhhh',3,3,'sfhjds',0,'A'),(20,'007','Agent',12,10,'Classified',0,'A');
+insert  into `subject`(`SubjectID`,`SubjectCode`,`SubjectName`,`LecHours`,`LecUnits`,`LabHours`,`LabUnits`,`SubjectDeptCode`,`SubjectType`,`SubjectDay`,`Status`) values (1,'1','Programming 1 Lab',0,3,0,1,'A',NULL,NULL,'A'),(2,'2','Programming 1 Lecture',0,5,0,1,'D',NULL,NULL,'A'),(3,'3','Programming 2 Lab',0,3,0,1,'D',NULL,NULL,'A'),(4,'4','Programming 2 Lecture',0,0,0,1,'D',NULL,NULL,'A'),(5,'5','Programming 3 Lab',0,0,0,1,'A',NULL,NULL,'A'),(6,'6','Programming 3 Lecture',0,5,0,1,'D',NULL,NULL,'A'),(7,'7','Programming 4 Lab',0,3,0,1,'A',NULL,NULL,'A'),(8,'8','Programming 4 Lecture',0,5,0,1,'A',NULL,NULL,'A'),(9,'9','Database and Designs',0,4,0,1,'A',NULL,NULL,'A'),(10,'10','Free Elective 1',0,4,0,1,'A',NULL,NULL,'A'),(11,'11','Free Elective 2',0,4,0,1,'A',NULL,NULL,'A'),(12,'12','Free Elective 3',0,3,0,1,'A',NULL,NULL,'A'),(13,'13','Free Elective 4',0,3,0,1,'A',NULL,NULL,'A'),(14,'14','Algebra',0,4,0,1,'A',NULL,NULL,'A'),(15,'15','Trigonometry',0,4,0,1,'A',NULL,NULL,'A'),(16,'16','Differential Calculus',0,5,0,1,'A',NULL,NULL,'A'),(17,'17','Integral Calculus',0,5,0,1,'A',NULL,NULL,'A'),(18,'18','Networking Principles',0,5,0,1,'A',NULL,NULL,'A'),(19,'19','Mathhhh',3,3,0,0,'A',NULL,NULL,'A'),(20,'007','Agent',12,10,0,0,'A',NULL,NULL,'A');
 
 /*Table structure for table `subject_list` */
 
@@ -203,11 +229,11 @@ CREATE TABLE `subject_list` (
   `faculty_id` int(10) DEFAULT NULL,
   `subject_code` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`subject_list_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `subject_list` */
 
-insert  into `subject_list`(`subject_list_id`,`faculty_id`,`subject_code`) values (1,1,'9'),(2,1,'15'),(3,1,'18'),(4,1,'007');
+insert  into `subject_list`(`subject_list_id`,`faculty_id`,`subject_code`) values (1,1,'9'),(2,1,'2'),(3,1,'1'),(4,1,'3'),(5,1,'10'),(6,1,'11'),(7,1,'12');
 
 /*Table structure for table `user` */
 

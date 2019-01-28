@@ -64,15 +64,15 @@
                                     if($row->fs == 'A') {
                                     ?>
                                       <tr>
-                                        <td><center><?php echo $row->prof_id; ?></center></td>
-                                        <td><center><?php echo $row->last_name.', '.$row->first_name.' '.$row->middle_name; ?></center></td>
-                                        <td><center><?php echo $row->position_name; ?></center></td>
-                                        <td><center><?php echo $row->department_name; ?></center></td>
-                                        <td><center><?php echo $row->contact; ?></center></td>
+                                        <td><center><?php echo $row->ProfID; ?></center></td>
+                                        <td><center><?php echo $row->Lastname.', '.$row->Firstname.' '.$row->Middlename; ?></center></td>
+                                        <td><center><?php echo $row->PositionName; ?></center></td>
+                                        <td><center><?php echo $row->DepartmentName; ?></center></td>
+                                        <td><center><?php echo $row->Contact; ?></center></td>
                                         <!-- <td><center><?php echo $row->fs; ?></center></td> -->
                                         <td><center>
-                                          <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->prof_id.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
-                                          <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->prof_id.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
+                                          <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->ProfID.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
+                                          <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->ProfID.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
                                         </center></td>
                                       </tr>
                                     <?php
@@ -118,15 +118,15 @@
                                       if($row->fs == 'D') {
                                       ?>
                                         <tr>
-                                          <td><center><?php echo $row->prof_id; ?></center></td>
-                                          <td><center><?php echo $row->last_name.', '.$row->first_name.' '.$row->middle_name; ?></center></td>
-                                          <td><center><?php echo $row->position_name; ?></center></td>
-                                          <td><center><?php echo $row->department_name; ?></center></td>
-                                          <td><center><?php echo $row->contact; ?></center></td>
+                                          <td><center><?php echo $row->ProfID; ?></center></td>
+                                          <td><center><?php echo $row->Lastname.', '.$row->Firstname.' '.$row->Middlename; ?></center></td>
+                                          <td><center><?php echo $row->PositionName; ?></center></td>
+                                          <td><center><?php echo $row->DepartmentName; ?></center></td>
+                                          <td><center><?php echo $row->Contact; ?></center></td>
                                           <!-- <td><center><?php echo $row->fs; ?></center></td> -->
                                           <td><center>
-                                            <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->prof_id.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
-                                            <a href="<?php echo site_url('welcome_admin/activateFaculty/'.$row->prof_id.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
+                                            <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->ProfID.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
+                                            <a href="<?php echo site_url('welcome_admin/activateFaculty/'.$row->ProfID.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
                                           </center></td>
                                         </tr>
                                       <?php
@@ -172,14 +172,14 @@
                                     if($row->fs == 'A') {
                                     ?>
                                       <tr>
-                                        <td><center><?php echo $row->prof_id; ?></center></td>
-                                        <td><center><?php echo $row->last_name.', '.$row->first_name.' '.$row->middle_name; ?></center></td>
-                                        <td><center><?php echo $row->position_name; ?></center></td>
-                                        <td><center><?php echo $row->department_name; ?></center></td>
-                                        <td><center><?php echo $row->contact; ?></center></td>
+                                        <td><center><?php echo $row->ProfID; ?></center></td>
+                                        <td><center><?php echo $row->Lastname.', '.$row->Firstname.' '.$row->Middlename; ?></center></td>
+                                        <td><center><?php echo $row->PositionName; ?></center></td>
+                                        <td><center><?php echo $row->DepartmentName; ?></center></td>
+                                        <td><center><?php echo $row->Contact; ?></center></td>
                                         <td><center>
-                                          <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->prof_id.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
-                                          <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->prof_id.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
+                                          <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->ProfID.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
+                                          <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->ProfID.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
                                         </center></td>
                                       </tr>
                                     <?php
@@ -217,7 +217,7 @@
         <form class="form-horizontal">
           <div class="modal-body">
             <div class="form-group">
-              <div class="alert alert-danger alert-dismissible fade show" align="center" style="display: none;"></div>
+              <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show" align="center" style="display: none;"></div>
             </div>
             <div class="row form-group">
               <div class="col-12 col-md-4"><input type="text" id="ffname" name="ffname" placeholder="First Name" class="form-control">
@@ -233,7 +233,7 @@
                   <select data-placeholder="Subject" name="fposition" id="fposition" class="form-control">
                       <?php
                           foreach($position as $row) { ?>
-                          <option value="<?php echo $row->position_code ?>"><?php echo $row->position_name ?></option>
+                          <option value="<?php echo $row->PositionCode ?>"><?php echo $row->PositionName ?></option>
                       <?php
                           }
                       ?>
@@ -243,7 +243,7 @@
                   <select name="fdepCode" id="fdepCode" class="form-control" >
                       <?php
                           foreach($department as $row) { ?>
-                          <option value="<?php echo $row->department_code ?>"><?php echo $row->department_name ?></option>
+                          <option value="<?php echo $row->DepartmentCode ?>"><?php echo $row->DepartmentName ?></option>
                       <?php
                           }
                       ?>

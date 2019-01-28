@@ -59,16 +59,16 @@
                                  <?php
                                   if ($department!=NULL) {
                                     foreach ($department as $row) {
-                                      if($row->status == 'A') {
+                                      if($row->Status == 'A') {
                                       ?>
                                         <tr>
-                                          <td><center><?php echo $row->department_id; ?></center></td>
-                                          <td><center><?php echo $row->department_code; ?></center></td>
-                                          <td><center><?php echo $row->department_name; ?></center></td>
-                                          <td><center><?php echo $row->status; ?></center></td>
+                                          <td><center><?php echo $row->DepartmentID; ?></center></td>
+                                          <td><center><?php echo $row->DepartmentCode; ?></center></td>
+                                          <td><center><?php echo $row->DepartmentName; ?></center></td>
+                                          <td><center><?php echo $row->Status; ?></center></td>
                                           <td><center>
-                                            <a href="<?php echo site_url('welcome_admin/viewDepartment/'.$row->department_id.'');?>" class="btn btn-sm btn-info" title="View Department"><i class="fa fa-eye"></i></a>
-                                            <a href="<?php echo site_url('welcome_admin/deleteDepartment/'.$row->department_id.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
+                                            <a href="<?php echo site_url('welcome_admin/viewDepartment/'.$row->DepartmentID.'');?>" class="btn btn-sm btn-info" title="View Department"><i class="fa fa-eye"></i></a>
+                                            <a href="<?php echo site_url('welcome_admin/deleteDepartment/'.$row->DepartmentID.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
                                           </center></td>
                                         </tr>
                                       <?php
@@ -95,7 +95,7 @@
                               <strong class="card-title">Data Table</strong>
                           </div>
                           <div class="card-body">
-                            <table id="bootstrap-data-table-faculty" class="table table-hover">
+                            <table id="bootstrap-data-table" class="table table-hover">
                               <thead>
                                 <tr>
                                   <th>ID</th>
@@ -109,16 +109,16 @@
                                  <?php
                                   if ($department!=NULL) {
                                     foreach ($department as $row) {
-                                      if($row->status == 'D') {
+                                      if($row->Status == 'D') {
                                       ?>
                                         <tr>
-                                          <td><center><?php echo $row->department_id; ?></center></td>
-                                          <td><center><?php echo $row->department_code; ?></center></td>
-                                          <td><center><?php echo $row->department_name; ?></center></td>
-                                          <td><center><?php echo $row->status; ?></center></td>
+                                          <td><center><?php echo $row->DepartmentID; ?></center></td>
+                                          <td><center><?php echo $row->DepartmentCode; ?></center></td>
+                                          <td><center><?php echo $row->DepartmentName; ?></center></td>
+                                          <td><center><?php echo $row->Status; ?></center></td>
                                           <td><center>
-                                            <a href="<?php echo site_url('welcome_admin/viewDepartment/'.$row->department_id.'');?>" class="btn btn-sm btn-info" title="View Department"><i class="fa fa-eye"></i></a>
-                                            <a href="<?php echo site_url('welcome_admin/activateDepartment/'.$row->department_id.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
+                                            <a href="<?php echo site_url('welcome_admin/viewDepartment/'.$row->DepartmentID.'');?>" class="btn btn-sm btn-info" title="View Department"><i class="fa fa-eye"></i></a>
+                                            <a href="<?php echo site_url('welcome_admin/activateDepartment/'.$row->DepartmentID.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
                                           </center></td>
                                         </tr>
                                       <?php

@@ -7,8 +7,6 @@ class Home_model extends CI_Model{
 		$query = $this->db->query("
 			SELECT us.user_id, us.username, us.password, us.usertype
 			FROM user us
-			LEFT JOIN faculty as f
-			ON f.prof_id = us.user_id			
 			WHERE us.username = '$user' AND us.password = '$pass'
 		");
 		if ($query->num_rows() > 0){

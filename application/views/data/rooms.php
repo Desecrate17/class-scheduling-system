@@ -38,7 +38,7 @@
                                             <select name="rooms" id="rooms" class="form-control" >
                                                 <?php
                                                     foreach($room as $row) { ?>
-                                                    <option value="<?php echo $row->room_id ?>"><?php echo $row->room_no ?></option>
+                                                    <option value="<?php echo $row->RoomID ?>"><?php echo $row->RoomNo ?></option>
                                                 <?php
                                                     }
                                                 ?>
@@ -106,7 +106,7 @@
 
               <!--INACTIVE -->
               <div class="tab-pane fade" id="inactive" role="tabpanel" aria-labelledby="nav-home-tab">
-              	<div class="row">
+                <div class="row">
                   <!--TABLE+++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
                     <div class="col-md-12">
                       <div class="card">
@@ -141,7 +141,7 @@
 
               <!--UNASSIGNED -->
               <div class="tab-pane fade" id="unassigned" role="tabpanel" aria-labelledby="nav-home-tab">
-              	<div class="row">
+                <div class="row">
                   <!--TABLE+++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
                     <div class="col-md-12">
                       <div class="card">
@@ -210,7 +210,7 @@
                   <select data-placeholder="Department" name="dep" id="dep" class="form-control">
                       <?php
                           foreach($dep_list as $row) { ?>
-                          <option value="<?php echo $row->department_id ?>"><?php echo $row->department_name ?></option>
+                          <option value="<?php echo $row->DepartmentID ?>"><?php echo $row->DepartmentName ?></option>
                       <?php
                           }
                       ?>

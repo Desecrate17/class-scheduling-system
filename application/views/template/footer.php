@@ -20,8 +20,6 @@
     <script src="<?php echo base_url('assets/js/input-mask/jquery.inputmask.date.extensions.js"');?>"></script>
     <script src="<?php echo base_url('assets/js/input-mask/jquery.inputmask.phone.extensions.js"');?>"></script>
 
-     <script src="<?php echo base_url('assets/js/timepicker.js');?>"></script>
-
 
     <script src="<?php echo base_url('assets/vendors/datatables.net/js/jquery.dataTables.min.js');?>"></script>
     <script src="<?php echo base_url('assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js');?>"></script>
@@ -62,27 +60,27 @@
     jQuery(document).ready(function($) {
           
 
-          // $('#btn_faculty_sub').on('click', function(){
-          //     var sub_list = $('[name="sub_list[]"]').val();
-          //     var fid = $('#profid').val();
-          //     $.ajax({
-          //         type: 'post',
-          //         url: "<?php echo site_url('welcome_admin/facsub'); ?>",
-          //         data: {
-          //               sub_list : sub_list,
-          //               fid : fid
-          //         },
-          //       dataType: 'JSON',
-          //       success: function(data){
-          //         alert("Subject successfully added!");
-          //         location.reload();
-          //         $('#infosub').modal('hide');
-          //       },
-          //       error: function(){
-          //         alert('ERROR!');
-          //       }
-          //   });
-          // });
+          $('#btn_faculty_sub').on('click', function(){
+              var sub_list = $('[name="sub_list[]"]').val();
+              var fid = $('#profid').val();
+              $.ajax({
+                  type: 'post',
+                  url: "<?php echo site_url('welcome_admin/facsub'); ?>",
+                  data: {
+                        sub_list : sub_list,
+                        fid : fid
+                  },
+                dataType: 'JSON',
+                success: function(data){
+                  alert("Subject successfully added!");
+                  location.reload();
+                  $('#infosub').modal('hide');
+                },
+                error: function(){
+                  alert('ERROR!');
+                }
+            });
+          });
 
 
           // FACULTY //
@@ -253,11 +251,7 @@
           });
           // SUBJECT //
 
-                    //room//
-        
-
-          //room//
-         $('#roombut').on('click', function(){
+                   $('#roombut').on('click', function(){
          var r = document.getElementById('rooms');
          var rooms = r.options[r.selectedIndex].value;
                 $.ajax({
@@ -319,82 +313,8 @@
                     });return false;
           });
 
-
-            $('#btn_add_sub').on('click', function(){
-              var sub_list = $('[name="sub_list[]"]').val();
-              $.ajax({
-                  type: 'post',
-                  url: "<?php echo site_url('welcome_faculty/facsub'); ?>",
-                  data: {
-                        sub_list : sub_list
-                  },
-                dataType: 'JSON',
-                success: function(data){
-                  alert("Subject successfully added!");
-                  location.reload();
-                  $('#infosub').modal('hide');
-                },
-                error: function(){
-                  alert('ERROR!');
-                }
-            });
-          });
-
-
-
-        $('#master').on('click', function(e) {
-         if($(this).is(':checked',true))  
-         {
-            $(".del_subj").prop('checked', true);  
-         } else {  
-            $(".del_subj").prop('checked',false);  
-         }  
-        });
- 
-        $('.delete_all').on('click', function(e) {
- 
-            var allVals = [];  
-            $(".del_subj:checked").each(function() {  
-                allVals.push($(this).attr('data-id'));
-            });  
- 
-            if(allVals.length <=0)  
-            {  
-                alert("Please select row.");  
-            }  else {  
- 
-                var check = confirm("Are you sure you want to delete this row?");  
-                if(check == true){  
- 
-                    var join_selected_values = allVals.join(","); 
- 
-                    $.ajax({
-                        url: "<?php echo site_url('welcome_faculty/delete_subj'); ?>",
-                        type: 'POST',
-                        data: 'ids='+join_selected_values,
-                        success: function (data) {
-                          console.log(data);
-                          $(".del_subj:checked").each(function() {  
-                              $(this).parents("tr").remove();
-                          });
-                          alert("Item Deleted successfully.");
-                        },
-                        error: function (data) {
-                            alert(data.responseText);
-                        }
-                    });
- 
-                  // $.each(allVals, function( index, value ) {
-                  //     $('table tr').filter("[data-row-id='" + value + "']").remove();
-                  // });
-                }  
-            }  
-        });
-
     
     });
-
- 
     </script>
     
 </body>

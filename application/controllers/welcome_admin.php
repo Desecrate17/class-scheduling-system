@@ -106,14 +106,6 @@ class welcome_admin extends CI_Controller {
 	}
 	//FACULTY//
 
-	// //ROOMS//
-	// public function rooms(){
-	// 	$this->load->view('template/header');
-	// 	$this->load->view('data/rooms');
-	// 	$this->load->view('template/footer');		
-	// }
-	// //ROOMS//
-
 	//DEPARTMENT//
 	public function department(){
 		$data['data2'] = $this->Admin_model->view_faculty();
@@ -272,10 +264,10 @@ class welcome_admin extends CI_Controller {
 
 	public function add_room(){
 		$response = array();
-		$this->form_validation->set_rules('room_no', 'First Name', 'required');
-		$this->form_validation->set_rules('room_type', 'Middle Name', 'required');
-		$this->form_validation->set_rules('room_stat', 'Last Name', 'required');
-		$this->form_validation->set_rules('dep', 'Last Name', 'required');
+		$this->form_validation->set_rules('room_no', 'Room No.', 'required');
+		// $this->form_validation->set_rules('room_type', 'Middle Name', 'required');
+		// $this->form_validation->set_rules('room_stat', 'Last Name', 'required');
+		// $this->form_validation->set_rules('dep', 'Last Name', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			$data = $this->Admin_model->add_room();
 			$response['status'] = TRUE;
