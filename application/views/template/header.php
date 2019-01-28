@@ -27,7 +27,8 @@
   
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css');?>"" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.lwMultiSelect.css');?>"" type="text/css">
-
+    <link rel="icon" href="<?php echo base_url('assets/img/logo.jpg'); ?>" /> 
+    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
 </head>
