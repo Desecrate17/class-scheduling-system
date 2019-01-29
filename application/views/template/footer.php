@@ -251,7 +251,7 @@
           });
           // SUBJECT //
 
-                   $('#roombut').on('click', function(){
+          $('#roombut').on('click', function(){
          var r = document.getElementById('rooms');
          var rooms = r.options[r.selectedIndex].value;
                 $.ajax({
@@ -264,54 +264,39 @@
                         $('#datatable').html(data);
                     },
                     error: function(){
-                        alert('EROROROROR');
+                        alert('ERROR');
                     }
                 });
            });
 
-
-          $('#btn_room').click(function () {
-             if ((document.getElementById('room_no').value === '' ) || (document.getElementById('room_type').value === '' ) || (document.getElementById('room_stat').value === '' )|| (document.getElementById('dep').value === '' )){
-            alert('Please Fill all the Fields!');
-          }else{
-            $('#addRoom').modal('hide');
-            $('#confirm_modal').modal({
-                backdrop: 'static'
-            });
-          }
-             });
-            $('#btn_confirm').click(function () {
-                 $('#confirm_modal').modal('hide');
-               
-                    var room_no = $('#room_no').val();
-                    var room_type = $('#room_type').val();
-                    var room_stat = $('#room_stat').val();
-                    var dep = $('#dep').val();
-                    $.ajax({
-                        type : "POST",
-                        url  : "<?php echo site_url('welcome_admin/add_room')?>",
-                        dataType : "JSON",
-                        data : {
-                            room_no: room_no,
-                            room_type: room_type,
-                            room_stat: room_stat,
-                            dep: dep
-                        },
-                        success: function(data){
-                            if (data.status) {
-                                alert("Room successfully added!");
-                                location.reload();
-                                $('#confirm_modal').modal('hide');
-                            }else{
-                                $('.alert').css('display', 'block');
-                                $('.alert').html(data.notif);   
-                            }
-                        },
-                        error: function(request, status, error){
-                          alert(request.responseText);
-                        }
-                    });return false;
-          });
+            $('#btn_room').on('click', function(){
+            var room_no = $('#room_no').val();
+            var room_type = $('#room_type').val();
+             var dep = $('#dep').val();
+            $.ajax({
+                type: 'post',
+                url: "<?php echo site_url('welcome_admin/add_room'); ?>",
+                data: {
+                    room_no: room_no,
+                    room_type: room_type,
+                    dep: dep
+                },
+                dataType: 'JSON',
+                success: function(data){
+                    if (data.status) {
+                        alert("Room successfully created!");
+                        location.reload();
+                        javascript:window.location.reload();
+                    }else{
+                        $('.alert').css('display', 'block');
+                        $('.alert').html(data.notif);
+                    }
+                },
+                error: function(){
+                    alert('ERROR!');
+                }
+            });return false;
+        });
 
     
     });

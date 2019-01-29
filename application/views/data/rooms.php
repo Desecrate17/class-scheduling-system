@@ -200,12 +200,8 @@
             <div class="row form-group">
               <div class="col-12 col-md-4"><input type="text" id="room_no" name="room_no" placeholder="Room Number" class="form-control">
               </div>
-              <div class="col-12 col-md-4"><input type="text" id="room_stat" name="room_stat" placeholder="Room Status" class="form-control">
-              </div>
               <div class="col-12 col-md-4"><input type="text" id="room_type" name="room_type" placeholder="Room Type" class="form-control">
               </div>
-            </div> 
-            <div class="row form-group">
               <div class="col-12 col-md-4">
                   <select data-placeholder="Department" name="dep" id="dep" class="form-control">
                       <?php
@@ -215,8 +211,8 @@
                           }
                       ?>
                   </select>
-              </div>    
-            </div>
+              </div>
+            </div> 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary-danger" data-dismiss="modal">Cancel</button>

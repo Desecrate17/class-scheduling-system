@@ -264,10 +264,8 @@ class welcome_admin extends CI_Controller {
 
 	public function add_room(){
 		$response = array();
-		$this->form_validation->set_rules('room_no', 'Room No.', 'required');
-		// $this->form_validation->set_rules('room_type', 'Middle Name', 'required');
-		// $this->form_validation->set_rules('room_stat', 'Last Name', 'required');
-		// $this->form_validation->set_rules('dep', 'Last Name', 'required');
+		$this->form_validation->set_rules('room_no', 'Room No', 'required');
+		$this->form_validation->set_rules('room_type', 'Room Status', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			$data = $this->Admin_model->add_room();
 			$response['status'] = TRUE;
@@ -278,7 +276,6 @@ class welcome_admin extends CI_Controller {
 	    	$response['notif']	= validation_errors();
 		}
 		echo json_encode($response);
-
 	}
 	//ROOMS//
 

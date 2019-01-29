@@ -426,18 +426,17 @@ class Admin_model extends CI_Model{
 			return NULL;
 		}
 	}
-	// s.sched_from, s.sched_length, s.sched_from
 	public function view_room_schedule($rooms){
 		$query = $this->db->query("
-			SELECT s.SchedID, s.SchedName, s.SchedDays, f.Firstname, f.Middlename, f.Lastname, subj.SubjectName, r.RoomNo, r.RoomID, 
-				FROM schedule as s
+			SELECT s.SchedID, s.SchedName, s.SchedTime, s.SchedDays, f.Firstname, f.Middlename, f.Lastname, subj.SubjectName, r.RoomNo, r.RoomID, s.SubjectHours
+			FROM schedule as s
 			LEFT JOIN faculty as f
 			ON s.SchedProf = f.ProfID
 			LEFT JOIN subject as subj
 			ON s.SubjectCode = subj.SubjectCode
 			LEFT JOIN room as r
-			ON s.SchedRoom = r.RoomNo
-			WHERE r.RoomID = '$rooms'
+			ON s.SchedRoom= r.RoomID
+			WHERE s.SchedRoom = '$rooms'
 
 			");
 		if ($query->num_rows() > 0){
@@ -446,7 +445,6 @@ class Admin_model extends CI_Model{
 			return NULL;
 		}
 	}
-
 
 	public function add_room(){
 		$data = array(
