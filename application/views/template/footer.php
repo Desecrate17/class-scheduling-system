@@ -223,6 +223,7 @@
               var units = $('#units').val();
               var hrs = $('#hrs').val();
               var type = $('#type').val();
+              var dep = $('#dep').val();
               $.ajax({
                   type: 'post',
                   url: "<?php echo site_url('welcome_admin/addSubject'); ?>",
@@ -231,7 +232,8 @@
                         subj_name: subj_name,
                         units: units,
                         hrs: hrs,
-                        type: type
+                        type: type,
+                        dept: dep
                   },
                 dataType: 'JSON',
                 success: function(data){

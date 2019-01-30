@@ -61,9 +61,9 @@
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Data</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-address-card-o"></i><a href="<?php echo site_url('welcome_admin/faculty');?>">Faculty</a></li>
-                            <li><i class="fa fa-hotel"></i><a href="<?php echo site_url('welcome_admin/view_sched');?>">Section</a></li>
+                            <li><i class="fa fa-hotel"></i><a href="<?php echo site_url('welcome_admin/section');?>">Section</a></li>
                             <li><i class="fa fa-building-o"></i><a href="<?php echo site_url('welcome_admin/rooms');?>">Rooms</a></li>
-                            <li><i class="fa fa-graduation-cap"></i><a href="<?php echo site_url('welcome_admin/view_sched');?>">Courses</a></li>
+                            <li><i class="fa fa-graduation-cap"></i><a href="<?php echo site_url('welcome_admin/courses');?>">Courses</a></li>
                             <li><i class="fa fa-suitcase"></i><a href="<?php echo site_url('welcome_admin/department');?>">Departments</a></li>
                             <li><i class="fa fa-book"></i><a href="<?php echo site_url('welcome_admin/subjects');?>">Subjects</a></li>
                         </ul>
