@@ -10,19 +10,11 @@ class Home extends CI_Controller {
 	
 	public function index(){
 		if($this->session->userdata("logged_in")){
-			// if($userdata[0] == 'faculty'){
-				redirect(base_url('welcome_admin'));
-			// }
-			// else if($userdata[0] == 'admin'){
-			// 	redirect(base_url('welcome_admin'));		
-			// }
-			// else if($userdata[0] == 'dep'){
-			// 	redirect(base_url('welcome_dep'));		
-			// }
+			redirect(base_url('welcome_admin'));
+
 		}else {
 		    $data = array('alert' => false);  
-            $this->load->view('home',$data);
-	
+            $this->load->view('home',$data);	
   	 }
 	}
 
@@ -33,7 +25,7 @@ class Home extends CI_Controller {
 		if(isset($userdata)){
 			$_SESSION = array( 
 				'id' => $userdata[0]->user_id, 
-				'user' => $userdata[0]->username, // '
+				'user' => $userdata[0]->username,
 				'pass' => $userdata[0]->password,
 				'utype' => $userdata[0]->usertype,
 				'logged_in' => TRUE,
@@ -41,25 +33,16 @@ class Home extends CI_Controller {
 			$this->session->set_userdata($_SESSION);
             
 			switch ($userdata[0]->usertype) {
-				case 'faculty':
-					redirect('welcome_faculty');
-					break;
 				case 'admin':
 					redirect('welcome_admin');
 					break;
-				case 'dephead':
-					redirect('welcome_dep');
-					break;
 			}
-			// $this->load->view('dashboards/faculty');
 		}
 		else{
 			$this->session->set_flashdata('error_msg','Invalid Username or Password, Try again!'); 
 			redirect();
 		}
-		// $this->load->view('dashboards/faculty');
 	}
-
 	public function logout(){
 		session_destroy();
 		redirect();

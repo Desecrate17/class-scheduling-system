@@ -227,15 +227,28 @@ class Admin_model extends CI_Model{
 
 	//SUBJECT//
 	public function add_subject(){
-		$data = array(
+		if($this->input->post('type') == "Lecture"){
+			$data = array(
 			'SubjectCode'=>$this->input->post('subj_code'),
 			'SubjectName'=>$this->input->post('subj_name'),
-			'subject_unit'=>$this->input->post('LecUnits'),
-			'subject_hrs'=>$this->input->post('LecHours'),
+			'LecUnits'=>$this->input->post('units'),
+			'LecHours'=>$this->input->post('hrs'),
 			'SubjectType'=>$this->input->post('type'),
+			'SubjectDeptCode'=>$this->input->post('dept'),
 			'Status' => "A"
-			// 'position_id'=>$this->input->post('position'),
-		);
+			);
+		}
+		else{
+			$data = array(
+			'SubjectCode'=>$this->input->post('subj_code'),
+			'SubjectName'=>$this->input->post('subj_name'),
+			'LabUnits'=>$this->input->post('units'),
+			'LabHours'=>$this->input->post('hrs'),
+			'SubjectType'=>$this->input->post('type'),
+			'SubjectDeptCode'=>$this->input->post('dept'),
+			'Status' => "A"
+			);
+		}
 		$this->db->insert('subject', $data);
 	}
 
@@ -254,8 +267,9 @@ class Admin_model extends CI_Model{
 
 	public function view_subjects(){
 		$query = $this->db->query("
-			SELECT s.SubjectID, s.SubjectCode, s.SubjectName, s.LecHours, s.LecUnits, s.LabHours, s.LabUnits, s.SubjectType, s.SubjectDeptCode, s.Status
+			SELECT s.SubjectID, s.SubjectCode, s.SubjectName, s.LecHours, s.LecUnits, s.LabHours, s.LabUnits, s.SubjectType, s.SubjectDeptCode, s.Status, d.DepartmentName
 			FROM subject as s
+			LEFT JOIN department as d ON s.SubjectDeptCode = d.DepartmentCode
 			");
 		if ($query->num_rows() > 0){
 			return $query->result();
@@ -292,6 +306,37 @@ class Admin_model extends CI_Model{
         return $this->db->update('subject',$data);
 	}
 	//SUBJECT//
+
+
+	//SECTION//
+	public function view_section(){
+		$query = $this->db->query("
+			SELECT *
+			FROM section as s
+			LEFT JOIN department as d ON s.DepartmentCode = d.DepartmentCode 
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+	//SECTION//
+
+	//COURSES//
+	public function view_courses(){
+		$query = $this->db->query("
+			SELECT c.CourseCode, c.CourseName, c.CourseType, d.DepartmentName
+			FROM course as c
+			LEFT JOIN department as d ON c.DepartmentCode = d.DepartmentCode 
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+	//COURSES//
 
 	
 	public function view_position(){
@@ -426,6 +471,34 @@ class Admin_model extends CI_Model{
 			return NULL;
 		}
 	}
+
+	public function add_room(){
+		$data = array(
+			'RoomNo'=>$this->input->post('room_no'),
+			'RoomType'=>$this->input->post('room_type'),
+			'DepartmentCode'=>$this->input->post('dep')
+		
+		);
+		$result = $this->db->insert('room', $data);
+		return $result;
+
+
+	}
+
+	public function list_room(){
+		$query = $this->db->query("
+				SELECT r.RoomID, r.RoomNo,  r.RoomType, r.DepartmentCode, d.DepartmentCode, d.DepartmentName, r.RoomStatus
+ 				FROM room as r
+				LEFT JOIN department as d
+				ON r.DepartmentCode = d.DepartmentID
+ 			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
 	public function view_room_schedule($id){
 		$query = $this->db->query("
 			SELECT s.SchedID, s.SchedName, s.SchedTime, s.SchedDays, f.Firstname, f.Middlename, f.Lastname, subj.SubjectName, r.RoomNo, r.RoomID, s.SubjectHours, s.SchedEnd
@@ -433,7 +506,7 @@ class Admin_model extends CI_Model{
 			LEFT JOIN faculty as f
 			ON s.SchedProf = f.ProfID
 			LEFT JOIN subject as subj
-			ON s.SubjectCode = subj.SubjectCode
+			ON s.SubjectCode = subj.SubjectID
 			LEFT JOIN room as r
 			ON s.SchedRoom= r.RoomID
 			WHERE s.SchedRoom = '$id'
@@ -446,28 +519,12 @@ class Admin_model extends CI_Model{
 		}
 	}
 
-	public function add_room(){
-		$data = array(
-			'RoomNo'=>$this->input->post('room_no'),
-			'RoomType'=>$this->input->post('room_type'),
-			'RoomStatus'=>$this->input->post('room_stat'),
-			'DepartmentCode'=>$this->input->post('dep')
-		
-		);
-		$result = $this->db->insert('room', $data);
-		return $result;
-
-
-	}
-
-	public function list_room(){
+	public function room_name($id){
 
 		$query = $this->db->query("
-				SELECT r.RoomID, r.RoomNo,  r.RoomType, r.DepartmentCode, d.DepartmentCode, d.DepartmentName, r.RoomStatus
- 				FROM room as r
-				LEFT JOIN department as d
-				ON r.DepartmentCode = d.DepartmentCode
- 			");
+				SELECT * FROM room
+				WHERE RoomID = '$id'
+			");
 		if ($query->num_rows() > 0){
 			return $query->result();
 		}else{

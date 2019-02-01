@@ -185,7 +185,6 @@ class welcome_admin extends CI_Controller {
 		$this->form_validation->set_rules('subj_name', 'Middle Name', 'required');
 		$this->form_validation->set_rules('units', 'No. of units', 'required');
 		$this->form_validation->set_rules('hrs', 'No. of hours', 'required');
-		$this->form_validation->set_rules('type', 'Subject Type', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			$data = $this->Admin_model->add_subject();
 			$response['status'] = TRUE;
@@ -204,7 +203,6 @@ class welcome_admin extends CI_Controller {
 		$this->form_validation->set_rules('subj_name', 'Middle Name', 'required');
 		$this->form_validation->set_rules('units', 'No. of units', 'required');
 		$this->form_validation->set_rules('hrs', 'No. of hours', 'required');
-		$this->form_validation->set_rules('type', 'Subject Type', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			$data = $this->Admin_model->add_subject();
 			$response['status'] = TRUE;
@@ -235,6 +233,28 @@ class welcome_admin extends CI_Controller {
 		echo json_encode($response);    
 	}
 	//SUBJECT//
+
+	//SECTION//
+	public function section(){
+		$data['data'] = $this->Admin_model->view_section();
+		$data['department'] = $this->Admin_model->view_department();
+		$this->load->view('template/header');
+		$this->load->view('data/section',$data);
+		$this->load->view('template/footer');
+	}
+	//SECTION//
+
+
+	//COURSES//
+	public function courses(){
+		$data['data'] = $this->Admin_model->view_courses();
+		$data['department'] = $this->Admin_model->view_department();
+		$this->load->view('template/header');
+		$this->load->view('data/courses',$data);
+		$this->load->view('template/footer');
+	}
+	//COURSES//
+
 	public function viewSched(){
 		$this->load->view('template/header');
 		$this->load->view('adminDashboards/view_schedule');
@@ -254,19 +274,18 @@ class welcome_admin extends CI_Controller {
 				
 	//ROOMS//
 
-	//ROOMS//
-	// public function room_view(){
-	// 	$rooms= $this->input->post("rooms");
-	// 	$data['hey']=$this->Admin_model->view_room_schedule($rooms);
-	// 	$this->load->view('data/displayroom',$data);
-				
-	// }
-
+	public function viewroomSched($id){
+		$data['room'] = $this->Admin_model->room_name($id);
+		$data['hey'] = $this->Admin_model->view_room_schedule($id);
+		$this->load->view('template/header');
+		$this->load->view('data/displayroom',$data);
+		$this->load->view('template/footer');
+	}
 
 	public function add_room(){
 		$response = array();
 		$this->form_validation->set_rules('room_no', 'Room No', 'required');
-		$this->form_validation->set_rules('room_type', 'Room Status', 'required');
+		$this->form_validation->set_rules('room_type', 'Room Type', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			$data = $this->Admin_model->add_room();
 			$response['status'] = TRUE;
@@ -278,16 +297,28 @@ class welcome_admin extends CI_Controller {
 		}
 		echo json_encode($response);
 	}
-
-	public function viewroomSched($id){
-		$data['hey'] = $this->Admin_model->view_room_schedule($id);
-		$this->load->view('template/header');
-		$this->load->view('data/displayroom',$data);
-		$this->load->view('template/footer');
-	}
-
 	//ROOMS//
-
-	
-	
+	// public function fitnesscalc{
+	// 	public static  $solution =  array();
+	//     static function setSolution($newSolution) {
+	//     	 fitnesscalc::$solution=str_split($newSolution);
+	//     	}
+	// 		static function  getFitness($individual) {
+	// 	        $fitness = 0;
+	// 		    $sol_count=count(fitnesscalc::$solution);  /* get array size */
+	// 	        for ($i=0; $i < $individual->size() && $i < $sol_count; $i++ )
+	// 			{
+	// 				$char_diff=0;
+	// 				//compare genes and note the difference using ASCII value vs. solution Ascii value note the difference
+	// 	            $char_diff=abs( ord($individual->getGene($i)) - ord(fitnesscalc::$solution[$i]) ) ; 
+	// 				//$char_fitness=($individual->getGene($i)==fitnesscalc::$solution[$i])?1:0; //if exact match add 1 to fitness 
+	// 					$fitness+=$char_diff; // low fitness values are better,
+	// 	        }
+	// 			return $fitness; 
+	// 		}
+	// 	    static function getMaxFitness() {
+	// 	        $maxFitness = 0; 
+	// 	        return $maxFitness;
+	// 	    }
+	// }
 }
