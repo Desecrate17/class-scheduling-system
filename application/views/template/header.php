@@ -31,6 +31,9 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/reset.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/table-style.css'); ?>">
+
 </head>
 
 <body>

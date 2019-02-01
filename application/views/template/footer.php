@@ -32,6 +32,7 @@
     <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.print.min.js');?>"></script>
     <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.colVis.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/init-scripts/data-table/datatables-init.js');?>"></script>
+    <script src="<?php echo base_url('assets/js/resources.js');?>"></script>
      <script type="text/javascript">
         jQuery(document).ready(function($) {
           // MODAL
@@ -272,48 +273,38 @@
            });
 
 
-          $('#btn_room').click(function () {
-             if ((document.getElementById('room_no').value === '' ) || (document.getElementById('room_type').value === '' ) || (document.getElementById('room_stat').value === '' )|| (document.getElementById('dep').value === '' )){
-            alert('Please Fill all the Fields!');
-          }else{
-            $('#addRoom').modal('hide');
-            $('#confirm_modal').modal({
-                backdrop: 'static'
-            });
-          }
-             });
-            $('#btn_confirm').click(function () {
-                 $('#confirm_modal').modal('hide');
-               
-                    var room_no = $('#room_no').val();
-                    var room_type = $('#room_type').val();
-                    var room_stat = $('#room_stat').val();
-                    var dep = $('#dep').val();
-                    $.ajax({
-                        type : "POST",
-                        url  : "<?php echo site_url('welcome_admin/add_room')?>",
-                        dataType : "JSON",
-                        data : {
-                            room_no: room_no,
-                            room_type: room_type,
-                            room_stat: room_stat,
-                            dep: dep
-                        },
-                        success: function(data){
-                            if (data.status) {
-                                alert("Room successfully added!");
-                                location.reload();
-                                $('#confirm_modal').modal('hide');
-                            }else{
-                                $('.alert').css('display', 'block');
-                                $('.alert').html(data.notif);   
-                            }
-                        },
-                        error: function(request, status, error){
-                          alert(request.responseText);
-                        }
-                    });return false;
-          });
+            $('#btn_room').on('click', function(){
+            var room_no = $('#room_no').val();
+            var room_type = $('#room_type').val();
+             var dep = $('#dep').val();
+            $.ajax({
+                type: 'post',
+                url: "<?php echo site_url('welcome_admin/add_room'); ?>",
+                data: {
+                    room_no: room_no,
+                    room_type: room_type,
+                    dep: dep
+                },
+                dataType: 'JSON',
+                success: function(data){
+                    if (data.status) {
+                        alert("Room successfully created!");
+                        location.reload();
+                        javascript:window.location.reload();
+                    }else{
+                        $('.alert').css('display', 'block');
+                        $('.alert').html(data.notif);
+                    }
+                },
+                error: function(){
+                    alert('ERROR!');
+                }
+            });return false;
+        });
+
+              $(".clickable-row").click(function() {
+          window.location = $(this).data("href");
+      });
 
     
     });

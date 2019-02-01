@@ -471,18 +471,45 @@ class Admin_model extends CI_Model{
 			return NULL;
 		}
 	}
-	// s.sched_from, s.sched_length, s.sched_from
-	public function view_room_schedule($rooms){
+
+	public function add_room(){
+		$data = array(
+			'RoomNo'=>$this->input->post('room_no'),
+			'RoomType'=>$this->input->post('room_type'),
+			'DepartmentCode'=>$this->input->post('dep')
+		
+		);
+		$result = $this->db->insert('room', $data);
+		return $result;
+
+
+	}
+
+	public function list_room(){
 		$query = $this->db->query("
-			SELECT s.SchedID, s.SchedName, s.SchedDays, f.Firstname, f.Middlename, f.Lastname, subj.SubjectName, r.RoomNo, r.RoomID, 
-				FROM schedule as s
+				SELECT r.RoomID, r.RoomNo,  r.RoomType, r.DepartmentCode, d.DepartmentCode, d.DepartmentName, r.RoomStatus
+ 				FROM room as r
+				LEFT JOIN department as d
+				ON r.DepartmentCode = d.DepartmentID
+ 			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+	public function view_room_schedule($id){
+		$query = $this->db->query("
+			SELECT s.SchedID, s.SchedName, s.SchedTime, s.SchedDays, f.Firstname, f.Middlename, f.Lastname, subj.SubjectName, r.RoomNo, r.RoomID, s.SubjectHours, s.SchedEnd
+ 			FROM schedule as s
 			LEFT JOIN faculty as f
 			ON s.SchedProf = f.ProfID
 			LEFT JOIN subject as subj
-			ON s.SubjectCode = subj.SubjectCode
+			ON s.SubjectCode = subj.SubjectID
 			LEFT JOIN room as r
-			ON s.SchedRoom = r.RoomNo
-			WHERE r.RoomID = '$rooms'
+			ON s.SchedRoom= r.RoomID
+			WHERE s.SchedRoom = '$id'
 
 			");
 		if ($query->num_rows() > 0){
@@ -492,19 +519,17 @@ class Admin_model extends CI_Model{
 		}
 	}
 
+	public function room_name($id){
 
-	public function add_room(){
-		$data = array(
-			'RoomNo'=>$this->input->post('room_no'),
-			'RoomType'=>$this->input->post('room_type'),
-			'RoomStatus'=>$this->input->post('room_stat'),
-			'DepartmentCode'=>$this->input->post('dep')
-		
-		);
-		$result = $this->db->insert('room', $data);
-		return $result;
-
-
+		$query = $this->db->query("
+				SELECT * FROM room
+				WHERE RoomID = '$id'
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
 	}
 
 	public function departments(){
