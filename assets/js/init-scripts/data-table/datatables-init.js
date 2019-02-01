@@ -4,11 +4,9 @@
 
     /*  Data Table
     -------------*/
-
-    $('#bootstrap-data-table-2').DataTable({
+    $('.bootstrap-data-table-room').DataTable({
         lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
     });
-
     $('#bootstrap-data-table').DataTable({
         lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
     });
