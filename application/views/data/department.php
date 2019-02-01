@@ -45,10 +45,9 @@
                               <strong class="card-title">Data Table</strong>
                           </div>
                           <div class="card-body">
-                            <table id="bootstrap-data-table-faculty" class="table table-striped table-hover">
+                            <table id="bootstrap-data-table-faculty" class="table table-striped table-bordered table-hover">
                               <thead>
                                 <tr>
-                                  <th>ID</th>
                                   <th>Department Code</th>
                                   <th>Department</th>
                                   <th>Status</th>
@@ -62,7 +61,6 @@
                                       if($row->Status == 'A') {
                                       ?>
                                         <tr>
-                                          <td><center><?php echo $row->DepartmentID; ?></center></td>
                                           <td><center><?php echo $row->DepartmentCode; ?></center></td>
                                           <td><center><?php echo $row->DepartmentName; ?></center></td>
                                           <td><center><?php echo $row->Status; ?></center></td>
@@ -95,10 +93,9 @@
                               <strong class="card-title">Data Table</strong>
                           </div>
                           <div class="card-body">
-                            <table id="bootstrap-data-table" class="table table-hover">
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered table-hover">
                               <thead>
                                 <tr>
-                                  <th>ID</th>
                                   <th>Department</th>
                                   <th>Department Code</th>
                                   <th>Status</th>
@@ -112,7 +109,6 @@
                                       if($row->Status == 'D') {
                                       ?>
                                         <tr>
-                                          <td><center><?php echo $row->DepartmentID; ?></center></td>
                                           <td><center><?php echo $row->DepartmentCode; ?></center></td>
                                           <td><center><?php echo $row->DepartmentName; ?></center></td>
                                           <td><center><?php echo $row->Status; ?></center></td>

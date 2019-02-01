@@ -45,7 +45,7 @@
                             <strong class="card-title">Data Table</strong>
                         </div>
                         <div class="card-body" >
-                          <table id="bootstrap-data-table" class="table table-striped table-hover">
+                          <table id="bootstrap-data-table" class="table table-striped table-bordered table-hover">
                             <thead>
                               <tr>
                                 <th>ID</th>
@@ -100,7 +100,7 @@
                             <strong class="card-title">Data Table</strong>
                         </div>
                         <div class="card-body">
-                          <table id="bootstrap-data-table-faculty" class="table table-hover">
+                          <table id="bootstrap-data-table-faculty" class="table table-striped table-bordered table-hover">
                               <thead>
                                 <tr>
                                   <th>ID</th>
@@ -153,7 +153,7 @@
                             <strong class="card-title">Data Table</strong>
                         </div>
                         <div class="card-body">
-                          <table id="bootstrap-data-table-faculty2" class="table table-hover">
+                          <table id="bootstrap-data-table-faculty2" class="table table-striped table-bordered table-hover">
                             <thead>
                               <tr>
                                 <th>ID</th>

@@ -224,6 +224,7 @@
               var units = $('#units').val();
               var hrs = $('#hrs').val();
               var type = $('#type').val();
+              var dep = $('#dep').val();
               $.ajax({
                   type: 'post',
                   url: "<?php echo site_url('welcome_admin/addSubject'); ?>",
@@ -232,7 +233,8 @@
                         subj_name: subj_name,
                         units: units,
                         hrs: hrs,
-                        type: type
+                        type: type,
+                        dept: dep
                   },
                 dataType: 'JSON',
                 success: function(data){
@@ -252,7 +254,7 @@
           });
           // SUBJECT //
 
-          $('#roombut').on('click', function(){
+                   $('#roombut').on('click', function(){
          var r = document.getElementById('rooms');
          var rooms = r.options[r.selectedIndex].value;
                 $.ajax({
@@ -265,10 +267,11 @@
                         $('#datatable').html(data);
                     },
                     error: function(){
-                        alert('ERROR');
+                        alert('EROROROROR');
                     }
                 });
            });
+
 
             $('#btn_room').on('click', function(){
             var room_no = $('#room_no').val();
@@ -299,9 +302,9 @@
             });return false;
         });
 
-            $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
+              $(".clickable-row").click(function() {
+          window.location = $(this).data("href");
+      });
 
     
     });

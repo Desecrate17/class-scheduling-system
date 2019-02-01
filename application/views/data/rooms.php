@@ -35,7 +35,7 @@
                             <strong class="card-title">Physical Rooms</strong>
                         </div>
                         <div class="card-body" >
-                          <table id="bootstrap-data-table" class="table table-striped table-hover">
+                          <table class="bootstrap-data-table-room table table-striped table-hover">
                             <thead>
                               <tr>
                                 <th><center>Room</center></th>
@@ -76,7 +76,7 @@
                             <strong class="card-title">Dummy Rooms</strong>
                         </div>
                         <div class="card-body" >
-                          <table id="bootstrap-data-table-2" class="table table-striped table-hover">
+                          <table class="bootstrap-data-table-room table table-striped table-hover">
                             <thead>
                               <tr>
                                 <th><center>Room</center></th>
@@ -114,10 +114,10 @@
                     <div class="col-md-12">
                       <div class="card">
                         <div class="card-header">
-                            <!-- <strong class="card-title">Data Table</strong> -->
+                            <strong class="card-title">Unassigned Rooms</strong>
                         </div>
                         <div class="card-body" >
-                          <table class="table table-hover">
+                          <table class="bootstrap-data-table-room table table-hover">
                             <thead>
                               <tr>
                                 <th>TIME</th>

@@ -45,16 +45,15 @@
                                 <strong class="card-title">Data Table</strong>
                             </div>
                             <div class="card-body">
-                              <table id="bootstrap-data-table" class="table table-striped table-hover">
+                              <table id="bootstrap-data-table" class="table table-striped table-bordered table-hover">
                                 <thead>
                                   <tr>
                                     <th>ID</th>
                                     <th>Subject</th>
                                     <th>Descriptive Title</th>
-                                    <th>Lec Hours</th>
-                                    <th>Lec Units</th>
-                                    <th>Lab Hours</th>
-                                    <th>Lab Units</th>
+                                    <th>Department</th>
+                                    <th>Hours</th>
+                                    <th>Units</th>
                                     <th>Type</th>
                                     <th>Action</th>
                                   </tr>
@@ -64,13 +63,29 @@
                                     if ($subjects!=NULL) {
                                       foreach ($subjects as $row) {
                                         if($row->Status == 'A') {
+                                          if($row->SubjectType == 'Lecture') {
                                         ?>
                                           <tr>
                                             <td><center><?php echo $row->SubjectID; ?></center></td>
                                             <td><center><?php echo $row->SubjectCode; ?></center></td>
                                             <td><center><?php echo $row->SubjectName; ?></center></td>
+                                            <td><center><?php echo $row->DepartmentName; ?></center></td>
                                             <td><center><?php echo $row->LecHours; ?></center></td>
                                             <td><center><?php echo $row->LecUnits; ?></center></td>
+                                            <td><center><?php echo $row->SubjectType; ?></center></td>
+                                            <td><center>
+                                              <button href="#editsubjects" data-toggle="modal" id="editsub" value="<?php echo $row->SubjectID;?>" class="btn btn-sm btn-info" title="Update Subject"><i class="fa fa-edit"></i></button>
+                                              <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->SubjectID.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
+                                            </center></td>
+                                          </tr>
+                                        <?php
+                                        }
+                                        else{ ?>
+                                          <tr>
+                                            <td><center><?php echo $row->SubjectID; ?></center></td>
+                                            <td><center><?php echo $row->SubjectCode; ?></center></td>
+                                            <td><center><?php echo $row->SubjectName; ?></center></td>
+                                            <td><center><?php echo $row->DepartmentName; ?></center></td>
                                             <td><center><?php echo $row->LabHours; ?></center></td>
                                             <td><center><?php echo $row->LabUnits; ?></center></td>
                                             <td><center><?php echo $row->SubjectType; ?></center></td>
@@ -79,7 +94,8 @@
                                               <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->SubjectID.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
                                             </center></td>
                                           </tr>
-                                        <?php
+                                          <?php 
+                                        }
                                       }
                                     }
                                   }
@@ -103,16 +119,15 @@
                                 <strong class="card-title">Data Table</strong>
                             </div>
                             <div class="card-body">
-                              <table id="bootstrap-data-table-faculty" class="table table-hover">
+                              <table id="bootstrap-data-table-faculty" class="table table-striped table-bordered table-hover">
                                 <thead>
                                   <tr>
                                     <th>ID</th>
                                     <th>Subject</th>
                                     <th>Descriptive Title</th>
-                                    <th>Lec Hours</th>
-                                    <th>Lec Units</th>
-                                    <th>Lab Hours</th>
-                                    <th>Lab Units</th>
+                                    <th>Department</th>
+                                    <th>Hours</th>
+                                    <th>Units</th>
                                     <th>Type</th>
                                     <th>Action</th>
                                   </tr>
@@ -122,21 +137,38 @@
                                     if ($subjects!=NULL) {
                                       foreach ($subjects as $row) {
                                         if($row->Status == 'D') {
+                                          if($row->SubjectType == 'Lecture') {
                                         ?>
                                           <tr>
                                             <td><center><?php echo $row->SubjectID; ?></center></td>
                                             <td><center><?php echo $row->SubjectCode; ?></center></td>
                                             <td><center><?php echo $row->SubjectName; ?></center></td>
+                                            <td><center><?php echo $row->DepartmentName; ?></center></td>
                                             <td><center><?php echo $row->LecHours; ?></center></td>
                                             <td><center><?php echo $row->LecUnits; ?></center></td>
+                                            <td><center><?php echo $row->SubjectType; ?></center></td>
+                                            <td><center>
+                                              <a href="<?php echo site_url('welcome_admin/activateSubject/'.$row->SubjectID.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
+                                            </center></td>
+                                          </tr>
+                                        <?php
+                                        }
+                                        else{
+                                          ?>
+                                          <tr>
+                                            <td><center><?php echo $row->SubjectID; ?></center></td>
+                                            <td><center><?php echo $row->SubjectCode; ?></center></td>
+                                            <td><center><?php echo $row->SubjectName; ?></center></td>
+                                            <td><center><?php echo $row->DepartmentName; ?></center></td>
                                             <td><center><?php echo $row->LabHours; ?></center></td>
                                             <td><center><?php echo $row->LabUnits; ?></center></td>
                                             <td><center><?php echo $row->SubjectType; ?></center></td>
                                             <td><center>
-                                              <a href="<?php echo site_url('welcome_admin/activateSubject/'.$row->subject_id.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
+                                              <a href="<?php echo site_url('welcome_admin/activateSubject/'.$row->SubjectID.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
                                             </center></td>
                                           </tr>
-                                        <?php
+                                          <?php 
+                                        }
                                       }
                                     }
                                   }
@@ -173,7 +205,7 @@
                 <div class="form-group">
                     <div class="alert alert-danger" align="center" style="display: none;"></div>
                 </div>
-                <div class="row form-group">
+            <div class="row form-group">
               <div class="col-12 col-md-4"><input type="text" id="subcode" name="subcode" placeholder="Subject Code" class="form-control">
               </div>
               <div class="col-12 col-md-4"><input type="text" id="subname" name="subname" placeholder="Subject Name" class="form-control">
@@ -188,6 +220,17 @@
                   <option value="Laboratory">Laboratory</option>
                   <option value="Lecture">Lecture</option>
                 </select>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <select name="department" id="dep" class="form-control" >
+                      <?php
+                          foreach($department as $row) { ?>
+                          <option value="<?php echo $row->DepartmentCode ?>"><?php echo $row->DepartmentName ?></option>
+                      <?php
+                          }
+                      ?>
+                  </select>
               </div>
 
 
@@ -205,7 +248,7 @@
 
 
 <!--EDIT SUBJECTS MODAL ++++++++++++++++++++++++++++++++++++++++++-->
-  <div class="modal fade" id="editsubjects">
+  <div class="modal fade" id="editsubjects" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <form class="form-horizontal">
@@ -230,6 +273,7 @@
             <div class="row form-group">
               <div class="col-12 col-md-4"><input type="contact" id="hrs" name="hrs" placeholder="No. of hrs" class="form-control"></div>
               <div class="col-12 col-md-4"><input type="contact" id="type" name="type" placeholder="Subject Type" class="form-control"></div>
+              <div class="col-12 col-md-4"><input type="contact" id="dep" name="type" placeholder="Department" class="form-control"></div>
 
             </div>
           </div> 
