@@ -17,15 +17,17 @@
         <div class="top-info"><span>Monday</span></div>
          <ul>
               <?php
+              if ($hey!=NULL) {
                foreach($hey as $h){ 
-                  if($h->SchedDays=="monday")
-                { ?>
-                  <li class="single-event" data-start="<?php echo $h->SchedTime; ?>" data-end="<?php echo $h->SchedEnd; ?>" data-content="event-abs-circuit" data-event="event-1">
-                    <a href="#0">
-                      <em class="event-name"><?php echo $h->SubjectName;?></em>
-                    </a>
-                  </li>
-                <?php }
+                    if($h->SchedDays=="monday")
+                  { ?>
+                    <li class="single-event" data-start="<?php echo $h->SchedTime; ?>" data-end="<?php echo $h->SchedEnd; ?>" data-content="event-abs-circuit" data-event="event-1">
+                      <a href="#0">
+                        <em class="event-name"><?php echo $h->SubjectName;?></em>
+                      </a>
+                    </li>
+                  <?php }
+                    }
                   }
                     ?>
             </ul>
@@ -35,15 +37,17 @@
         <div class="top-info"><span>Tuesday</span></div>
          <ul>
               <?php
-               foreach($hey as $h){ 
-                  if($h->SchedDays=="tuesday")
-                { ?>
-                  <li class="single-event" data-start="<?php echo $h->SchedTime; ?>" data-end="<?php echo $h->SchedEnd; ?>" data-content="event-abs-circuit" data-event="event-1">
-                    <a href="#0">
-                      <em class="event-name"><?php echo $h->SubjectName;?></em>
-                    </a>
-                  </li>
-                <?php }
+               if ($hey!=NULL) {
+                 foreach($hey as $h){ 
+                    if($h->SchedDays=="tuesday")
+                  { ?>
+                    <li class="single-event" data-start="<?php echo $h->SchedTime; ?>" data-end="<?php echo $h->SchedEnd; ?>" data-content="event-abs-circuit" data-event="event-1">
+                      <a href="#0">
+                        <em class="event-name"><?php echo $h->SubjectName;?></em>
+                      </a>
+                    </li>
+                  <?php }
+                    }
                   }
                     ?>
             </ul>
@@ -53,17 +57,19 @@
         <div class="top-info"><span>Wednesday</span></div>
             <ul>
               <?php
-               foreach($hey as $h){ 
-                  if($h->SchedDays=="wednesday")
-                { ?>
-                  <li class="single-event" data-start="<?php echo $h->SchedTime; ?>" data-end="<?php echo $h->SchedEnd; ?>" data-content="event-abs-circuit" data-event="event-1">
-                    <a href="#0">
-                      <em class="event-name"><?php echo $h->SubjectName;?></em>
-                    </a>
-                  </li>
-                <?php }
+               if ($hey!=NULL) {
+                 foreach($hey as $h){ 
+                    if($h->SchedDays=="wednesday")
+                  { ?>
+                    <li class="single-event" data-start="<?php echo $h->SchedTime; ?>" data-end="<?php echo $h->SchedEnd; ?>" data-content="event-abs-circuit" data-event="event-1">
+                      <a href="#0">
+                        <em class="event-name"><?php echo $h->SubjectName;?></em>
+                      </a>
+                    </li>
+                  <?php }
+                    }
                   }
-                    ?>
+                      ?>
             </ul>
 
       </li>
@@ -72,6 +78,7 @@
         <div class="top-info"><span>Thursday</span></div>
           <ul>
               <?php
+              if ($hey!=NULL) {
                foreach($hey as $h){ 
                   if($h->SchedDays=="thursday")
                 { ?>
@@ -82,7 +89,8 @@
                   </li>
                 <?php }
                   }
-                    ?>
+                }
+              ?>
             </ul>
       </li>
 
@@ -90,15 +98,17 @@
         <div class="top-info"><span>Friday</span></div>
         <ul>
               <?php
-               foreach($hey as $h){ 
-                  if($h->SchedDays=="friday")
-                { ?>
-                  <li class="single-event" data-start="<?php echo $h->SchedTime; ?>" data-end="<?php echo $h->SchedEnd; ?>" data-content="event-abs-circuit" data-event="event-1">
-                    <a href="#0">
-                      <em class="event-name"><?php echo $h->SubjectName;?></em>
-                    </a>
-                  </li>
-                <?php }
+               if ($hey!=NULL) {
+                 foreach($hey as $h){ 
+                    if($h->SchedDays=="friday")
+                  { ?>
+                    <li class="single-event" data-start="<?php echo $h->SchedTime; ?>" data-end="<?php echo $h->SchedEnd; ?>" data-content="event-abs-circuit" data-event="event-1">
+                      <a href="#0">
+                        <em class="event-name"><?php echo $h->SubjectName;?></em>
+                      </a>
+                    </li>
+                  <?php }
+                    }
                   }
                     ?>
             </ul>
