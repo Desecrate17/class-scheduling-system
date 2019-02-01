@@ -32,6 +32,7 @@
     <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.print.min.js');?>"></script>
     <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.colVis.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/init-scripts/data-table/datatables-init.js');?>"></script>
+    <script src="<?php echo base_url('assets/js/resources.js');?>"></script>
      <script type="text/javascript">
         jQuery(document).ready(function($) {
           // MODAL
@@ -297,6 +298,10 @@
                 }
             });return false;
         });
+
+            $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
 
     
     });

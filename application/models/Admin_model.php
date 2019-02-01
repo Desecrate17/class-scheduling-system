@@ -426,17 +426,17 @@ class Admin_model extends CI_Model{
 			return NULL;
 		}
 	}
-	public function view_room_schedule($rooms){
+	public function view_room_schedule($id){
 		$query = $this->db->query("
-			SELECT s.SchedID, s.SchedName, s.SchedTime, s.SchedDays, f.Firstname, f.Middlename, f.Lastname, subj.SubjectName, r.RoomNo, r.RoomID, s.SubjectHours
-			FROM schedule as s
+			SELECT s.SchedID, s.SchedName, s.SchedTime, s.SchedDays, f.Firstname, f.Middlename, f.Lastname, subj.SubjectName, r.RoomNo, r.RoomID, s.SubjectHours, s.SchedEnd
+ 			FROM schedule as s
 			LEFT JOIN faculty as f
 			ON s.SchedProf = f.ProfID
 			LEFT JOIN subject as subj
 			ON s.SubjectCode = subj.SubjectCode
 			LEFT JOIN room as r
 			ON s.SchedRoom= r.RoomID
-			WHERE s.SchedRoom = '$rooms'
+			WHERE s.SchedRoom = '$id'
 
 			");
 		if ($query->num_rows() > 0){
@@ -458,6 +458,21 @@ class Admin_model extends CI_Model{
 		return $result;
 
 
+	}
+
+	public function list_room(){
+
+		$query = $this->db->query("
+				SELECT r.RoomID, r.RoomNo,  r.RoomType, r.DepartmentCode, d.DepartmentCode, d.DepartmentName, r.RoomStatus
+ 				FROM room as r
+				LEFT JOIN department as d
+				ON r.DepartmentCode = d.DepartmentCode
+ 			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
 	}
 
 	public function departments(){

@@ -246,6 +246,7 @@ class welcome_admin extends CI_Controller {
 		$data['room'] =$this->Admin_model->view_room_name();
 		$data['dep_list'] = $this->Admin_model->departments();
 		$data['room_sched'] = $this->Admin_model->view_room_all();
+		$data['list'] = $this->Admin_model->list_room();
 		$this->load->view('template/header');
 		$this->load->view('data/rooms',$data);
 		$this->load->view('template/footer');
@@ -254,12 +255,12 @@ class welcome_admin extends CI_Controller {
 	//ROOMS//
 
 	//ROOMS//
-	public function room_view(){
-		$rooms= $this->input->post("rooms");
-		$data['hey']=$this->Admin_model->view_room_schedule($rooms);
-		$this->load->view('data/displayroom',$data);
+	// public function room_view(){
+	// 	$rooms= $this->input->post("rooms");
+	// 	$data['hey']=$this->Admin_model->view_room_schedule($rooms);
+	// 	$this->load->view('data/displayroom',$data);
 				
-	}
+	// }
 
 
 	public function add_room(){
@@ -277,6 +278,14 @@ class welcome_admin extends CI_Controller {
 		}
 		echo json_encode($response);
 	}
+
+	public function viewroomSched($id){
+		$data['hey'] = $this->Admin_model->view_room_schedule($id);
+		$this->load->view('template/header');
+		$this->load->view('data/displayroom',$data);
+		$this->load->view('template/footer');
+	}
+
 	//ROOMS//
 
 	
