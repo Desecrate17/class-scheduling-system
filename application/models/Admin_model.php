@@ -58,7 +58,7 @@ class Admin_model extends CI_Model{
 
 	public function view_faculty_info2($id){
 		$query = $this->db->query("
-			SELECT s.SubjectName, s.Status
+			SELECT s.SubjectName, s.Status, sl.subjectLID
 			FROM faculty as f
 			LEFT JOIN subject_list as sl ON f.ProfID = sl.ProfID
 			LEFT JOIN subject as s ON sl.SubjectCode = s.SubjectCode

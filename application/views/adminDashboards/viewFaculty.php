@@ -23,50 +23,78 @@
     </div>
   </div>
 
+<div class="row">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
+    <div class="animated fadeIn">
+    <div class="card">
+      <div class="card-body">
+        <div class="mx-auto d-block">
+          <img class="mx-auto d-block" style="height: 300px; width: 500px;" src="<?php echo base_url('assets/images/user.png');?>" alt="Card image cap">
+          <h5 class="text-sm-center mt-2 mb-1"><?php                                           
+            foreach ($data as $row) { ?>
+                <?php echo $row->Lastname.', '.$row->Firstname.' '.$row->Middlename[0].'.'; ?>
+            <?php
+                }?>
+          </h5>                                                                  </div><hr>
+          <p class="text-sm-center mt-2 mb-1"> 
+            <?php
+              foreach ($info as $row) { ?>
+                <?php echo $row->PositionName; ?>
+            <?php
+            }?>
+          </p>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
 <div class="col-md-12">
-  <div class="animated fadeIn">
-  <div class="card">
-    <div class="card-body">
-      <div class="mx-auto d-block">
-        <img class="mx-auto d-block" src="<?php echo base_url('assets/images/user.png');?>" alt="Card image cap">
-        <h5 class="text-sm-center mt-2 mb-1"><?php                                           
-          foreach ($data as $row) { ?>
-              <?php echo $row->Lastname.', '.$row->Firstname.' '.$row->Middlename[0].'.'; ?>
-          <?php
-              }?>
-        </h5>
-        <p class="text-sm-center mt-2 mb-1"> <?php                                          
-          foreach ($info as $row) { ?>
-              <?php echo $row->PositionName; ?>
-          <?php
-          }?>
-        </p>                                                                                                       
-      </div><hr>
-      <div class="col-md-12">
         <div class="card">
-          <div class="card-header">
-            <i class="fa fa-info-circle"></i>
-            <strong class="card-title">Professor Information</strong>
+          <div class="card-header" style="background-color: #c51e3a; border-color: #c51e3a;">
+            <i class="fa fa-info-circle" style="color: #fff;"></i>
+            <strong class="card-title" style="color: #fff;">Professor Information</strong>
           </div>
           <div class="card-body">
             <?php foreach ($info as $row) { ?>
-                <h6>Department:</h6><p><?php echo $row->DepartmentName; ?></p>
-                <h6>Preferred Time:</h6><p><?php echo $row->PreferredTime; ?></p>
-            <?php } ?><h6>Preferred Subjects:</h6>
-            <?php foreach ($info2 as $row) { if($row->Status == 'A') { ?>
-                <p><?php echo $row->SubjectName; ?></p>
-            <?php } } ?>
+
+            <h6>Department:</h6>
+              <div class="card-body">
+                  <div class="mx-auto d-block">
+                    <p><?php echo $row->DepartmentName; ?></p>
+                  </div>
+              </div>
+            <hr>
+            <h6>Preferred Time:</h6>
+              <div class="card-body">
+                  <div class="mx-auto d-block">
+                    <p><?php echo $row->PreferredTime; ?></p>
+                  </div>
+              </div>
+            <hr>
+            <?php } ?>
+
+            <h6>Preferred Subjects:</h6>
+                <div class="card-body">
+                    <div class="mx-auto d-block">
+                        <?php foreach ($info2 as $row) { if($row->Status == 'A') { ?>
+                             <p><input type="checkbox" class="del_subj" data-id="<?php echo $row->subjectLID; ?>"><?php echo $row->SubjectName; ?></p>
+                           <?php } } ?>
+                    </div>
+                    <div class="card-footer" style="border-color:transparent; background-color: transparent;">
+                      <input type="checkbox" id="master">Select All
+                      <button class="btn btn-primary delete_all">Delete Subjects</button>
+                      <button type="button" class="btn btn-primary" data-target="#infosub" data-toggle="modal" data-backdrop="static" title="Add Subject">Add Subjects</i></button>
+                  </div>
+                </div>
           </div>
           <div class="card-footer">
-            <button type="button" class="btn btn-sm btn-info" data-target="#editfaculty" data-toggle="modal" data-backdrop="static" title="Edit Information">Edit</button>
-            <button type="button" class="btn btn-sm btn-info" data-target="#infosub" data-toggle="modal" data-backdrop="static" title="Add Subject">Add Subject</button>
+            <button type="button" class="btn btn-primary" data-target="#editfaculty" data-toggle="modal" data-backdrop="static" title="Edit Information">Edit</button>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  </div>
-</div>
 <!-- <div class="col-md-6">
   <div class="animated fadeIn">
   <div class="card">
@@ -118,7 +146,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
-          <h5 class="modal-title"><strong>Edit Faculty <?php echo $data[0]->ProfID;?></strong></h5>
+          <h5 class="modal-title" style="color: #fff;"><strong>Edit Faculty <?php echo $data[0]->Lastname.','.$data[0]->Firstname;?></strong></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -174,7 +202,7 @@
               </div>    
             </div>
           </div>
-          <div class="modal-footer" style="background-color: #c51e3a; border-color: #c51e3a;">
+          <div class="modal-footer">
             <input type="hidden" name="prof_id" id="profid" value="<?php echo $data[0]->ProfID;?>">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             <button type="button" id="btnupd_faculty" name="btn_faculty" class="btn btn-primary">Confirm</button>
@@ -190,7 +218,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
-          <h5 class="modal-title"><strong>Add Subject <?php echo $data[0]->ProfID;?></strong></h5>
+          <h5 class="modal-title" style="color: #fff;"><strong>Add Subject <?php echo $data[0]->ProfID;?></strong></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -216,7 +244,7 @@
               </div>    
             </div>
           </div>
-          <div class="modal-footer" style="background-color: #c51e3a; border-color: #c51e3a;">
+          <div class="modal-footer">
             <input type="hidden" name="prof_id" id="profid" value="<?php echo $data[0]->ProfID;?>">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             <button type="button" id="btn_faculty_sub" name="btn_faculty" class="btn btn-primary">Confirm</button>
