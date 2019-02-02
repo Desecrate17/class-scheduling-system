@@ -297,6 +297,16 @@ class welcome_admin extends CI_Controller {
 		}
 		echo json_encode($response);
 	}
+
+	public function delete_subj()
+    {
+        $ids = $this->input->post('ids');
+ 
+        $this->db->where_in('subjectLID', explode(",", $ids));
+        $this->db->delete('subject_list');
+ 
+        echo json_encode(['success'=>"Item Deleted successfully."]);
+    }
 	//ROOMS//
 	// public function fitnesscalc{
 	// 	public static  $solution =  array();

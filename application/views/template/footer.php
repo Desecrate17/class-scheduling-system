@@ -306,6 +306,57 @@
           window.location = $(this).data("href");
       });
 
+
+      $('#master').on('click', function(e) {
+         if($(this).is(':checked',true))  
+         {
+            $(".del_subj").prop('checked', true);  
+         } else {  
+            $(".del_subj").prop('checked',false);  
+         }  
+        });
+ 
+        $('.delete_all').on('click', function(e) {
+ 
+            var allVals = [];  
+            $(".del_subj:checked").each(function() {  
+                allVals.push($(this).attr('data-id'));
+            });  
+ 
+            if(allVals.length <=0)  
+            {  
+                alert("Please select row.");  
+            }  else {  
+ 
+                var check = confirm("Are you sure you want to delete this row?");  
+                if(check == true){  
+ 
+                    var join_selected_values = allVals.join(","); 
+ 
+                    $.ajax({
+                        url: "<?php echo site_url('welcome_admin/delete_subj'); ?>",
+                        type: 'POST',
+                        data: 'ids='+join_selected_values,
+                        success: function (data) {
+                          console.log(data);
+                          $(".del_subj:checked").each(function() {  
+                              $(this).parents("tr").remove();
+                          });
+                          alert("Item Deleted successfully.");
+                          javascript:window.location.reload();
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+ 
+                  // $.each(allVals, function( index, value ) {
+                  //     $('table tr').filter("[data-row-id='" + value + "']").remove();
+                  // });
+                }  
+            }  
+        });
+
     
     });
     </script>
