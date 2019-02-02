@@ -117,7 +117,7 @@
   <div class="modal fade" id="editfaculty" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
           <h5 class="modal-title"><strong>Edit Faculty <?php echo $data[0]->ProfID;?></strong></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -174,7 +174,7 @@
               </div>    
             </div>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer" style="background-color: #c51e3a; border-color: #c51e3a;">
             <input type="hidden" name="prof_id" id="profid" value="<?php echo $data[0]->ProfID;?>">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             <button type="button" id="btnupd_faculty" name="btn_faculty" class="btn btn-primary">Confirm</button>
@@ -189,7 +189,7 @@
   <div class="modal fade" id="infosub" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
           <h5 class="modal-title"><strong>Add Subject <?php echo $data[0]->ProfID;?></strong></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -216,7 +216,7 @@
               </div>    
             </div>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer" style="background-color: #c51e3a; border-color: #c51e3a;">
             <input type="hidden" name="prof_id" id="profid" value="<?php echo $data[0]->ProfID;?>">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             <button type="button" id="btn_faculty_sub" name="btn_faculty" class="btn btn-primary">Confirm</button>

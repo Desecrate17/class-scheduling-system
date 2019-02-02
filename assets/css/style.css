@@ -1089,7 +1089,7 @@ aside.left-panel {
         width: 100%; }
         .navbar .navbar-nav li > a:hover,
         .navbar .navbar-nav li > a:hover .menu-icon {
-          color: #fff !important; }
+          color: #c51e3a !important; }
         .navbar .navbar-nav li > a .menu-icon {
           color: #8b939b;
           float: left;
@@ -1315,7 +1315,7 @@ header.fixed-top {
   position: inherit; }
 
 .menutoggle {
-  background: #e74c3c;
+  background: #c51e3a;
   border-radius: 50%;
   color: #fff !important;
   cursor: pointer;

@@ -35,7 +35,7 @@
                             <strong class="card-title">Physical Rooms</strong>
                         </div>
                         <div class="card-body" >
-                          <table class="bootstrap-data-table-room table table-striped table-hover">
+                          <table class="bootstrap-data-table-room table table-striped table-bordered table-hover">
                             <thead>
                               <tr>
                                 <th><center>Room</center></th>
@@ -76,7 +76,7 @@
                             <strong class="card-title">Dummy Rooms</strong>
                         </div>
                         <div class="card-body" >
-                          <table class="bootstrap-data-table-room table table-striped table-hover">
+                          <table class="bootstrap-data-table-room table table-striped table-bordered table-hover">
                             <thead>
                               <tr>
                                 <th><center>Room</center></th>
@@ -117,7 +117,7 @@
                             <strong class="card-title">Unassigned Rooms</strong>
                         </div>
                         <div class="card-body" >
-                          <table class="bootstrap-data-table-room table table-hover">
+                          <table class="bootstrap-data-table-room table table-striped table-bordered table-hover">
                             <thead>
                               <tr>
                                 <th>TIME</th>
@@ -154,8 +154,8 @@
   <div class="modal fade" id="addRoom" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Add Room</h5>
+        <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
+          <h5 class="modal-title" style="color: #fff;">Add Room</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -183,7 +183,7 @@
             </div> 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary-danger" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             <button type="button" value="submit" id="btn_room" name="btn_room" class="btn btn-primary">Confirm</button>
           </div>
         </form>

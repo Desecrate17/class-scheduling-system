@@ -195,8 +195,8 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <form class="form-horizontal">
-            <div class="modal-header">
-                <h5 class="modal-title" id="scrollmodalLabel">Add Department</h5>
+            <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
+                <h5 class="modal-title" id="scrollmodalLabel" style="color:white;">Add Subjects</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -252,8 +252,8 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <form class="form-horizontal">
-            <div class="modal-header">
-                <h5 class="modal-title" id="scrollmodalLabel">Add Department</h5>
+            <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
+                <h5 class="modal-title" id="scrollmodalLabel" style="color:#fff">Edit Subject</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
