@@ -77,8 +77,8 @@
   <div class="modal fade" id="editdepartment" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"><strong>Edit Department <?php echo $data[0]->DepartmentName;?></strong></h5>
+        <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
+          <h5 class="modal-title" style="color: #fff;"><strong>Edit <?php echo $data[0]->DepartmentName;?> Department</strong></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

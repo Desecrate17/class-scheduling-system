@@ -16,8 +16,8 @@
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
 
-    <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/dist/css/bootstrap.min.css')?>" type="text/css">
-    <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css')?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/dist/css/bootstrap.css')?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.css')?>" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendors/themify-icons/css/themify-icons.css');?>" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendors/flag-icon-css/css/flag-icon.min.css');?>" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendors/selectFX/css/cs-skin-elastic.css')?>" type="text/css">
@@ -30,6 +30,9 @@
     <link rel="icon" href="<?php echo base_url('assets/img/logo.jpg'); ?>" /> 
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/reset.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/table-style.css'); ?>">
 
 </head>
 

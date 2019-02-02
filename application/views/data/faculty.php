@@ -208,8 +208,8 @@
   <div class="modal fade" id="addfaculty" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Add Faculty</h5>
+        <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
+          <h5 class="modal-title" style="color:#fff;">Add Faculty</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -252,12 +252,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: white;
-  color: #495057;
-  border: 2px solid red">Cancel</button>
-            <button type="button" id="btn_faculty" name="btn_faculty" class="btn btn-primary" style="background-color: white;
-  color: #495057;
-  border: 2px solid green;">Confirm</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" id="btn_faculty" name="btn_faculty" class="btn btn-primary">Confirm</button>
           </div>
         </form>
       </div>
