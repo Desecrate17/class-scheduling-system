@@ -267,9 +267,12 @@ class Admin_model extends CI_Model{
 
 	public function view_subjects(){
 		$query = $this->db->query("
-			SELECT s.SubjectID, s.SubjectCode, s.SubjectName, s.LecHours, s.LecUnits, s.LabHours, s.LabUnits, s.SubjectType, s.SubjectDeptCode, s.Status, d.DepartmentName
-			FROM subject as s
-			LEFT JOIN department as d ON s.SubjectDeptCode = d.DepartmentCode
+			SELECT DISTINCT s.SubjectID, s.SubjectCode, s.SubjectName, s.LecHours, s.LecUnits, s.LabHours, s.LabUnits, s.SubjectType, s.SubjectDeptCode, s.Status, d.DepartmentName
+			FROM SUBJECT AS s
+			LEFT JOIN department AS d ON s.SubjectDeptCode = d.DepartmentCode
+			WHERE NOT EXISTS(
+    			SELECT * FROM subject_list AS sl 
+    			WHERE sl.SubjectCode = s.SubjectCode AND sl.ProfId= '1')
 			");
 		if ($query->num_rows() > 0){
 			return $query->result();
