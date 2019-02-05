@@ -35,7 +35,7 @@
 		                      <strong class="card-title">Data Table</strong>
 		                  </div>
 		                  <div class="card-body">
-		                    <table id="bootstrap-data-table-faculty" class="table table-striped table-bordered table-hover">
+		                    <table id="bootstrap-data-table" class="table table-striped table-bordered table-hover">
 		                      <thead>
 		                        <tr>
 		                          <th>ID</th>
@@ -60,7 +60,7 @@
 		                                  <td><center><?php echo $row->CourseCode.'-'.$row->SectionYearLvl[0].''.$row->SectionCode; ?></center></td>
 		                                  <td><center><?php echo $row->DepartmentName; ?></center></td>
 		                                  <td><center>
-                                          <a href="<?php echo site_url('');?>" class="btn btn-sm btn-info" title="View Schedule"><i class="fa fa-eye"></i></a>
+                                          <a href="<?php echo site_url('');?>" class="btn btn-outline-info" style="border-radius: 3px;" title="View Schedule"><i class="fa fa-eye"></i> View</a>
                                         </center></td>
 		                                  
 		                                </tr>

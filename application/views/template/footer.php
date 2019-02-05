@@ -5,6 +5,7 @@
     <script src="<?php echo base_url('assets/vendors/popper.js/dist/umd/popper.min.js');?>"></script>
     <script src="<?php echo base_url('assets/vendors/bootstrap/dist/js/bootstrap.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/main.js');?>"></script>
+    <script src="<?php echo base_url('assets/js/resources.js');?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.lwMultiSelect.min.js');?>"></script>
   
     <script src="<?php echo base_url('assets/vendors/chart.js/dist/Chart.bundle.min.js');?>"></script>
@@ -32,7 +33,6 @@
     <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.print.min.js');?>"></script>
     <script src="<?php echo base_url('assets/vendors/datatables.net-buttons/js/buttons.colVis.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/init-scripts/data-table/datatables-init.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/resources.js');?>"></script>
      <script type="text/javascript">
         jQuery(document).ready(function($) {
           // MODAL
@@ -43,24 +43,19 @@
           });
 
           //CONTACT
-          $('input[name="fcontact"]').inputmask("(+63)999-999-9999", {"placeholder": "(+63)xxx-xxx-xxxx"});
+          $('input[name="fcontact"]').inputmask("(+63)999 999 9999", {"placeholder": "(+63)XXX XXX XXXX"});
 
           //MULTIPLE SELECT
           $('#selectmenu').lwMultiSelect({
             maxSelect: 4,
             maxText: 'Max. of 4 Subjects'
-          }); //initialize the plugin 
-          // $('#selectmenu').val(); //get currently selected values.
-          //access to public methods via data properties.
-          // $('#selectmenu').data('plugin_lwMultiSelect').updateList(); //refresh the containers with the current options in #selectmenu
-          // $('#selectmenu').data('plugin_lwMultiSelect').selectAll(); //select all visible items on the left container
-          // $('#selectmenu').data('plugin_lwMultiSelect').removeAll(); //remove all selected  items
+          }); 
         });
     </script>
     <script type="text/javascript">
     jQuery(document).ready(function($) {
           
-
+    // FACULTY //
           $('#btn_faculty_sub').on('click', function(){
               var sub_list = $('[name="sub_list[]"]').val();
               var fid = $('#profid').val();
@@ -83,8 +78,6 @@
             });
           });
 
-
-          // FACULTY //
           $('#btn_faculty').on('click', function(){
               var ffname = $('#ffname').val();
               var fmname = $('#fmname').val();
@@ -127,7 +120,6 @@
               var fcontact = $('#fcontact_upd').val();
               var fposition = $('#fposition_upd').val();
               var fdepCode = $('#fdepCode_upd').val();
-              // var sub_list = $('#sub_list').val();
               var fid = $('#profid').val();
               $.ajax({
                   type: 'post',
@@ -139,7 +131,6 @@
                         contact: fcontact,
                         position: fposition,
                         depCode: fdepCode,
-                        // sub_list: sub_list,
                         fid : fid
                   },
                 dataType: 'JSON',
@@ -158,9 +149,8 @@
                 }
             });return false;
           });
-          // FACULTY //
 
-          // DEPARTMENT // 
+    // DEPARTMENT // 
           $('#btn_department').on('click', function(){
               var depName = $('#ddepname').val();
               var depCode = $('#ddepcode').val();
@@ -215,12 +205,32 @@
                 }
             });return false;
           });
-          // DEPARTMENT //
 
-          // SUBJECT //
+          $('#active-department table tbody').on('click', 'button:contains("Update")', function(){
+                var id = $(this).val();
+                $.ajax({
+                    type: 'ajax',
+                    url: "<?php echo base_url('welcome_admin/get_department')?>",
+                    method: "GET",
+                    dataType: 'json',
+                    data:{DepartmentID:id},
+                    success:function(result){
+                        $('#editdepartment form')[0].reset();
+                        $('#editdepartment form').attr('action', "<?php echo base_url()?>"+'welcome_admin/editDepartment'+'?id='+result.department[0].DepartmentID);
+                        $('#editdepartment input[name="ddepname_upd"]').val(result.department[0].DepartmentName);
+                        $('#editdepartment input[name="ddepcode_upd"]').val(result.department[0].DepartmentCode);
+                        $('#editdepartment input[name="ddep_id"]').val(result.department[0].DepartmentID);
+                    },
+                    error:function(request){
+                        alert(request.responseText);
+                    }
+                });
+            });
+
+    // SUBJECT //
           $('#btn_subject').on('click', function(){
               var subj_code = $('#subcode').val();
-              var subj_name = $('#subname').val();
+              var subj_name = $('#subname').val().trim();
               var units = $('#units').val();
               var hrs = $('#hrs').val();
               var type = $('#type').val();
@@ -252,31 +262,96 @@
                 }
             });return false;
           });
-          // SUBJECT //
 
-                   $('#roombut').on('click', function(){
-         var r = document.getElementById('rooms');
-         var rooms = r.options[r.selectedIndex].value;
+          $('#btnupd_subject').on('click', function(){
+              var code = $('#upsubcode').val();
+              var name = $('#upsubname').val().trim();
+              var units = $('#upunits').val();
+              var hrs = $('#uphrs').val();
+              var type = $('#uptype').val();
+              var dep = $('#updepartment').val();
+              var id = $('#sub_id').val();
+              $.ajax({
+                  type: 'post',
+                  url: "<?php echo site_url('welcome_admin/editSubject'); ?>",
+                  data: {
+                        subj_code: code,
+                        subj_name: name,
+                        units: units,
+                        hrs: hrs,
+                        type: type,
+                        dept: dep,
+                        sid: id
+                  },
+                dataType: 'JSON',
+                success: function(data){
+                    if (data.status) {
+                        alert("Update Succesful!");
+                        location.reload();
+                        $('#editsubjects').modal('hide');
+                    }else{
+                        $('.alert').css('display', 'block');
+                        $('.alert').html(data.notif);   
+                    }
+                },
+                error: function(request, status, error){
+                  alert(request.responseText);
+                }
+            });return false;
+          });
+
+          $('#active table tbody').on('click', 'button:contains("Update")', function(){
+                var id = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('welcome_admin/room_view'); ?>",
-                    method: 'POST',
-                    data: {
-                        rooms:rooms
+                    type: 'ajax',
+                    url: "<?php echo base_url('welcome_admin/get_subjects')?>",
+                    method: "GET",
+                    dataType: 'json',
+                    data:{SubjectID:id},
+                    success:function(result){
+                        $('#editsubjects form')[0].reset();
+                        $('#editsubjects form').attr('action', "<?php echo base_url()?>"+'welcome_admin/editSubject'+'?id='+result.subject[0].SubjectID);
+                        $('#editsubjects input[name="upsubcode"]').val(result.subject[0].SubjectCode);
+                        $('#editsubjects input[name="upsubname"]').val(result.subject[0].SubjectName);
+
+                        $('#editsubjects input[name="upunits"]').val(result.subject[0].LecUnits);
+                        $('#editsubjects input[name="uphrs"]').val(result.subject[0].LecHours);
+                          
+                        $('#editsubjects select[name="uptype"]').val(result.subject[0].SubjectType);
+                        $('#editsubjects select[name="updepartment"]').val(result.subject[0].SubjectDeptCode);
+                        $('#editsubjects input[name="sub_id"]').val(result.subject[0].SubjectID);
+
                     },
-                    success: function(data){
-                        $('#datatable').html(data);
-                    },
-                    error: function(){
-                        alert('EROROROROR');
+                    error:function(request){
+                        alert(request.responseText);
                     }
                 });
-           });
+            });
 
 
-            $('#btn_room').on('click', function(){
+          $('#roombut').on('click', function(){
+             var r = document.getElementById('rooms');
+             var rooms = r.options[r.selectedIndex].value;
+              $.ajax({
+                  url: "<?php echo site_url('welcome_admin/room_view'); ?>",
+                  method: 'POST',
+                  data: {
+                      rooms:rooms
+                  },
+                  success: function(data){
+                      $('#datatable').html(data);
+                  },
+                  error: function(){
+                      alert('EROROROROR');
+                  }
+              });
+          });
+
+
+          $('#btn_room').on('click', function(){
             var room_no = $('#room_no').val();
             var room_type = $('#room_type').val();
-             var dep = $('#dep').val();
+            var dep = $('#dep').val();
             $.ajax({
                 type: 'post',
                 url: "<?php echo site_url('welcome_admin/add_room'); ?>",
@@ -300,64 +375,63 @@
                     alert('ERROR!');
                 }
             });return false;
-        });
+          });
 
-              $(".clickable-row").click(function() {
-          window.location = $(this).data("href");
-      });
+          $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+          });
+
+          $('#master').on('click', function(e) {
+                   if($(this).is(':checked',true))  
+                   {
+                      $(".del_subj").prop('checked', true);  
+                   } else {  
+                      $(".del_subj").prop('checked',false);  
+                   }  
+                  });
+           
+          $('.delete_all').on('click', function(e) {
+
+              var allVals = [];  
+              $(".del_subj:checked").each(function() {  
+                  allVals.push($(this).attr('data-id'));
+              });  
+
+              if(allVals.length <=0)  
+              {  
+                  alert("Please select row.");  
+              }  else {  
+
+                  var check = confirm("Are you sure you want to delete this row?");  
+                  if(check == true){  
+
+                      var join_selected_values = allVals.join(","); 
+
+                      $.ajax({
+                          url: "<?php echo site_url('welcome_admin/delete_subj'); ?>",
+                          type: 'POST',
+                          data: 'ids='+join_selected_values,
+                          success: function (data) {
+                            console.log(data);
+                            $(".del_subj:checked").each(function() {  
+                                $(this).parents("tr").remove();
+                            });
+                            alert("Item Deleted successfully.");
+                            javascript:window.location.reload();
+                          },
+                          error: function (data) {
+                              alert(data.responseText);
+                          }
+                      });
+
+                    // $.each(allVals, function( index, value ) {
+                    //     $('table tr').filter("[data-row-id='" + value + "']").remove();
+                    // });
+                  }  
+              }  
+          });
 
 
-      $('#master').on('click', function(e) {
-         if($(this).is(':checked',true))  
-         {
-            $(".del_subj").prop('checked', true);  
-         } else {  
-            $(".del_subj").prop('checked',false);  
-         }  
-        });
- 
-        $('.delete_all').on('click', function(e) {
- 
-            var allVals = [];  
-            $(".del_subj:checked").each(function() {  
-                allVals.push($(this).attr('data-id'));
-            });  
- 
-            if(allVals.length <=0)  
-            {  
-                alert("Please select row.");  
-            }  else {  
- 
-                var check = confirm("Are you sure you want to delete this row?");  
-                if(check == true){  
- 
-                    var join_selected_values = allVals.join(","); 
- 
-                    $.ajax({
-                        url: "<?php echo site_url('welcome_admin/delete_subj'); ?>",
-                        type: 'POST',
-                        data: 'ids='+join_selected_values,
-                        success: function (data) {
-                          console.log(data);
-                          $(".del_subj:checked").each(function() {  
-                              $(this).parents("tr").remove();
-                          });
-                          alert("Item Deleted successfully.");
-                          javascript:window.location.reload();
-                        },
-                        error: function (data) {
-                            alert(data.responseText);
-                        }
-                    });
- 
-                  // $.each(allVals, function( index, value ) {
-                  //     $('table tr').filter("[data-row-id='" + value + "']").remove();
-                  // });
-                }  
-            }  
-        });
-
-    
     });
     </script>
     

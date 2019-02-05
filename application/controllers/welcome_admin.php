@@ -29,6 +29,7 @@ class welcome_admin extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	//FACULTY//
 	public function facsub(){
 		$subject['sub'] = $this->input->post('sub_list');
 		foreach($subject['sub'] as $subjid){
@@ -36,7 +37,7 @@ class welcome_admin extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
-	//FACULTY//
+
 	public function faculty(){
 		$data['data'] = $this->Admin_model->view_faculty();
 		$data['department'] = $this->Admin_model->view_department();
@@ -52,7 +53,7 @@ class welcome_admin extends CI_Controller {
 		$data['info'] =$this->Admin_model->view_faculty_info($id);
 		$data['info2'] =$this->Admin_model->view_faculty_info2($id);
 		$data['department'] = $this->Admin_model->view_department();
-		$data['subjects'] = $this->Admin_model->view_subjects();
+		$data['subjects'] = $this->Admin_model->view_faculty_subjects();
 		$data['position'] = $this->Admin_model->view_position();
 		$this->load->view('template/header');
 		$this->load->view('adminDashboards/viewFaculty',$data);
@@ -61,9 +62,9 @@ class welcome_admin extends CI_Controller {
 
 	public function addFaculty(){
 		$response = array();
-		$this->form_validation->set_rules('fname', 'First Name', 'required');
-		$this->form_validation->set_rules('mname', 'Middle Name', 'required');
-		$this->form_validation->set_rules('lname', 'Last Name', 'required');
+		$this->form_validation->set_rules('fname', 'First Name', 'required|alpha');
+		$this->form_validation->set_rules('mname', 'Middle Name', 'required|alpha');
+		$this->form_validation->set_rules('lname', 'Last Name', 'required|alpha');
 		if ($this->form_validation->run() == TRUE) {
 			$data = $this->Admin_model->add_faculty();
 			$response['status'] = TRUE;
@@ -104,31 +105,22 @@ class welcome_admin extends CI_Controller {
 	    $this->Admin_model->del_faculty($id);
 	    redirect('welcome_admin/faculty');
 	}
-	//FACULTY//
 
 	//DEPARTMENT//
 	public function department(){
-		$data['data2'] = $this->Admin_model->view_faculty();
 		$data['department'] = $this->Admin_model->view_department();
 		$data['subjects'] = $this->Admin_model->view_subjects();
-		$data['position'] = $this->Admin_model->view_position();
 		$this->load->view('template/header');
 		$this->load->view('data/department',$data);
 		$this->load->view('template/footer');	
 	}
 
-	public function viewDepartment($id){
-		$data['data'] =$this->Admin_model->view_department_name($id);
-		$data['data2'] = $this->Admin_model->view_department_info($id);
-		$this->load->view('template/header');
-		$this->load->view('adminDashboards/viewDepartment',$data);
-		$this->load->view('template/footer');
-	}
-
 	public function addDepartment(){
 		$response = array();
-		$this->form_validation->set_rules('depname', 'Department Name', 'required');
-		$this->form_validation->set_rules('depcode', 'Department Code', 'required');
+		$this->form_validation->set_rules('depname', 'Department Name', 'required|is_unique[department.DepartmentName]',array(
+			'is_unique' => '%s already exist!'));
+		$this->form_validation->set_rules('depcode', 'Department Code', 'required|is_unique[department.DepartmentCode]',array(
+			'is_unique' => '%s already exist!'));
 		if ($this->form_validation->run() == TRUE) {
 			$data = $this->Admin_model->add_department();
 			$response['status'] = TRUE;
@@ -157,6 +149,12 @@ class welcome_admin extends CI_Controller {
 		echo json_encode($response);    
 	}
 
+	public function get_department(){
+		$data['department'] = $this->Admin_model->view_department_name($_GET['DepartmentID']);
+		echo json_encode($data);
+	}
+
+
 	public function activateDepartment($id){
 	    $this->Admin_model->act_department($id);
 	    redirect('welcome_admin/department');
@@ -166,13 +164,19 @@ class welcome_admin extends CI_Controller {
 	    $this->Admin_model->del_department($id);
 	    redirect('welcome_admin/department');
 	}
-	//DEPARTMENT//
 
 	//SUBJECT//
+
+	public function get_subjects(){
+		$data['subject'] = $this->Admin_model->view_subjects_name($_GET['SubjectID']);
+		echo json_encode($data);
+	}
+
 	public function subjects(){
 		$data['data'] = $this->Admin_model->view_faculty();
+		// $data['data2'] =$this->Admin_model->view_subjects_name($_GET['id']);
 		$data['department'] = $this->Admin_model->view_department();
-		$data['subjects'] = $this->Admin_model->view_subjects();
+		$data['subject'] = $this->Admin_model->view_subjects();
 		$data['position'] = $this->Admin_model->view_position();
 		$this->load->view('template/header');
 		$this->load->view('data/subjects',$data);
@@ -181,10 +185,12 @@ class welcome_admin extends CI_Controller {
 
 	public function addSubject(){
 		$response = array();
-		$this->form_validation->set_rules('subj_code', 'Subject Code', 'required');
-		$this->form_validation->set_rules('subj_name', 'Middle Name', 'required');
-		$this->form_validation->set_rules('units', 'No. of units', 'required');
-		$this->form_validation->set_rules('hrs', 'No. of hours', 'required');
+		$this->form_validation->set_rules('subj_code', 'Subject Code', 'required|is_unique[subject.SubjectCode]',array(
+			'is_unique' => '%s already exist!'));
+		$this->form_validation->set_rules('subj_name', 'Subject Name', 'required|alpha_numeric_spaces|is_unique[subject.SubjectName]',array(
+			'is_unique' => '%s already exist!'));
+		$this->form_validation->set_rules('units', 'No. of units', 'required|numeric');
+		$this->form_validation->set_rules('hrs', 'No. of hours', 'required|numeric');
 		if ($this->form_validation->run() == TRUE) {
 			$data = $this->Admin_model->add_subject();
 			$response['status'] = TRUE;
@@ -197,14 +203,14 @@ class welcome_admin extends CI_Controller {
 		echo json_encode($response);    
 	}
 
-	public function editSubject($id){		
+	public function editSubject(){		
 	    $response = array();
 		$this->form_validation->set_rules('subj_code', 'Subject Code', 'required');
-		$this->form_validation->set_rules('subj_name', 'Middle Name', 'required');
-		$this->form_validation->set_rules('units', 'No. of units', 'required');
-		$this->form_validation->set_rules('hrs', 'No. of hours', 'required');
+		$this->form_validation->set_rules('subj_name', 'Subject Name', 'required|alpha_numeric_spaces');
+		$this->form_validation->set_rules('units', 'No. of units', 'required|numeric');
+		$this->form_validation->set_rules('hrs', 'No. of hours', 'required|numeric');
 		if ($this->form_validation->run() == TRUE) {
-			$data = $this->Admin_model->add_subject();
+			$data = $this->Admin_model->edit_subject();
 			$response['status'] = TRUE;
 			$response[] = $data;
 		}
@@ -227,11 +233,11 @@ class welcome_admin extends CI_Controller {
 	    redirect('welcome_admin/subjects');
 	}
 
-	public function getSubject(){
-		$id = $_POST['id']; 
-		$response = $this->Admin_model->edit_subjects($id);
-		echo json_encode($response);    
-	}
+	// public function getSubject(){
+	// 	$id = $_POST['id']; 
+	// 	$response = $this->Admin_model->edit_subjects($id);
+	// 	echo json_encode($response);    
+	// }
 	//SUBJECT//
 
 	//SECTION//
@@ -242,7 +248,6 @@ class welcome_admin extends CI_Controller {
 		$this->load->view('data/section',$data);
 		$this->load->view('template/footer');
 	}
-	//SECTION//
 
 
 	//COURSES//
@@ -253,7 +258,6 @@ class welcome_admin extends CI_Controller {
 		$this->load->view('data/courses',$data);
 		$this->load->view('template/footer');
 	}
-	//COURSES//
 
 	public function viewSched(){
 		$this->load->view('template/header');
@@ -261,19 +265,17 @@ class welcome_admin extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+
 	//ROOMS//
 	public function rooms(){
 		$data['room'] =$this->Admin_model->view_room_name();
 		$data['dep_list'] = $this->Admin_model->departments();
-		$data['room_sched'] = $this->Admin_model->view_room_all();
 		$data['list'] = $this->Admin_model->list_room();
 		$this->load->view('template/header');
 		$this->load->view('data/rooms',$data);
 		$this->load->view('template/footer');
 	}
-				
-	//ROOMS//
-
+			
 	public function viewroomSched($id){
 		$data['room'] = $this->Admin_model->room_name($id);
 		$data['hey'] = $this->Admin_model->view_room_schedule($id);

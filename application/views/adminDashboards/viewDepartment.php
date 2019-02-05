@@ -50,7 +50,7 @@
 	                        <button type="button" class="btn btn-sm btn-info" data-target="#editdepartment" data-toggle="modal" data-backdrop="static">Edit</button><span class="fa fa-pencil"></span>
 	                    </div>
 	                    <div class="card-body">
-	                    <h6> Department Dean : </h6><p>
+	                    <h6> College Dean : </h6><p>
 	                	<?php 
 	                	foreach($data2 as $row){
 	                	  if($row->pc == 'Dean'){
@@ -77,8 +77,8 @@
   <div class="modal fade" id="editdepartment" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
-          <h5 class="modal-title" style="color: #fff;"><strong>Edit <?php echo $data[0]->DepartmentName;?> Department</strong></h5>
+        <div class="modal-header">
+          <h5 class="modal-title"><strong>Edit Department "<?php echo $data[0]->DepartmentName;?>"</strong></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

@@ -29,7 +29,7 @@ CREATE TABLE `colleges` (
 
 /*Data for the table `colleges` */
 
-insert  into `colleges`(`CollegeID`,`CollegeName`,`CollegeCode`,`CollegeDean`) values (1,'College of Science','COS',NULL);
+insert  into `colleges`(`CollegeID`,`CollegeName`,`CollegeCode`,`CollegeDean`) values (1,'College of Science','COS','Grim Reaper RE. Hunk');
 
 /*Table structure for table `course` */
 
@@ -82,11 +82,11 @@ CREATE TABLE `department` (
   `DepartmentCode` varchar(10) NOT NULL,
   `Status` char(1) DEFAULT 'A',
   PRIMARY KEY (`DepartmentID`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `department` */
 
-insert  into `department`(`DepartmentID`,`CollegeID`,`DepartmentName`,`DepartmentCode`,`Status`) values (1,'COS','Math','MATH','A'),(2,'COS','Physics','PHYS','A'),(3,'COS','Chemistry','CHEM','A');
+insert  into `department`(`DepartmentID`,`CollegeID`,`DepartmentName`,`DepartmentCode`,`Status`) values (1,'COS','MATH','MATH','A'),(2,'COS','PHYSICS','PHYS','A'),(3,'COS','CHEMISTRY','CHEM','A'),(4,'COS','TACTICAL','TAC','D');
 
 /*Table structure for table `faculty` */
 
@@ -94,21 +94,21 @@ DROP TABLE IF EXISTS `faculty`;
 
 CREATE TABLE `faculty` (
   `ProfID` int(10) NOT NULL AUTO_INCREMENT,
-  `Firstname` char(15) NOT NULL,
-  `Middlename` char(15) NOT NULL,
-  `Lastname` char(15) NOT NULL,
-  `PositionCode` int(5) DEFAULT NULL,
-  `Contact` varchar(20) NOT NULL,
-  `DepartmentCode` varchar(10) NOT NULL,
-  `PreferredTime` text NOT NULL,
-  `PreferredSubject` text NOT NULL,
+  `Firstname` char(50) DEFAULT NULL,
+  `Middlename` char(50) DEFAULT NULL,
+  `Lastname` char(50) DEFAULT NULL,
+  `PositionCode` varchar(20) DEFAULT NULL,
+  `Contact` varchar(20) DEFAULT NULL,
+  `DepartmentCode` varchar(10) DEFAULT NULL,
+  `PreferredTime` text,
+  `PreferredSubject` text,
   `Status` char(1) DEFAULT 'A',
   PRIMARY KEY (`ProfID`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `faculty` */
 
-insert  into `faculty`(`ProfID`,`Firstname`,`Middlename`,`Lastname`,`PositionCode`,`Contact`,`DepartmentCode`,`PreferredTime`,`PreferredSubject`,`Status`) values (1,'Mary Roses','CotingjoX','Apoyonz',1,'(+63)909-121-2121','MATH','01:00:00','1','D'),(2,'Marose','Contingoz','Flameon',1,'(+12)311-111-1111','MATH','00:00:00','','A'),(3,'Mary Rose','Cotingjoy','Apoyonx',2,'(+12)311-111-1111','MATH','00:00:00','','A'),(4,'Mareese','Contingo','Apoyony',3,'(+45)613-980-7776','MATH','00:00:00','','A'),(5,'Mary Rose','Contingjo','Apoyon',4,'(+12)311-111-1111','MATH','00:00:00','','A'),(6,'Maureese','Contingoc','Apoyonc',4,'(+78)945-658-3464','MATH','00:00:00','','A'),(7,'Rosemary','Contingov','Apoyonv',3,'(+12)311-111-1111','MATH','00:00:00','','A'),(8,'Fname','Mname','Lname',4,'(+23)451-212-1212','MATH','00:00:00','','A'),(9,'Chae','Yeon','Lee',4,'(+78)945-658-3464','MATH','00:00:00','','A'),(10,'Jesus','Mary','Joseph',3,'(+78)945-658-3464','MATH','00:00:00','','A'),(11,'Won','Young','Jang',4,'(+78)945-658-3464','MATH','00:00:00','','A'),(12,'Monkey','Dude','Luffy',3,'(+63)921-310-3341','MATH','00:00:00','','A'),(13,'One','Two','Three',4,'(+63)123-312-3231','MATH','00:00:00','','A'),(14,'Ones','Twos','Threes',2,'(+63)123-311-1111','MATH','00:00:00','','A'),(15,'wew','wew','ewe',4,'(+63)131-231-3231','MATH','00:00:00','','A'),(16,'\'','\'','\'',1,'(+63)123-412-3412','MATH','','','A'),(17,';','qw','qw',1,'(+63)121-212-1212','MATH','','','A'),(18,'>','<','>',2,'(+63)121-121-2121','MATH','','','A'),(19,'?','\"','/',1,'(+63)111-111-1111','MATH','','','A'),(20,'B','U','D',1,'(+63)121-221-2121','MATH','','','A');
+insert  into `faculty`(`ProfID`,`Firstname`,`Middlename`,`Lastname`,`PositionCode`,`Contact`,`DepartmentCode`,`PreferredTime`,`PreferredSubject`,`Status`) values (1,'EDGARDO','PIO','DELA CRUZ','3','(+63)921 581 7290','MATH',NULL,NULL,'A'),(2,'JOHN','DOE','CRUZ','4','(+63)999 012 3571','MATH',NULL,NULL,'A'),(3,'ALBERT','GIN','CASTAN','1','(+63)907 277 0813','MATH',NULL,NULL,'A'),(4,'ADRIAN','CILIA','DELOS REYES','5','(+63)927 571 0253','MATH',NULL,NULL,'A'),(5,'RUDY','GINO','FERNANDEZ','7','(+63)991 252 1721','MATH',NULL,NULL,'A');
 
 /*Table structure for table `policy` */
 
@@ -133,16 +133,16 @@ CREATE TABLE `policy` (
 DROP TABLE IF EXISTS `position`;
 
 CREATE TABLE `position` (
-  `PositionID` int(10) NOT NULL,
+  `PositionID` int(10) NOT NULL AUTO_INCREMENT,
   `PositionCode` int(5) DEFAULT NULL,
-  `PositionName` char(15) DEFAULT NULL,
+  `PositionName` varchar(50) DEFAULT NULL,
   `PositionDesc` text,
   PRIMARY KEY (`PositionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `position` */
 
-insert  into `position`(`PositionID`,`PositionCode`,`PositionName`,`PositionDesc`) values (1,1,'Dean',NULL),(2,2,'Department Head',NULL),(3,3,'Instructor',NULL),(4,4,'Research',NULL);
+insert  into `position`(`PositionID`,`PositionCode`,`PositionName`,`PositionDesc`) values (2,1,'DEPARTMENT HEAD',NULL),(3,2,'INSTRUCTOR 1',NULL),(4,3,'INSTRUCTOR 2',NULL),(5,4,'INSTRUCTOR 3',NULL),(6,5,'PROFESSOR 1',NULL),(7,6,'PROFESSOR 2',NULL),(8,7,'PROFESSOR 3',NULL),(9,8,'PROFESSOR 4',NULL),(10,9,'PROFESSOR 5',NULL),(11,10,'PROFESSOR 6',NULL),(12,11,'PROFESSOR 7',NULL),(13,12,'ASSISTANT PROFESSOR 1',NULL),(14,13,'ASSISTANT PROFESSOR 2',NULL);
 
 /*Table structure for table `room` */
 
@@ -153,13 +153,13 @@ CREATE TABLE `room` (
   `RoomNo` int(10) NOT NULL,
   `RoomStatus` char(15) NOT NULL DEFAULT 'Physical',
   `RoomType` char(10) NOT NULL,
-  `DepartmentCode` int(10) NOT NULL,
+  `DepartmentCode` varchar(10) NOT NULL,
   PRIMARY KEY (`RoomID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `room` */
 
-insert  into `room`(`RoomID`,`RoomNo`,`RoomStatus`,`RoomType`,`DepartmentCode`) values (1,301,'Physical','Lecture',1),(2,302,'Physical','Lecture',1),(3,303,'Physical','Lecture',1),(4,304,'Physical','Lecture',1),(5,311,'Physical','Laboratory',1),(6,313,'Physical','Laboratory',1);
+insert  into `room`(`RoomID`,`RoomNo`,`RoomStatus`,`RoomType`,`DepartmentCode`) values (1,301,'Physical','Lecture','MATH'),(2,302,'Physical','Lecture','MATH'),(3,303,'Physical','Lecture','MATH'),(4,304,'Physical','Lecture','MATH'),(5,311,'Physical','Laboratory','MATH'),(6,313,'Dummy','Laboratory','MATH');
 
 /*Table structure for table `schedule` */
 
@@ -169,6 +169,7 @@ CREATE TABLE `schedule` (
   `SchedID` int(10) NOT NULL AUTO_INCREMENT,
   `SchedName` varchar(50) NOT NULL,
   `SchedTime` time NOT NULL,
+  `SchedEnd` time DEFAULT NULL,
   `SchedDays` varchar(50) NOT NULL,
   `SchedRoom` varchar(50) NOT NULL,
   `SchedProf` varchar(50) NOT NULL,
@@ -177,11 +178,13 @@ CREATE TABLE `schedule` (
   `SubjectType` varchar(50) NOT NULL,
   `SubjectHours` int(5) NOT NULL,
   `DepartmentCode` varchar(10) NOT NULL,
-  `Overload` tinyint(1) NOT NULL,
+  `Overload` text NOT NULL,
   PRIMARY KEY (`SchedID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `schedule` */
+
+insert  into `schedule`(`SchedID`,`SchedName`,`SchedTime`,`SchedEnd`,`SchedDays`,`SchedRoom`,`SchedProf`,`SubjectCode`,`SubjectName`,`SubjectType`,`SubjectHours`,`DepartmentCode`,`Overload`) values (1,'Sched1','08:00:00','10:00:00','tuesday','1','1','CS 101','Computer Fundamentals','Lecture',2,'MATH','0');
 
 /*Table structure for table `section` */
 
@@ -217,14 +220,14 @@ CREATE TABLE `subject` (
   `LabUnits` int(15) DEFAULT '0',
   `SubjectDeptCode` varchar(10) NOT NULL,
   `SubjectType` varchar(20) NOT NULL,
-  `SubjectDay` varchar(20) NOT NULL,
+  `SubjectDay` varchar(20) NOT NULL DEFAULT 'monday to saturday',
   `Status` char(1) NOT NULL DEFAULT 'A',
   PRIMARY KEY (`SubjectID`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 /*Data for the table `subject` */
 
-insert  into `subject`(`SubjectID`,`SubjectCode`,`SubjectName`,`LecHours`,`LecUnits`,`LabHours`,`LabUnits`,`SubjectDeptCode`,`SubjectType`,`SubjectDay`,`Status`) values (1,'CHEM 11','General Chemestry Lecture',3,3,0,0,'CHEM','Lecture','','A'),(2,'CHEM 11L','General Chemestry Laboratory',0,0,3,1,'CHEM','Laboratory','','A'),(3,'CS 101','Computer Fundamentals',0,3,0,0,'MATH','Lecture','','A'),(4,'CS 111','Computer Programming 1 Lecture',0,3,0,0,'MATH','Lecture','','A'),(5,'CS 111L','Computer Programming 1 Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(6,'MATH 1','College Algebra',0,4,0,0,'MATH','Lecture','','A'),(7,'MATH 2A','Plane and Spherical Trigonometry',0,3,0,0,'MATH','Lecture','','A'),(8,'CS 122','Computer Programming 2 Lecture',0,2,0,0,'MATH','Lecture','','A'),(9,'CS 122L','Computer Programming 2 Laboratory',0,0,3,1,'MATH','Lecture','','A'),(10,'CS 123','Discrete Structures',0,3,0,0,'MATH','Lecture','','A'),(11,'MATH 5A','Differential Calculus and Anal Geometry',0,5,0,0,'MATH','Lecture','','A'),(12,'PHYS 1A','Mechanics Lecture',0,3,0,0,'PHYS','Lecture','','A'),(13,'PHYS 1AL','Mechanics Laboratory',0,0,0,1,'PHYS','Laboratory','','A'),(14,'CS 211','Data Structures Lecture',0,2,0,0,'MATH','Lecture','','A'),(15,'CS 211L','Data Structures Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(16,'CS 212','Object Oriented Programming Lecture',0,2,0,0,'MATH','Lecture','','A'),(17,'CS 212L','Object Oriented Programming Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(18,'CS 213','Combinatorics and Graph Theory',0,3,0,0,'MATH','Lecture','','A'),(19,'MATH 6','Integral Calculus',3,4,0,0,'MATH','Lecture','','A'),(20,'PHYS 2B','Electricity and Magnetism Lecture',12,3,0,0,'PHYS','Lecture','','A'),(21,'PHYS 2BL','Electricity and Magnetism Laboratory',0,0,3,1,'PHYS','Laboratory','','A'),(22,'CS 221','Design and Analysis of Algorithm',0,3,0,0,'MATH','Lecture','','A'),(23,'CS 222','Digital Design',0,3,0,0,'MATH','Lecture','','A'),(24,'CS 222L','Digital Design Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(25,'CS 223','Programming Languages Lecture',0,2,0,0,'MATH','Lecture','','A'),(26,'CS 223L','Programming Languages Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(27,'MATH 8','Probability and Statistics',0,3,0,0,'MATH','Lecture','','A'),(28,'CS 311','Database Systems Lecture',0,3,0,0,'MATH','Lecture','','A'),(29,'CS 311L','Database Systems Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(30,'CS 312','Computer Organization Lecture',0,2,0,0,'MATH','Lecture','','A'),(31,'CS 312L','Computer Organization Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(32,'CS 313','Automata and Language Theory',3,3,0,0,'MATH','Lecture','','A'),(33,'CS 314','Research Methods',3,3,0,0,'MATH','Lecture','','A'),(34,'CSE 1','CS Elective 1',3,3,0,0,'MATH','Lecture','','A'),(35,'CSF 1','Free Elective 1',3,3,0,0,'MATH','Lecture','','A'),(39,'CSGO L','Counter-Strike GO L',0,0,5,5,'PHYS','Laboratory','','A'),(38,'CSGO','Counter-Strike GO',5,3,0,0,'PHYS','Lecture','','A');
+insert  into `subject`(`SubjectID`,`SubjectCode`,`SubjectName`,`LecHours`,`LecUnits`,`LabHours`,`LabUnits`,`SubjectDeptCode`,`SubjectType`,`SubjectDay`,`Status`) values (1,'CHEM 11','General Chemestry Lecture',3,3,0,0,'CHEM','Lecture','','A'),(2,'CHEM 11L','General Chemestry Laboratory',0,0,3,1,'CHEM','Laboratory','','A'),(3,'CS 101','Computer Fundamentals',0,3,0,0,'MATH','Lecture','','A'),(4,'CS 111','Computer Programming 1 Lecture',0,3,0,0,'MATH','Lecture','','A'),(5,'CS 111L','Computer Programming 1 Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(6,'MATH 1','College Algebra',0,4,0,0,'MATH','Lecture','','A'),(7,'MATH 2A','Plane and Spherical Trigonometry',0,3,0,0,'MATH','Lecture','','A'),(8,'CS 122','Computer Programming 2 Lecture',0,2,0,0,'MATH','Lecture','','A'),(9,'CS 122L','Computer Programming 2 Laboratory',0,0,3,1,'MATH','Lecture','','A'),(10,'CS 123','Discrete Structures',0,3,0,0,'MATH','Lecture','','A'),(11,'MATH 5A','Differential Calculus and Anal Geometry',0,5,0,0,'MATH','Lecture','','A'),(12,'PHYS 1A','Mechanics Lecture',0,3,0,0,'PHYS','Lecture','','A'),(13,'PHYS 1AL','Mechanics Laboratory',0,0,0,1,'PHYS','Laboratory','','A'),(14,'CS 211','Data Structures Lecture',0,2,0,0,'MATH','Lecture','','A'),(15,'CS 211L','Data Structures Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(16,'CS 212','Object Oriented Programming Lecture',0,2,0,0,'MATH','Lecture','','A'),(17,'CS 212L','Object Oriented Programming Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(18,'CS 213','Combinatorics and Graph Theory',0,3,0,0,'MATH','Lecture','','A'),(19,'MATH 6','Integral Calculus',3,4,0,0,'MATH','Lecture','','A'),(20,'PHYS 2B','Electricity and Magnetism Lecture',12,3,0,0,'PHYS','Lecture','','A'),(21,'PHYS 2BL','Electricity and Magnetism Laboratory',0,0,3,1,'PHYS','Laboratory','','A'),(22,'CS 221','Design and Analysis of Algorithm',0,3,0,0,'MATH','Lecture','','A'),(23,'CS 222','Digital Design',0,3,0,0,'MATH','Lecture','','A'),(24,'CS 222L','Digital Design Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(25,'CS 223','Programming Languages Lecture',0,2,0,0,'MATH','Lecture','','A'),(26,'CS 223L','Programming Languages Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(27,'MATH 8','Probability and Statistics',0,3,0,0,'MATH','Lecture','','A'),(28,'CS 311','Database Systems Lecture',0,3,0,0,'MATH','Lecture','','A'),(29,'CS 311L','Database Systems Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(30,'CS 312','Computer Organization Lecture',0,2,0,0,'MATH','Lecture','','A'),(31,'CS 312L','Computer Organization Laboratory',0,0,3,1,'MATH','Laboratory','','A'),(32,'CS 313','Automata and Language Theory',3,3,0,0,'MATH','Lecture','','A'),(33,'CS 314','Research Methods',3,3,0,0,'MATH','Lecture','','A'),(34,'CSE 1','CS Elective 1',3,3,0,0,'MATH','Lecture','','A'),(35,'CSF 1','Free Elective 1',3,3,0,0,'MATH','Lecture','','A');
 
 /*Table structure for table `subject_list` */
 
@@ -235,11 +238,11 @@ CREATE TABLE `subject_list` (
   `ProfID` int(10) DEFAULT NULL,
   `SubjectCode` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`SubjectLID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `subject_list` */
 
-insert  into `subject_list`(`SubjectLID`,`ProfID`,`SubjectCode`) values (1,1,'9'),(2,1,'2'),(3,1,'1'),(4,1,'3'),(5,1,'10'),(6,1,'11'),(7,1,'12');
+insert  into `subject_list`(`SubjectLID`,`ProfID`,`SubjectCode`) values (1,1,'CS 111'),(2,1,'CS 111L'),(3,2,'MATH 1'),(4,3,'MATH 2A'),(5,4,'CS 122'),(6,5,'CS 122L'),(7,6,'CS 123'),(8,1,'CS 122');
 
 /*Table structure for table `user` */
 
