@@ -1,3 +1,14 @@
+<?php 
+$pos = '';
+$depart = '';
+foreach($position as $row){
+  $pos .= '<option value="'.$row->PositionCode.'">'.$row->PositionName.'</option>';
+  }
+foreach($department as $row2){
+  $depart .= '<option value="'.$row2->DepartmentCode.'">'.$row2->DepartmentName.'</option>';
+  }  
+?> 
+
 <!-- Header-->
   <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -230,23 +241,17 @@
             <div class="row form-group">
               <div class="col-12 col-md-4"><input type="contact" id="fcontact" name="fcontact" placeholder="Contact No." class="form-control"></div>
               <div class="col-12 col-md-4">
-                  <select data-placeholder="Subject" name="fposition" id="fposition" class="form-control">
-                      <?php
-                          foreach($position as $row) { ?>
-                          <option value="<?php echo $row->PositionCode ?>"><?php echo $row->PositionName ?></option>
-                      <?php
-                          }
-                      ?>
+                  <select name="fposition" id="fposition" class="form-control">
+                    <option value="">Select Position</option>
+                    <?php echo $pos ?>
                   </select>
+
+                  
               </div>
               <div class="col-12 col-md-4">
                   <select name="fdepCode" id="fdepCode" class="form-control" >
-                      <?php
-                          foreach($department as $row) { ?>
-                          <option value="<?php echo $row->DepartmentCode ?>"><?php echo $row->DepartmentName ?></option>
-                      <?php
-                          }
-                      ?>
+                    <option value="">Select Department</option>
+                    <?php echo $depart ?>
                   </select>
               </div>    
             </div>

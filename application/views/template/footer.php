@@ -46,10 +46,9 @@
           $('input[name="fcontact"]').inputmask("(+63)999 999 9999", {"placeholder": "(+63)XXX XXX XXXX"});
 
           //MULTIPLE SELECT
-          $('#selectmenu').lwMultiSelect({
-            maxSelect: 4,
-            maxText: 'Max. of 4 Subjects'
-          }); 
+          $('#selectmenu').lwMultiSelect();
+          $('#selectmenu2').lwMultiSelect();
+
         });
     </script>
     <script type="text/javascript">
@@ -78,6 +77,46 @@
             });
           });
 
+          $('#btn_faculty_time').on('click', function(){
+              var day = $('#day').val();
+              var shift = $('#shift').val();
+              var time_list = $('[name="time_list[]"]').val();
+              var fid = $('#profid').val();
+
+              if(day == ''){
+                alert("Please Select Day");
+                return false;
+              }
+              else if(shift == ''){
+                alert("Please Select Shift");
+                return false;
+              }
+              else if(time_list == ''){
+                alert("Please Select Time");
+                return false;
+              }
+              else{
+              $.ajax({
+                  type: 'post',
+                  url: "<?php echo site_url('welcome_admin/factime'); ?>",
+                  data: {
+                        day : day,
+                        shift : shift,
+                        time_list : time_list,
+                        fid : fid
+                  },
+                dataType: 'JSON',
+                success: function(data){
+                  alert("Time successfully added!");
+                  location.reload();
+                  $('#infotime').modal('hide');
+                },
+                error: function(){
+                  alert('ERROR!');
+                }
+            });
+          }});
+
           $('#btn_faculty').on('click', function(){
               var ffname = $('#ffname').val();
               var fmname = $('#fmname').val();
@@ -85,6 +124,16 @@
               var fcontact = $('#fcontact').val();
               var fposition = $('#fposition').val();
               var fdepCode = $('#fdepCode').val();
+
+              if(fposition == ''){
+                alert("Please Select Position");
+                return false;
+              }
+              else if(fdepCode == ''){
+                alert("Please Select Department");
+                return false;
+              }
+              else{
               $.ajax({
                   type: 'post',
                   url: "<?php echo site_url('welcome_admin/addFaculty'); ?>",
@@ -111,6 +160,7 @@
                   alert(request.responseText);
                 }
             });return false;
+            }
           });
           
           $('#btnupd_faculty').on('click', function(){
@@ -389,6 +439,15 @@
                       $(".del_subj").prop('checked',false);  
                    }  
                   });
+
+          $('#master2').on('click', function(e) {
+                   if($(this).is(':checked',true))  
+                   {
+                      $(".del_time").prop('checked', true);  
+                   } else {  
+                      $(".del_time").prop('checked',false);  
+                   }  
+                  });
            
           $('.delete_all').on('click', function(e) {
 
@@ -399,7 +458,7 @@
 
               if(allVals.length <=0)  
               {  
-                  alert("Please select row.");  
+                  alert("Please select subject row.");  
               }  else {  
 
                   var check = confirm("Are you sure you want to delete this row?");  
@@ -430,6 +489,48 @@
                   }  
               }  
           });
+
+          $('.delete_all2').on('click', function(e) {
+
+              var allVals = [];  
+              $(".del_time:checked").each(function() {  
+                  allVals.push($(this).attr('data-id'));
+              });  
+
+              if(allVals.length <=0)  
+              {  
+                  alert("Please select time row.");  
+              }  else {  
+
+                  var check = confirm("Are you sure you want to delete this row?");  
+                  if(check == true){  
+
+                      var join_selected_values = allVals.join(","); 
+
+                      $.ajax({
+                          url: "<?php echo site_url('welcome_admin/delete_time'); ?>",
+                          type: 'POST',
+                          data: 'ids='+join_selected_values,
+                          success: function (data) {
+                            console.log(data);
+                            $(".del_time:checked").each(function() {  
+                                $(this).parents("tr").remove();
+                            });
+                            alert("Item Deleted successfully.");
+                            javascript:window.location.reload();
+                          },
+                          error: function (data) {
+                              alert(data.responseText);
+                          }
+                      });
+
+                    // $.each(allVals, function( index, value ) {
+                    //     $('table tr').filter("[data-row-id='" + value + "']").remove();
+                    // });
+                  }  
+              }  
+          });
+
 
 
     });

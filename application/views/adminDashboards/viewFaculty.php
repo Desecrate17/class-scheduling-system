@@ -1,3 +1,14 @@
+<?php 
+$dayz = '';
+$shifts = '';
+foreach($day as $row){
+  $dayz .= '<option value="'.$row->Day.'">'.$row->Day.'</option>';
+  }
+foreach($shift as $row){
+  $shifts .= '<option value="'.$row->Shift.'">'.$row->Shift.'</option>';
+  }
+?> 
+
   <div class="breadcrumbs">
     <div class="col-sm-4">
       <div class="page-header float-left">
@@ -66,29 +77,39 @@
             <hr>
             <h6>Preferred Time:</h6>
               <div class="card-body">
-                  <div class="mx-auto d-block">
-                    <p><?php echo $row->PreferredTime; ?></p>
-                  </div>
+                <div class="mx-auto d-block">
+                    <?php 
+                      foreach ($info3 as $row) { ?>
+                         <p><input type="checkbox" class="del_time" data-id="<?php echo $row->TimeLID; ?>"><?php echo $row->Time; ?></p>
+                       <?php
+                      } 
+                    ?>
+                </div>
+                <div class="card-footer" style="border-color:transparent; background-color: transparent;">
+                  <input type="checkbox" id="master2">Select All
+                </div>
               </div>
             <hr>
             <?php } ?>
 
             <h6>Preferred Subjects:</h6>
-                <div class="card-body">
-                  <div class="mx-auto d-block">
-                      <?php foreach ($info2 as $row) { if($row->Status == 'A') { ?>
-                           <p><input type="checkbox" class="del_subj" data-id="<?php echo $row->SubjectLID; ?>"><?php echo $row->SubjectName; ?></p>
-                         <?php } } ?>
-                  </div>
-                  <div class="card-footer" style="border-color:transparent; background-color: transparent;">
-                    <input type="checkbox" id="master">Select All
-                  </div>
+              <div class="card-body">
+                <div class="mx-auto d-block">
+                    <?php foreach ($info2 as $row) { if($row->Status == 'A') { ?>
+                         <p><input type="checkbox" class="del_subj" data-id="<?php echo $row->SubjectLID; ?>"><?php echo $row->SubjectName; ?></p>
+                       <?php } } ?>
                 </div>
+                <div class="card-footer" style="border-color:transparent; background-color: transparent;">
+                  <input type="checkbox" id="master">Select All
+                </div>
+              </div>
           </div>
       <div class="card-footer">
-        <button type="button" class="btn btn-outline-danger" data-target="#editfaculty" data-toggle="modal" data-backdrop="static" title="Edit Information"><i class="fa fa-pencil"></i> Edit</button>
+        <button type="button" class="btn btn-outline-danger" data-target="#editfaculty" data-toggle="modal" data-backdrop="static" title="Edit Information"><i class="fa fa-pencil"></i> Edit Info</button>
         <button type="button" class="btn btn-outline-danger delete_all"><i class="fa fa-trash"></i> Delete Subjects</button>
+        <button type="button" class="btn btn-outline-danger delete_all2"><i class="fa fa-trash"></i> Delete Time</button>
         <button type="button" class="btn btn-outline-danger" data-target="#infosub" data-toggle="modal" data-backdrop="static" title="Add Subject"><i class="fa fa-plus-circle"></i> Add Subject</button>
+        <button type="button" class="btn btn-outline-danger" data-target="#infotime" data-toggle="modal" data-backdrop="static" title="Add Subject"><i class="fa fa-plus-circle"></i> Add Time</button>
       </div>
     </div>
     </div>
@@ -196,4 +217,57 @@
     </div>
   </div>
 
+  <div class="modal fade" id="infotime" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><strong>Add Time <?php echo $data[0]->ProfID;?></strong></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="form-horizontal" >
+          <div class="modal-body">
+            <div class="form-group">
+              <div class="alert alert-danger" align="center" style="display: none;"></div>
+            </div>
+            <div class="row form-group">
+              <div class="col-12 col-md-4">
+                  <select name="day" id="day" class="form-control action" >
+                    <option value="">Select Day</option>
+                    <?php echo $dayz ?>
+                  </select>
+                </div>
+            </div> 
+            <div class="row form-group">
+              <div class="col-12 col-md-4">
+                  <select name="shift" id="shift" class="form-control action" >
+                    <option value="">Select Shift</option>
+                    <?php echo $shifts ?>
+                  </select>
+              </div>
+            </div>  
+            <div class="row form-group">    
+              <div class="col-12 col-md-4">
+                  <select name="time_list[]" id="selectmenu2" multiple>
+                      <?php
+                          foreach($time as $row) {
+                            ?>
+                              <option value="<?php echo $row->Time ?>"><?php echo $row->Time ?></option>
+                            <?php
+                          }
+                      ?>
+                  </select>
+              </div>    
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="hidden" name="prof_id" id="profid" value="<?php echo $data[0]->ProfID;?>">
+            <button type="button" class="btn btn-outline-info" style="border-radius: 3px;" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-outline-info" style="border-radius: 3px;" id="btn_faculty_time" name="btn_faculty">Confirm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
        

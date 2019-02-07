@@ -37,6 +37,14 @@ class welcome_admin extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
+	public function factime(){
+		$time['time'] = $this->input->post('time_list');
+		foreach($time['time'] as $timeid){
+			$data = $this->Admin_model->factime($timeid);
+		}
+		echo json_encode($data);
+	}
+
 
 	public function faculty(){
 		$data['data'] = $this->Admin_model->view_faculty();
@@ -52,9 +60,13 @@ class welcome_admin extends CI_Controller {
 		$data['data'] =$this->Admin_model->view_faculty_name($id);
 		$data['info'] =$this->Admin_model->view_faculty_info($id);
 		$data['info2'] =$this->Admin_model->view_faculty_info2($id);
+		$data['info3'] =$this->Admin_model->view_faculty_info3($id);
 		$data['department'] = $this->Admin_model->view_department();
 		$data['subjects'] = $this->Admin_model->view_faculty_subjects();
 		$data['position'] = $this->Admin_model->view_position();
+		$data['day'] = $this->Admin_model->view_faculty_day();
+		$data['shift'] = $this->Admin_model->view_faculty_shift();
+		$data['time'] = $this->Admin_model->view_faculty_time();
 		$this->load->view('template/header');
 		$this->load->view('adminDashboards/viewFaculty',$data);
 		$this->load->view('template/footer');
@@ -306,6 +318,16 @@ class welcome_admin extends CI_Controller {
  
         $this->db->where_in('subjectLID', explode(",", $ids));
         $this->db->delete('subject_list');
+ 
+        echo json_encode(['success'=>"Item Deleted successfully."]);
+    }
+
+    public function delete_time()
+    {
+        $ids = $this->input->post('ids');
+ 
+        $this->db->where_in('TimeLID', explode(",", $ids));
+        $this->db->delete('time_list');
  
         echo json_encode(['success'=>"Item Deleted successfully."]);
     }

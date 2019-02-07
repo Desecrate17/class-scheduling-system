@@ -52,7 +52,7 @@ class Admin_model extends CI_Model{
 
 	public function view_faculty_info2($id){
 		$query = $this->db->query("
-			SELECT s.SubjectName, s.Status, sl.SubjectLID
+			SELECT DISTINCT s.SubjectName, s.Status, sl.SubjectLID
 			FROM faculty as f
 			LEFT JOIN subject_list as sl ON f.ProfID = sl.ProfID
 			LEFT JOIN subject as s ON sl.SubjectCode = s.SubjectCode
@@ -64,6 +64,22 @@ class Admin_model extends CI_Model{
 			return NULL;
 		}
 	}
+
+	public function view_faculty_info3($id){
+		$query = $this->db->query("
+			SELECT DISTINCT tl.TimeLID, t.Time, f.Status
+			FROM faculty as f
+		 	LEFT JOIN time_list as tl ON f.ProfID = tl.ProfID
+		 	LEFT JOIN timee as t ON tl.Time = t.Time
+			WHERE f.ProfID = '$id'
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
 
 	public function view_department(){
 		$query = $this->db->query("
@@ -113,6 +129,47 @@ class Admin_model extends CI_Model{
 				LEFT JOIN faculty as f ON sl.ProfID = f.ProfID
     			WHERE sl.SubjectCode = s.SubjectCode AND sl.ProfID = f.ProfID
 			)
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+	public function view_faculty_time(){
+		$query = $this->db->query("
+			SELECT DISTINCT t.Time
+			FROM timee as t
+			WHERE NOT EXISTS(
+				SELECT * FROM time_list AS tl 
+				LEFT JOIN faculty as f ON tl.ProfID = f.ProfID
+    			WHERE tl.time = t.time AND tl.ProfID = f.ProfID
+			)
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+	public function view_faculty_day(){
+		$query = $this->db->query("
+			SELECT DISTINCT t.Day
+			FROM timee as t
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+	public function view_faculty_shift(){
+		$query = $this->db->query("
+			SELECT DISTINCT t.Shift
+			FROM timee as t
 			");
 		if ($query->num_rows() > 0){
 			return $query->result();
@@ -236,6 +293,16 @@ class Admin_model extends CI_Model{
 		$this->db->insert('subject_list');
 	}
 
+	public function factime($time){
+		$faculty_id = $this->input->post('fid');
+		$day = $this->input->post('day');
+		$shift = $this->input->post('shift');
+		$this->db->set('ProfID', $faculty_id);
+		$this->db->set('Days', $day);
+		$this->db->set('Shift', $shift);
+		$this->db->set('Time', $time);
+		$this->db->insert('time_list');
+	}
 //-- ADD MODEL END
 
 
@@ -284,7 +351,7 @@ class Admin_model extends CI_Model{
 		$type = $this->input->post('type');
 		$dep = $this->input->post('dept');
 		$sub_id = $this->input->post('sid');
-		print_r($sub_id);
+		print_r($dep);
 
 		if($this->input->post('type') == "Lecture"){
 			$this->db->set('SubjectCode', $code);
