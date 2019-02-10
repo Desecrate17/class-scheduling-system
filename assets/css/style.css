@@ -932,14 +932,14 @@ body {
   background: #f1f2f7;
   display: table;
   font-family: 'Open Sans' sans-serif !important;
-  font-size: 12px;
+  font-size: 16px;
   width: 100%; }
 
 div[class*="col-"] {
   float: left; }
 
 p {
-  font-size: 12px;
+  font-size: 16px;
   font-family: 'Open Sans' sans-serif;
   font-weight: 400;
   line-height: 24px;
@@ -951,7 +951,6 @@ p:focus {
 
 a,
 button {
-
   text-decoration: none;
   outline: none !important;
   color: #878787;
@@ -987,7 +986,6 @@ img {
 button,
 input,
 textarea {
-  font-size: 12px;
   box-shadow: none;
   outline: 0 !important; }
 
@@ -1084,14 +1082,14 @@ aside.left-panel {
         color: #c8c9ce !important;
         display: inline-block;
         font-family: 'Open Sans';
-        font-size: 12px;
+        font-size: 14px;
         line-height: 30px;
         padding: 10px 0;
         position: relative;
         width: 100%; }
         .navbar .navbar-nav li > a:hover,
         .navbar .navbar-nav li > a:hover .menu-icon {
-          color: #fff !important; }
+          color: #c51e3a !important; }
         .navbar .navbar-nav li > a .menu-icon {
           color: #8b939b;
           float: left;
@@ -1317,7 +1315,7 @@ header.fixed-top {
   position: inherit; }
 
 .menutoggle {
-  background: #e74c3c;
+  background: #c51e3a;
   border-radius: 50%;
   color: #fff !important;
   cursor: pointer;
@@ -1724,7 +1722,6 @@ header .form-inline {
 .button {
   display: inline-block;
   font-weight: 400;
-  font-size: 12;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -2472,7 +2469,7 @@ header .form-inline {
         	text-align: center; }
     	.table {
 	        border-collapse: collapse;
-	        font-size: 12px;
+	        font-size: 14px;
 	        min-width: 537px;
 	        padding: 0.5px 1px;
         } 
@@ -2509,6 +2506,15 @@ header .form-inline {
 
 /* buttons */
 
+
+
+.btn {
+    text-align: center;
+    line-height: 1.3;
+    border-radius: 16px;
+    color: #fff;
+    position: relative;
+}
 /*.btn-secondary {
     background: #064b7f none repeat scroll 0 0;
     border: medium none;

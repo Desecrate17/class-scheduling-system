@@ -16,8 +16,8 @@
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
 
-    <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/dist/css/bootstrap.min.css')?>" type="text/css">
-    <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css')?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/dist/css/bootstrap.css')?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.css')?>" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendors/themify-icons/css/themify-icons.css');?>" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendors/flag-icon-css/css/flag-icon.min.css');?>" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendors/selectFX/css/cs-skin-elastic.css')?>" type="text/css">
@@ -31,6 +31,78 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/reset.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/table-style.css'); ?>">
+
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/circle.css'); ?>">
+
+    <style>
+        .navbar-2 {
+          overflow: hidden;
+          background-color: white;
+        }
+
+        .navbar-2 a {
+          float: left;
+          font-size: 16px;
+          color: #000;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+
+        .dropdown-2 {
+          float: left;
+          overflow: hidden;
+        }
+
+        .dropdown-2 .dropbtn {
+          font-size: 16px;  
+          border: none;
+          outline: none;
+          color: #000;
+          padding: 14px 16px;
+          background-color: inherit;
+          font-family: inherit;
+          margin: 0;
+        }
+
+        .navbar-2 a:hover, .dropdown-2:hover .dropbtn {
+          background-color: #c51e3a;
+        }
+
+        .dropdown-content-2 {
+          display: none;
+          position: absolute;
+          background-color: white;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        .dropdown-content-2 a {
+          float: none;
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+        }
+
+        .dropdown-content-2 a:hover {
+          background-color: #c51e3a;
+        }
+
+        .dropdown-2:hover .dropdown-content-2 {
+          display: block;
+        }
+
+        .force-scroll {
+        overflow-y: scroll;
+        max-height: 500px;
+        height: auto;
+        }
+</style>
 
 </head>
 
@@ -73,7 +145,10 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Schedule</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-eye"></i><a href="<?php echo site_url('welcome_admin/view_sched');?>">View</a></li>
+                          <li><i class="fa fa-eye"></i><a href="<?php echo site_url('welcome_admin/generate_sched');?>">Generate Schedule</a></li>
+                            <li><i class="fa fa-eye"></i><a href="<?php echo site_url('welcome_admin/viewSched');?>">View By Faculty</a></li>
+                            <li><i class="fa fa-eye"></i><a href="<?php echo site_url('welcome_admin/viewSchedbyRoom');?>">View By Room</a></li>
+
                            
                         </ul>
                     </li>
@@ -100,11 +175,7 @@
                             <img class="user-avatar rounded-circle" src="<?php echo base_url('assets/images/admin.jpg');?>" alt="User Avatar">
                             <!-- <span><?php echo $this->session->userdata('user'); ?></span> -->
                         </a>
-                        <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
-
+                        <div class="user-menu dropdown-menu" style="background-color: #d3d3d3;">
                             <a class="nav-link" href="<?php echo base_url('Home/logout'); ?>"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>           

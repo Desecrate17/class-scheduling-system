@@ -60,8 +60,8 @@
                                 </thead>
                                 <tbody>
                                    <?php
-                                    if ($subject!=NULL) {
-                                      foreach ($subject as $row) {
+                                    if ($subjects!=NULL) {
+                                      foreach ($subjects as $row) {
                                         if($row->Status == 'A') {
                                           if($row->SubjectType == 'Lecture') {
                                         ?>
@@ -74,8 +74,8 @@
                                             <td><center><?php echo $row->LecUnits; ?></center></td>
                                             <td><center><?php echo $row->SubjectType; ?></center></td>
                                             <td><center>
-                                              <button value="<?php echo $row->SubjectID; ?>" data-target="#editsubjects" data-toggle="modal" data-backdrop="static" class="btn btn-outline-info" style="padding: 2px 6px 2px; border-radius: 3px;" title="Update Subject"><i class="fa fa-edit"></i> Update</button>
-                                              <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->SubjectID.''); ?>" class="btn btn-outline-danger" style="padding: 2px 6px 2px; border-radius: 3px;" title="Deactivate"><i class="fa fa-trash"></i> Delete</a>
+                                              <button href="#editsubjects" data-toggle="modal" id="editsub" value="<?php echo $row->SubjectID;?>" class="btn btn-sm btn-info" title="Update Subject"><i class="fa fa-edit"></i></button>
+                                              <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->SubjectID.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
                                             </center></td>
                                           </tr>
                                         <?php
@@ -90,8 +90,8 @@
                                             <td><center><?php echo $row->LabUnits; ?></center></td>
                                             <td><center><?php echo $row->SubjectType; ?></center></td>
                                             <td><center>
-                                              <button value="<?php echo $row->SubjectID;?>" data-target="#editsubjects" data-toggle="modal" data-backdrop="static" class="btn btn-outline-info" style="padding: 2px 6px 2px; border-radius: 3px;" title="Update Subject"><i class="fa fa-edit"></i> Update</button>
-                                              <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->SubjectID.''); ?>" class="btn btn-outline-danger" style="padding: 2px 6px 2px; border-radius: 3px;" title="Deactivate"><i class="fa fa-trash"></i> Delete</a>
+                                              <button href="#editsubjects" data-toggle="modal" id="editsub" value="<?php echo $row->SubjectID;?>" class="btn btn-sm btn-info" title="Update Subject"><i class="fa fa-edit"></i></button>
+                                              <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->SubjectID.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
                                             </center></td>
                                           </tr>
                                           <?php 
@@ -134,8 +134,8 @@
                                 </thead>
                                 <tbody>
                                    <?php
-                                    if ($subject!=NULL) {
-                                      foreach ($subject as $row) {
+                                    if ($subjects!=NULL) {
+                                      foreach ($subjects as $row) {
                                         if($row->Status == 'D') {
                                           if($row->SubjectType == 'Lecture') {
                                         ?>
@@ -195,16 +195,16 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <form class="form-horizontal">
-            <div class="modal-header">
-              <h5 class="modal-title" id="scrollmodalLabel">Add Department</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
+                <h5 class="modal-title" id="scrollmodalLabel" style="color:white;">Add Subjects</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-              <div class="form-group">
-                  <div class="alert alert-danger" align="center" style="display: none;"></div>
-              </div>
+                <div class="form-group">
+                    <div class="alert alert-danger" align="center" style="display: none;"></div>
+                </div>
             <div class="row form-group">
               <div class="col-12 col-md-4"><input type="text" id="subcode" name="subcode" placeholder="Subject Code" class="form-control">
               </div>
@@ -225,18 +225,20 @@
               <div class="col-12 col-md-4">
                 <select name="department" id="dep" class="form-control" >
                       <?php
-                          foreach($department as $rows) { ?>
-                          <option value="<?php echo $row->DepartmentCode ?>"><?php echo $rows->DepartmentName ?></option>
+                          foreach($department as $row) { ?>
+                          <option value="<?php echo $row->DepartmentCode ?>"><?php echo $row->DepartmentName ?></option>
                       <?php
                           }
                       ?>
                   </select>
               </div>
+
+
             </div>
           </div> 
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-info" style="border-radius: 3px;" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-outline-info" style="border-radius: 3px;" id="btn_subject" name="submit">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" id="btn_subject" name="submit" class="btn btn-primary">Confirm</button>
             </div>
           </form>
     </div>
@@ -249,51 +251,37 @@
   <div class="modal fade" id="editsubjects" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title"><strong>Edit Subject <?php echo $row->SubjectCode; ?></strong></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        <form action="<?php echo base_url('welcome_admin/editSubject'.$row->SubjectID);?>" method="post" class="form-horizontal" >     
-        <div class="modal-body">
-            <div class="form-group">
-                <div class="alert alert-danger" align="center" style="display: none;"></div>
+          <form class="form-horizontal">
+            <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
+                <h5 class="modal-title" id="scrollmodalLabel" style="color:#fff">Edit Subject</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="row form-group">
-              <div class="col-12 col-md-4"><input type="text" id="upsubcode" name="upsubcode" placeholder="Subject Code" class="form-control">
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="alert alert-danger" align="center" style="display: none;"></div>
+                </div>
+                <div class="row form-group">
+              <div class="col-12 col-md-4"><input type="text" id="subcode" name="subcode" placeholder="Subject Code" class="form-control">
               </div>
-              <div class="col-12 col-md-4"><input type="text" id="upsubname" name="upsubname" placeholder="Subject Name" class="form-control">
+              <div class="col-12 col-md-4"><input type="text" id="subname" name="subname" placeholder="Subject Name" class="form-control">
               </div>
-              <div class="col-12 col-md-4"><input type="text" id="upunits" name="upunits" placeholder="No. of units" class="form-control">
+              <div class="col-12 col-md-4"><input type="text" id="units" name="units" placeholder="No. of units" class="form-control">
               </div>
             </div> 
             <div class="row form-group">
-              <div class="col-12 col-md-4"><input type="contact" id="uphrs" name="uphrs" placeholder="No. of hrs" class="form-control"></div>
-              <div class="col-12 col-md-4">
-                <select name="uptype" id="uptype" class="form-control">
-                  <option value="Laboratory">Laboratory</option>
-                  <option value="Lecture">Lecture</option>
-                </select>
-              </div>
-              <div class="col-12 col-md-4">
-                <select name="updepartment" id="updepartment" class="form-control" >
-                  <?php
-                      foreach($department as $rows) { ?>
-                      <option value="<?php echo $rows->DepartmentCode ?>"><?php echo $rows->DepartmentName ?></option>
-                  <?php
-                      }
-                  ?>
-                </select>
-              </div>
+              <div class="col-12 col-md-4"><input type="contact" id="hrs" name="hrs" placeholder="No. of hrs" class="form-control"></div>
+              <div class="col-12 col-md-4"><input type="contact" id="type" name="type" placeholder="Subject Type" class="form-control"></div>
+              <div class="col-12 col-md-4"><input type="contact" id="dep" name="type" placeholder="Department" class="form-control"></div>
+
             </div>
-        </div> 
-        <div class="modal-footer">
-          <input type="hidden" name="sub_id" id="upid">
-          <button type="button" class="btn btn-outline-info" style="border-radius: 3px;" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-outline-info" style="border-radius: 3px;" id="btnupd_subject" name="submit">Confirm</button>
-        </div>
-      </form>
+          </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" id="btn_subject" name="submit" class="btn btn-primary">Confirm</button>
+            </div>
+          </form>
     </div>
   </div>
 </div>

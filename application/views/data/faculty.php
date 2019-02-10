@@ -1,14 +1,3 @@
-<?php 
-$pos = '';
-$depart = '';
-foreach($position as $row){
-  $pos .= '<option value="'.$row->PositionCode.'">'.$row->PositionName.'</option>';
-  }
-foreach($department as $row2){
-  $depart .= '<option value="'.$row2->DepartmentCode.'">'.$row2->DepartmentName.'</option>';
-  }  
-?> 
-
 <!-- Header-->
   <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -82,8 +71,8 @@ foreach($department as $row2){
                                         <td><center><?php echo $row->Contact; ?></center></td>
                                         <!-- <td><center><?php echo $row->fs; ?></center></td> -->
                                         <td><center>
-                                          <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->ProfID.'');?>" class="btn btn-outline-info" style="padding: 2px 6px 2px; border-radius: 3px;" title="View Profile"><i class="fa fa-eye"></i> View</a>
-                                          <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->ProfID.''); ?>" class="btn btn-outline-danger" style="padding: 2px 6px 2px; border-radius: 3px;" title="Deactivate"><i class="fa fa-trash"></i> Delete</a>
+                                          <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->ProfID.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
+                                          <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->ProfID.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
                                         </center></td>
                                       </tr>
                                     <?php
@@ -136,9 +125,9 @@ foreach($department as $row2){
                                           <td><center><?php echo $row->Contact; ?></center></td>
                                           <!-- <td><center><?php echo $row->fs; ?></center></td> -->
                                           <td><center>
-                                            <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->ProfID.'');?>" class="btn btn-outline-info" style="padding: 2px 6px 2px; border-radius: 3px;" title="View Profile"><i class="fa fa-eye"></i> View</a>
-                                            <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->ProfID.''); ?>" class="btn btn-outline-danger" style="padding: 2px 6px 2px; border-radius: 3px;" title="Deactivate"><i class="fa fa-trash"></i> Delete</a>
-                                        </center></td>
+                                            <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->ProfID.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
+                                            <a href="<?php echo site_url('welcome_admin/activateFaculty/'.$row->ProfID.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
+                                          </center></td>
                                         </tr>
                                       <?php
                                     }
@@ -189,8 +178,8 @@ foreach($department as $row2){
                                         <td><center><?php echo $row->DepartmentName; ?></center></td>
                                         <td><center><?php echo $row->Contact; ?></center></td>
                                         <td><center>
-                                          <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->ProfID.'');?>" class="btn btn-outline-info" style="padding: 2px 6px 2px; border-radius: 3px;" title="View Profile"><i class="fa fa-eye"></i> View</a>
-                                          <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->ProfID.''); ?>" class="btn btn-outline-danger" style="padding: 2px 6px 2px; border-radius: 3px;" title="Deactivate"><i class="fa fa-trash"></i> Delete</a>
+                                          <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->ProfID.'');?>" class="btn btn-sm btn-info" title="View Profile"><i class="fa fa-eye"></i></a>
+                                          <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->ProfID.''); ?>" class="btn btn-sm btn-danger" title="Deactivate"><i class="fa fa-trash"></i></a>
                                         </center></td>
                                       </tr>
                                     <?php
@@ -219,8 +208,8 @@ foreach($department as $row2){
   <div class="modal fade" id="addfaculty" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Add Faculty</h5>
+        <div class="modal-header" style="background-color: #c51e3a; border-color: #c51e3a;">
+          <h5 class="modal-title" style="color:#fff;">Add Faculty</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -241,24 +230,30 @@ foreach($department as $row2){
             <div class="row form-group">
               <div class="col-12 col-md-4"><input type="contact" id="fcontact" name="fcontact" placeholder="Contact No." class="form-control"></div>
               <div class="col-12 col-md-4">
-                  <select name="fposition" id="fposition" class="form-control">
-                    <option value="">Select Position</option>
-                    <?php echo $pos ?>
+                  <select data-placeholder="Subject" name="fposition" id="fposition" class="form-control">
+                      <?php
+                          foreach($position as $row) { ?>
+                          <option value="<?php echo $row->PositionCode ?>"><?php echo $row->PositionName ?></option>
+                      <?php
+                          }
+                      ?>
                   </select>
-
-                  
               </div>
               <div class="col-12 col-md-4">
                   <select name="fdepCode" id="fdepCode" class="form-control" >
-                    <option value="">Select Department</option>
-                    <?php echo $depart ?>
+                      <?php
+                          foreach($department as $row) { ?>
+                          <option value="<?php echo $row->DepartmentCode ?>"><?php echo $row->DepartmentName ?></option>
+                      <?php
+                          }
+                      ?>
                   </select>
               </div>    
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-info" style="border-radius: 3px;" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-outline-info" style="border-radius: 3px;" id="btn_faculty" name="btn_faculty">Confirm</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" id="btn_faculty" name="btn_faculty" class="btn btn-primary">Confirm</button>
           </div>
         </form>
       </div>

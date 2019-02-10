@@ -66,7 +66,7 @@ Main Components
     top: 0;
     left: 0;
     height: 100%;
-    width: 100%;
+    width: 96%;
     padding-top: 50px;
   }
   .cd-schedule .timeline li {
@@ -109,7 +109,6 @@ Main Components
 
 .cd-schedule .events {
   position: relative;
-  z-index: 1;
 }
 
 .cd-schedule .events .events-group {
@@ -185,7 +184,7 @@ Main Components
     width: 100%;
   }
   .cd-schedule .events .events-group {
-    width: 20%;
+    width: 16%;
     float: left;
     border: 1px solid #EAEAEA;
     /* reset style */
@@ -213,7 +212,7 @@ Main Components
     margin-bottom: 0;
   }
   .cd-schedule .events .events-group > ul {
-    height: 950px;
+    height: 700px;
     /* reset style */
     display: block;
     overflow: visible;
@@ -230,7 +229,7 @@ Main Components
   }
   .cd-schedule .events .single-event {
     position: absolute;
-    z-index: 3;
+    /*z-index: 3;*/
     /* top position and height will be set using js */
     width: calc(100% + 2px);
     left: -1px;
@@ -284,13 +283,13 @@ Main Components
 
 @media only screen and (min-width: 800px) {
   .cd-schedule .event-name {
-    font-size: 1rem;
+    font-size: .8-rem;
   }
 }
 
 .cd-schedule .event-date {
   /* they are not included in the the HTML but added using JavScript */
-  font-size: 1rem;
+  font-size: .8rem;
   opacity: .7;
   line-height: 1.2;
   margin-bottom: .2em;
@@ -588,7 +587,7 @@ Main Components
 .cd-schedule .cover-layer {
   /* layer between the content and the modal window */
   position: fixed;
-  z-index: 2;
+  /*z-index: 2;*/
   top: 0;
   left: 0;
   height: 100%;
