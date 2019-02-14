@@ -20,6 +20,10 @@
         lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
     });
 
+    $('#bootstrap-data-table-subject2').DataTable({
+        lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+    });
+
     $('#bootstrap-data-table-room').DataTable({
         lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
     });

@@ -6,10 +6,11 @@ class Admin_model extends CI_Model{
 
 // VIEW MODEL
 
+
 	public function view_faculty(){
 		$query = $this->db->query("
 			SELECT f.ProfID, f.Firstname, f.Middlename, f.Lastname, p.PositionName, f.Contact, d.DepartmentName, f.Status fs,
-			d.Status ds
+			d.Status ds, f.DepartmentCode as dc
 			FROM faculty as f
 			LEFT JOIN department as d ON f.DepartmentCode = d.DepartmentCode
 			LEFT JOIN position as p ON f.PositionCode = p.PositionCode
@@ -37,7 +38,7 @@ class Admin_model extends CI_Model{
 
 	public function view_faculty_info($id){
 		$query = $this->db->query("
-			SELECT f.ProfID, p.PositionName, f.Contact, d.DepartmentName, d.DepartmentCode, f.PreferredTime, p.PositionCode
+			SELECT f.ProfID, p.PositionName, f.Contact, d.DepartmentName, d.DepartmentCode, p.PositionCode
 			FROM faculty as f
 			INNER JOIN department as d ON f.DepartmentCode = d.DepartmentCode
 			INNER JOIN position as p ON f.PositionCode = p.PositionCode
@@ -52,7 +53,7 @@ class Admin_model extends CI_Model{
 
 	public function view_faculty_info2($id){
 		$query = $this->db->query("
-			SELECT DISTINCT s.SubjectName, s.Status, sl.SubjectLID
+			SELECT DISTINCT s.SubjectName, s.Status as ss, sl.SubjectLID, s.SubjectDeptCode as sdept
 			FROM faculty as f
 			LEFT JOIN subject_list as sl ON f.ProfID = sl.ProfID
 			LEFT JOIN subject as s ON sl.SubjectCode = s.SubjectCode
@@ -67,11 +68,13 @@ class Admin_model extends CI_Model{
 
 	public function view_faculty_info3($id){
 		$query = $this->db->query("
-			SELECT DISTINCT tl.TimeLID, t.Time, f.Status
+			SELECT DISTINCT tl.TimeLID, t.Time, f.Status, tl.Days
 			FROM faculty as f
 		 	LEFT JOIN time_list as tl ON f.ProfID = tl.ProfID
 		 	LEFT JOIN timee as t ON tl.Time = t.Time
 			WHERE f.ProfID = '$id'
+		 	ORDER BY tl.Days
+
 			");
 		if ($query->num_rows() > 0){
 			return $query->result();
@@ -108,7 +111,7 @@ class Admin_model extends CI_Model{
 
 	public function view_subjects(){
 		$query = $this->db->query("
-			SELECT *
+			SELECT *, s.Status as ss
 			FROM subject as s
 			LEFT JOIN department as d ON s.SubjectDeptCode = d.DepartmentCode
 			");
@@ -119,7 +122,7 @@ class Admin_model extends CI_Model{
 		}
 	}
 
-	public function view_faculty_subjects(){
+	public function view_faculty_subjects($id){
 		$query = $this->db->query("
 			SELECT DISTINCT *
 			FROM subject as s
@@ -127,7 +130,7 @@ class Admin_model extends CI_Model{
 			WHERE NOT EXISTS(
 				SELECT * FROM subject_list AS sl 
 				LEFT JOIN faculty as f ON sl.ProfID = f.ProfID
-    			WHERE sl.SubjectCode = s.SubjectCode AND sl.ProfID = f.ProfID
+    			WHERE sl.SubjectCode = s.SubjectCode AND sl.ProfID = '$id'
 			)
 			");
 		if ($query->num_rows() > 0){
@@ -137,14 +140,14 @@ class Admin_model extends CI_Model{
 		}
 	}
 
-	public function view_faculty_time(){
+	public function view_faculty_time($id){
 		$query = $this->db->query("
 			SELECT DISTINCT t.Time
 			FROM timee as t
 			WHERE NOT EXISTS(
 				SELECT * FROM time_list AS tl 
 				LEFT JOIN faculty as f ON tl.ProfID = f.ProfID
-    			WHERE tl.time = t.time AND tl.ProfID = f.ProfID
+    			WHERE tl.time = t.time AND tl.ProfID = '$id'
 			)
 			");
 		if ($query->num_rows() > 0){
@@ -153,6 +156,26 @@ class Admin_model extends CI_Model{
 			return NULL;
 		}
 	}
+	
+	public function view_faculty_time2($shift){
+		// $query = $this->db->get_where('timee', array('Shift' => $shift));
+		$query = $this->db->query("
+			SELECT DISTINCT t.Time
+			FROM timee as t
+			WHERE NOT EXISTS(
+				SELECT * FROM time_list AS tl 
+				INNER JOIN faculty as f ON tl.ProfID = f.ProfID
+			WHERE tl.Time = T.time AND tl.ProfID <> f.ProfID OR t.Shift <> '$shift'
+			GROUP BY tl.Days
+			)
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
 
 	public function view_faculty_day(){
 		$query = $this->db->query("
@@ -166,10 +189,11 @@ class Admin_model extends CI_Model{
 		}
 	}
 
-	public function view_faculty_shift(){
+	public function view_faculty_shift($day){
 		$query = $this->db->query("
 			SELECT DISTINCT t.Shift
 			FROM timee as t
+			WHERE t.Day = '$day'
 			");
 		if ($query->num_rows() > 0){
 			return $query->result();
@@ -223,6 +247,18 @@ class Admin_model extends CI_Model{
 		$query = $this->db->query("
 			SELECT *
 			FROM position
+			");
+		if ($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return NULL;
+		}
+	}
+
+	public function view_policy(){
+		$query = $this->db->query("
+			SELECT *
+			FROM policy
 			");
 		if ($query->num_rows() > 0){
 			return $query->result();
@@ -351,7 +387,6 @@ class Admin_model extends CI_Model{
 		$type = $this->input->post('type');
 		$dep = $this->input->post('dept');
 		$sub_id = $this->input->post('sid');
-		print_r($dep);
 
 		if($this->input->post('type') == "Lecture"){
 			$this->db->set('SubjectCode', $code);
@@ -516,6 +551,22 @@ class Admin_model extends CI_Model{
 		$query = $this->db->query("
 			SELECT COUNT(RoomID) AS room_id
 			FROM room
+			");
+		return $query->result();
+	}
+
+	public function section_count(){
+		$query = $this->db->query("
+			SELECT COUNT(SectionID) AS section_id
+			FROM section
+			");
+		return $query->result();
+	}
+
+	public function course_count(){
+		$query = $this->db->query("
+			SELECT COUNT(CourseID) AS course_id
+			FROM course
 			");
 		return $query->result();
 	}

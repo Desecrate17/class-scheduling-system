@@ -47,7 +47,6 @@
 
           //MULTIPLE SELECT
           $('#selectmenu').lwMultiSelect();
-          $('#selectmenu2').lwMultiSelect();
 
         });
     </script>
@@ -55,6 +54,7 @@
     jQuery(document).ready(function($) {
           
     // FACULTY //
+
           $('#btn_faculty_sub').on('click', function(){
               var sub_list = $('[name="sub_list[]"]').val();
               var fid = $('#profid').val();
@@ -76,6 +76,67 @@
                 }
             });
           });
+
+
+          $('#day').on('change', function(){
+            var day = $(this).val();
+            if(day == ''){
+              // $('#shift').attr('disabled', true);
+              $('#time').data('plugin_lwMultiSelect').updateList();    
+              $('#time').data('plugin_lwMultiSelect').removeAll();    
+              $('#timezone')[0].reset();
+
+
+            }
+            else{
+              $('#shift').attr('disabled', false);
+              $.ajax({
+                url: "<?php echo site_url('welcome_admin/facushift'); ?>",
+                type: "POST",
+                data: {'day':day},
+                dataType: 'html',
+
+                success: function(data){
+                  $('#shift').html(data);
+                  
+                },
+                error: function(){
+                  alert('Error');
+                }
+              });
+            }
+          });
+
+
+          $('#time').lwMultiSelect();
+          $('#shift').on('change', function(){
+            var day = $('#day').val();
+            var shift = $(this).val();
+            if(day == '' || shift == ''){
+              $('#time').data('plugin_lwMultiSelect').updateList();    
+              $('#time').data('plugin_lwMultiSelect').removeAll();    
+              $('#timezone')[0].reset();
+            }
+            else{
+              $('#time').attr('disabled', false);
+              $.ajax({
+                url: "<?php echo site_url('welcome_admin/facutime'); ?>",
+                type: "POST",
+                data: {'shift':shift},
+                dataType: 'html',
+
+                success: function(data){
+                  $('#time').html(data);
+                  $('#time').data('plugin_lwMultiSelect').updateList();
+
+                },
+                error: function(){
+                  alert('Error');
+                }
+              });
+            }
+          });
+
 
           $('#btn_faculty_time').on('click', function(){
               var day = $('#day').val();
@@ -114,10 +175,11 @@
                 error: function(){
                   alert('ERROR!');
                 }
-            });
-          }});
+            });}
+          });
 
-          $('#btn_faculty').on('click', function(){
+
+     $('#btn_faculty').on('click', function(){
               var ffname = $('#ffname').val();
               var fmname = $('#fmname').val();
               var flname = $('#flname').val();
@@ -320,7 +382,7 @@
               var hrs = $('#uphrs').val();
               var type = $('#uptype').val();
               var dep = $('#updepartment').val();
-              var id = $('#sub_id').val();
+              var id = $('#upid').val();
               $.ajax({
                   type: 'post',
                   url: "<?php echo site_url('welcome_admin/editSubject'); ?>",
@@ -364,9 +426,14 @@
                         $('#editsubjects input[name="upsubcode"]').val(result.subject[0].SubjectCode);
                         $('#editsubjects input[name="upsubname"]').val(result.subject[0].SubjectName);
 
-                        $('#editsubjects input[name="upunits"]').val(result.subject[0].LecUnits);
-                        $('#editsubjects input[name="uphrs"]').val(result.subject[0].LecHours);
-                          
+                        if(result.subject[0].SubjectType == "Lecture" ){
+                          $('#editsubjects input[name="upunits"]').val(result.subject[0].LecUnits);
+                          $('#editsubjects input[name="uphrs"]').val(result.subject[0].LecHours);
+                        }
+                        else{
+                          $('#editsubjects input[name="upunits"]').val(result.subject[0].LabUnits);
+                          $('#editsubjects input[name="uphrs"]').val(result.subject[0].LabHours); 
+                        }
                         $('#editsubjects select[name="uptype"]').val(result.subject[0].SubjectType);
                         $('#editsubjects select[name="updepartment"]').val(result.subject[0].SubjectDeptCode);
                         $('#editsubjects input[name="sub_id"]').val(result.subject[0].SubjectID);

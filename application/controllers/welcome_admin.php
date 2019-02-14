@@ -23,7 +23,9 @@ class welcome_admin extends CI_Controller {
 			'subjects' => $this->Admin_model->subjects_count(),
 			'subjects_on' => $this->Admin_model->subjects_count2(),
 			'subjects_off' => $this->Admin_model->subjects_count3(),
-			'rooms' => $this->Admin_model->rooms_count()
+			'rooms' => $this->Admin_model->rooms_count(),
+			'sections' => $this->Admin_model->section_count(),
+			'courses' => $this->Admin_model->course_count()
 		);
 		$this->load->view('adminDashboards/admin', $data);
 		$this->load->view('template/footer');
@@ -37,14 +39,6 @@ class welcome_admin extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
-	public function factime(){
-		$time['time'] = $this->input->post('time_list');
-		foreach($time['time'] as $timeid){
-			$data = $this->Admin_model->factime($timeid);
-		}
-		echo json_encode($data);
-	}
-
 
 	public function faculty(){
 		$data['data'] = $this->Admin_model->view_faculty();
@@ -62,14 +56,41 @@ class welcome_admin extends CI_Controller {
 		$data['info2'] =$this->Admin_model->view_faculty_info2($id);
 		$data['info3'] =$this->Admin_model->view_faculty_info3($id);
 		$data['department'] = $this->Admin_model->view_department();
-		$data['subjects'] = $this->Admin_model->view_faculty_subjects();
+
+		$data['subjects'] = $this->Admin_model->view_faculty_subjects($id);
+		
 		$data['position'] = $this->Admin_model->view_position();
 		$data['day'] = $this->Admin_model->view_faculty_day();
-		$data['shift'] = $this->Admin_model->view_faculty_shift();
-		$data['time'] = $this->Admin_model->view_faculty_time();
+		$data['time'] = $this->Admin_model->view_faculty_time($id);
 		$this->load->view('template/header');
 		$this->load->view('adminDashboards/viewFaculty',$data);
 		$this->load->view('template/footer');
+	}
+	public function facushift(){
+		$day = $this->input->post('day');
+		$result = $this->Admin_model->view_faculty_shift($day);
+		if(count($result)>0){
+			$data = '';
+			$data .= '<option value="">Select Shift</option>';
+			foreach($result as $rows ){
+				$data .= '<option value="'.$rows->Shift.'">'.$rows->Shift.'</option>';
+			}
+			echo $data;
+		}
+
+	}
+
+	public function facutime($id){
+		$shift = $this->input->post('shift');
+		$result = $this->Admin_model->view_faculty_time2($shift);
+		if(count($result)>0){
+			$data = '';
+			foreach($result as $rows ){
+				$data .= '<option value="'.$rows->Time.'">'.$rows->Time.'</option>';
+			}
+			echo $data;
+		}
+
 	}
 
 	public function addFaculty(){
@@ -321,6 +342,24 @@ class welcome_admin extends CI_Controller {
  
         echo json_encode(['success'=>"Item Deleted successfully."]);
     }
+    //TIME
+
+    public function timetime(){
+    	if(isset($_POST['day'])){
+    		$output = '';
+    		if($_POST["action"] == 'shift'){
+				$query = $this->Admin_model->view_faculty_shift();
+    		}
+    	}
+    }
+
+    public function factime(){
+		$time['time'] = $this->input->post('time_list');
+		foreach($time['time'] as $timeid){
+			$data = $this->Admin_model->factime($timeid);
+		}
+		echo json_encode($data);
+	}
 
     public function delete_time()
     {
@@ -331,28 +370,22 @@ class welcome_admin extends CI_Controller {
  
         echo json_encode(['success'=>"Item Deleted successfully."]);
     }
-	//ROOMS//
-	// public function fitnesscalc{
-	// 	public static  $solution =  array();
-	//     static function setSolution($newSolution) {
-	//     	 fitnesscalc::$solution=str_split($newSolution);
-	//     	}
-	// 		static function  getFitness($individual) {
-	// 	        $fitness = 0;
-	// 		    $sol_count=count(fitnesscalc::$solution);  /* get array size */
-	// 	        for ($i=0; $i < $individual->size() && $i < $sol_count; $i++ )
-	// 			{
-	// 				$char_diff=0;
-	// 				//compare genes and note the difference using ASCII value vs. solution Ascii value note the difference
-	// 	            $char_diff=abs( ord($individual->getGene($i)) - ord(fitnesscalc::$solution[$i]) ) ; 
-	// 				//$char_fitness=($individual->getGene($i)==fitnesscalc::$solution[$i])?1:0; //if exact match add 1 to fitness 
-	// 					$fitness+=$char_diff; // low fitness values are better,
-	// 	        }
-	// 			return $fitness; 
-	// 		}
-	// 	    static function getMaxFitness() {
-	// 	        $maxFitness = 0; 
-	// 	        return $maxFitness;
-	// 	    }
-	// }
+	
+	//POLICY
+    public function policy(){
+		$data['data'] = $this->Admin_model->view_policy();
+		$this->load->view('template/header');
+		$this->load->view('policy',$data);
+		$this->load->view('template/footer');
+    }
+
+
+    public function update_policy(){
+		$response = array();
+		$data = $this->Admin_model->update_policy();
+		$response['status'] = TRUE;
+		$response[] = $data;
+		echo json_encode($response);
+    }
+	
 }

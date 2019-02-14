@@ -73,9 +73,11 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Schedule</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-eye"></i><a href="<?php echo site_url('welcome_admin/view_sched');?>">View</a></li>
-                           
+                            <li><i class="fa fa-eye"></i><a href="<?php echo site_url('welcome_admin/view_sched');?>">View</a></li>   
                         </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="<?php echo site_url('welcome_admin/policy');?>" class="dropdown-toggle"> <i class="menu-icon fa fa-file"></i>Policy</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

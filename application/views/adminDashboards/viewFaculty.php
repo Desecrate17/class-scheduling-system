@@ -1,12 +1,17 @@
 <?php 
+$sub = '';  
 $dayz = '';
-$shifts = '';
 foreach($day as $row){
   $dayz .= '<option value="'.$row->Day.'">'.$row->Day.'</option>';
   }
-foreach($shift as $row){
-  $shifts .= '<option value="'.$row->Shift.'">'.$row->Shift.'</option>';
-  }
+foreach($info as $row2) {
+foreach($subjects as $row) {
+  if($row->Status == 'A') {
+  if($row->SubjectDeptCode == $row2->DepartmentCode) { 
+    $sub .= '<option value="'.$row->SubjectCode.'">'.$row->SubjectName.'</option>';    
+  }}
+}}
+
 ?> 
 
   <div class="breadcrumbs">
@@ -70,8 +75,8 @@ foreach($shift as $row){
 
             <h6>Department:</h6>
               <div class="card-body">
-                  <div class="mx-auto d-block">
-                    <p><?php echo $row->DepartmentName; ?></p>
+                  <div class="mx-auto d-block" style="color: grey;">
+                    <p><h3><?php echo $row->DepartmentName; ?> DEPARTMENT</h3></p>
                   </div>
               </div>
             <hr>
@@ -80,13 +85,13 @@ foreach($shift as $row){
                 <div class="mx-auto d-block">
                     <?php 
                       foreach ($info3 as $row) { ?>
-                         <p><input type="checkbox" class="del_time" data-id="<?php echo $row->TimeLID; ?>"><?php echo $row->Time; ?></p>
+                         <p><input type="checkbox" class="del_time" data-id="<?php echo $row->TimeLID; ?>"> <?php echo $row->Days; ?> <?php echo $row->Time; ?></p>
                        <?php
                       } 
                     ?>
                 </div>
                 <div class="card-footer" style="border-color:transparent; background-color: transparent;">
-                  <input type="checkbox" id="master2">Select All
+                  <input type="checkbox" id="master2"> Select All
                 </div>
               </div>
             <hr>
@@ -95,12 +100,14 @@ foreach($shift as $row){
             <h6>Preferred Subjects:</h6>
               <div class="card-body">
                 <div class="mx-auto d-block">
-                    <?php foreach ($info2 as $row) { if($row->Status == 'A') { ?>
-                         <p><input type="checkbox" class="del_subj" data-id="<?php echo $row->SubjectLID; ?>"><?php echo $row->SubjectName; ?></p>
-                       <?php } } ?>
+                  <?php foreach ($info as $row2) { ?>
+                    <?php foreach ($info2 as $row) { if($row->ss == 'A') { if($row->sdept == $row2->DepartmentCode) { ?>
+                         <p><input type="checkbox" class="del_subj" data-id="<?php echo $row->SubjectLID; ?>"> <?php echo $row->SubjectName; ?></p>
+                       <?php } } } } ?>
+                  
                 </div>
                 <div class="card-footer" style="border-color:transparent; background-color: transparent;">
-                  <input type="checkbox" id="master">Select All
+                  <input type="checkbox" id="master"> Select All
                 </div>
               </div>
           </div>
@@ -156,10 +163,10 @@ foreach($shift as $row){
                   <select name="fdepCodes" id="fdepCode_upd" class="form-control" >
                       <option value="<?php echo $info[0]->DepartmentCode;?>"><?php echo $info[0]->DepartmentName;?></option>
                       <?php
-                          foreach($department as $row) { ?>
+                          foreach($department as $row) { if($row->Status == 'A'){ ?>
                           <option value="<?php echo $row->DepartmentCode ?>"><?php echo $row->DepartmentName ?></option>
                       <?php
-                          }
+                          }}
                       ?>
                   </select>
               </div>    
@@ -194,15 +201,7 @@ foreach($shift as $row){
             <div class="row form-group">    
               <div class="col-12 col-md-4">
                   <select name="sub_list[]" id="selectmenu" multiple>
-                      <?php
-                          foreach($subjects as $row) {
-                            if($row->Status == 'A') { 
-                              ?>
-                                <option value="<?php echo $row->SubjectCode ?>"><?php echo $row->SubjectName ?></option>
-                              <?php
-                            }
-                          }
-                      ?>
+                    <?php echo $sub ?>
                   </select>
               </div>    
             </div>
@@ -217,7 +216,7 @@ foreach($shift as $row){
     </div>
   </div>
 
-  <div class="modal fade" id="infotime" tabindex="-1" role="dialog">
+  <div class="modal fade" id="infotime" tabindex="-1" role="dialog" value="<?php echo $data[0]->ProfID;?>">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -226,14 +225,14 @@ foreach($shift as $row){
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form class="form-horizontal" >
+        <form class="form-horizontal" id="timezone">
           <div class="modal-body">
             <div class="form-group">
               <div class="alert alert-danger" align="center" style="display: none;"></div>
             </div>
             <div class="row form-group">
               <div class="col-12 col-md-4">
-                  <select name="day" id="day" class="form-control action" >
+                  <select name="day" id="day" class="form-control">
                     <option value="">Select Day</option>
                     <?php echo $dayz ?>
                   </select>
@@ -241,22 +240,16 @@ foreach($shift as $row){
             </div> 
             <div class="row form-group">
               <div class="col-12 col-md-4">
-                  <select name="shift" id="shift" class="form-control action" >
+                  <select name="shift" id="shift" class="form-control">
                     <option value="">Select Shift</option>
-                    <?php echo $shifts ?>
+                     <!-- <?php echo $shifts ?> -->
                   </select>
               </div>
             </div>  
             <div class="row form-group">    
               <div class="col-12 col-md-4">
-                  <select name="time_list[]" id="selectmenu2" multiple>
-                      <?php
-                          foreach($time as $row) {
-                            ?>
-                              <option value="<?php echo $row->Time ?>"><?php echo $row->Time ?></option>
-                            <?php
-                          }
-                      ?>
+                  <select name="time_list[]" id="time" multiple>
+                     <!-- <?php echo $timez ?>     -->
                   </select>
               </div>    
             </div>
@@ -270,4 +263,4 @@ foreach($shift as $row){
       </div>
     </div>
   </div>
-       
+  

@@ -180,7 +180,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"><strong>Edit <?php echo $row->DepartmentName; ?> Department</strong></h5>
+          <h5 class="modal-title"><strong>Edit Department</strong></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -197,7 +197,7 @@
               </div>  
               <div class="col-12 col-md-6">
                 <label class="col-md-12"><h6>Department Code</h6></label> 
-                <input type="text" id="ddepcode_upd" name="ddepcode_upd" placeholder="Department Code" class="form-control">
+                <input type="text" id="ddepcode_upd" name="ddepcode_upd" placeholder="Department Code" class="form-control" disabled>
               </div>         
             </div>
           </div>

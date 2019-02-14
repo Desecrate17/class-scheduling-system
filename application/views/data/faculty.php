@@ -4,9 +4,9 @@ $depart = '';
 foreach($position as $row){
   $pos .= '<option value="'.$row->PositionCode.'">'.$row->PositionName.'</option>';
   }
-foreach($department as $row2){
+foreach($department as $row2){ if($row2->Status == 'A' ) {
   $depart .= '<option value="'.$row2->DepartmentCode.'">'.$row2->DepartmentName.'</option>';
-  }  
+  } }
 ?> 
 
 <!-- Header-->
@@ -137,7 +137,7 @@ foreach($department as $row2){
                                           <!-- <td><center><?php echo $row->fs; ?></center></td> -->
                                           <td><center>
                                             <a href="<?php echo site_url('welcome_admin/viewFaculty/'.$row->ProfID.'');?>" class="btn btn-outline-info" style="padding: 2px 6px 2px; border-radius: 3px;" title="View Profile"><i class="fa fa-eye"></i> View</a>
-                                            <a href="<?php echo site_url('welcome_admin/deleteFaculty/'.$row->ProfID.''); ?>" class="btn btn-outline-danger" style="padding: 2px 6px 2px; border-radius: 3px;" title="Deactivate"><i class="fa fa-trash"></i> Delete</a>
+                                            <a href="<?php echo site_url('welcome_admin/activateFaculty/'.$row->ProfID.''); ?>" class="btn btn-outline-success" style="padding: 2px 6px 2px; border-radius: 3px;" title="Activate"><i class="fa fa-recycle"></i> Activate</a>
                                         </center></td>
                                         </tr>
                                       <?php

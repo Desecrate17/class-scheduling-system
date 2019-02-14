@@ -1,3 +1,16 @@
+<?php 
+$type ='';
+$depart ='';
+  $type .= '<option value="Laboratory">Laboratory</option>
+                  <option value="Lecture">Lecture</option>';
+
+foreach($department as $row2){ if($row2->Status == "A"){
+  $depart .= '<option value="'.$row2->DepartmentCode.'">'.$row2->DepartmentName.'</option>';
+  }
+}
+
+?>
+
 <!-- Header-->
   <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -31,6 +44,7 @@
                   <a class="nav-item nav-link fa fa-plus" id="nav-home-tab" data-toggle="modal" href="#addsubjects" role="tab" aria-controls="nav-home" aria-selected="true"></a>
                   <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#active" role="tab" aria-controls="nav-profile" aria-selected="false">Active</a>
                   <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#inactive" role="tab" aria-controls="nav-contact" aria-selected="false">Inactive</a>
+                  <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#unassigned" role="tab" aria-controls="nav-contact" aria-selected="false">Unassigned</a>
                 </div>
               </nav>
                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -63,8 +77,9 @@
                                     if ($subject!=NULL) {
                                       foreach ($subject as $row) {
                                         if($row->Status == 'A') {
+                                          if($row->ss == 'A') {
                                           if($row->SubjectType == 'Lecture') {
-                                        ?>
+                                          ?>
                                           <tr>
                                             <td><center><?php echo $row->SubjectID; ?></center></td>
                                             <td><center><?php echo $row->SubjectCode; ?></center></td>
@@ -97,7 +112,7 @@
                                           <?php 
                                         }
                                       }
-                                    }
+                                    }}
                                   }
                                   ?>
                                 </tbody>
@@ -136,7 +151,7 @@
                                    <?php
                                     if ($subject!=NULL) {
                                       foreach ($subject as $row) {
-                                        if($row->Status == 'D') {
+                                          if($row->ss == 'D') {
                                           if($row->SubjectType == 'Lecture') {
                                         ?>
                                           <tr>
@@ -148,7 +163,7 @@
                                             <td><center><?php echo $row->LecUnits; ?></center></td>
                                             <td><center><?php echo $row->SubjectType; ?></center></td>
                                             <td><center>
-                                              <a href="<?php echo site_url('welcome_admin/activateSubject/'.$row->SubjectID.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
+                                              <a href="<?php echo site_url('welcome_admin/activateSubject/'.$row->SubjectID.''); ?>" class="btn btn-outline-success" style="padding: 2px 6px 2px; border-radius: 3px;" title="Activate"><i class="fa fa-recycle"></i> Activate</a>
                                             </center></td>
                                           </tr>
                                         <?php
@@ -164,7 +179,7 @@
                                             <td><center><?php echo $row->LabUnits; ?></center></td>
                                             <td><center><?php echo $row->SubjectType; ?></center></td>
                                             <td><center>
-                                              <a href="<?php echo site_url('welcome_admin/activateSubject/'.$row->SubjectID.''); ?>" class="btn btn-sm btn-success" title="Activate"><i class="fa fa-recycle"></i></a>
+                                              <a href="<?php echo site_url('welcome_admin/activateSubject/'.$row->SubjectID.''); ?>" class="btn btn-outline-success" style="padding: 2px 6px 2px; border-radius: 3px;" title="Activate"><i class="fa fa-recycle"></i> Activate</a>
                                             </center></td>
                                           </tr>
                                           <?php 
@@ -181,6 +196,82 @@
                       <!--TABLE++++++++++++++++++++++++++++++++++++++++++-->
                     </div>
                   </div>
+
+                  <!--UNASSIGNED -->
+                  <div class="tab-pane fade" id="unassigned" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="row">
+                      <!--TABLE+++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+                        <div class="col-md-12">
+                          <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Data Table</strong>
+                            </div>
+                            <div class="card-body">
+                              <table id="bootstrap-data-table-subject2" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                  <tr>
+                                    <th>ID</th>
+                                    <th>Subject</th>
+                                    <th>Descriptive Title</th>
+                                    <th>Department</th>
+                                    <th>Hours</th>
+                                    <th>Units</th>
+                                    <th>Type</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                   <?php
+                                    if ($subject!=NULL) {
+                                      foreach ($subject as $row) {
+                                        if($row->Status == 'D') {
+                                          if($row->ss == 'A') {
+                                          if($row->SubjectType == 'Lecture') {
+                                          ?>
+                                          <tr>
+                                            <td><center><?php echo $row->SubjectID; ?></center></td>
+                                            <td><center><?php echo $row->SubjectCode; ?></center></td>
+                                            <td><center><?php echo $row->SubjectName; ?></center></td>
+                                            <td><center><?php echo $row->DepartmentName; ?></center></td>
+                                            <td><center><?php echo $row->LecHours; ?></center></td>
+                                            <td><center><?php echo $row->LecUnits; ?></center></td>
+                                            <td><center><?php echo $row->SubjectType; ?></center></td>
+                                            <td><center>
+                                              <button value="<?php echo $row->SubjectID; ?>" data-target="#editsubjects" data-toggle="modal" data-backdrop="static" class="btn btn-outline-info" style="padding: 2px 6px 2px; border-radius: 3px;" title="Update Subject"><i class="fa fa-edit"></i> Update</button>
+                                              <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->SubjectID.''); ?>" class="btn btn-outline-danger" style="padding: 2px 6px 2px; border-radius: 3px;" title="Deactivate"><i class="fa fa-trash"></i> Delete</a>
+                                            </center></td>
+                                          </tr>
+                                        <?php
+                                        }
+                                        else{ ?>
+                                          <tr>
+                                            <td><center><?php echo $row->SubjectID; ?></center></td>
+                                            <td><center><?php echo $row->SubjectCode; ?></center></td>
+                                            <td><center><?php echo $row->SubjectName; ?></center></td>
+                                            <td><center><?php echo $row->DepartmentName; ?></center></td>
+                                            <td><center><?php echo $row->LabHours; ?></center></td>
+                                            <td><center><?php echo $row->LabUnits; ?></center></td>
+                                            <td><center><?php echo $row->SubjectType; ?></center></td>
+                                            <td><center>
+                                              <button value="<?php echo $row->SubjectID;?>" data-target="#editsubjects" data-toggle="modal" data-backdrop="static" class="btn btn-outline-info" style="padding: 2px 6px 2px; border-radius: 3px;" title="Update Subject"><i class="fa fa-edit"></i> Update</button>
+                                              <a href="<?php echo site_url('welcome_admin/deleteSubject/'.$row->SubjectID.''); ?>" class="btn btn-outline-danger" style="padding: 2px 6px 2px; border-radius: 3px;" title="Deactivate"><i class="fa fa-trash"></i> Delete</a>
+                                            </center></td>
+                                          </tr>
+                                          <?php 
+                                        }
+                                      }
+                                    }}
+                                  }
+                                  ?>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      <!--TABLE++++++++++++++++++++++++++++++++++++++++++-->
+                    </div>
+                  </div>
+
                 </div>
             </div>
           </div>
@@ -217,20 +308,16 @@
               <div class="col-12 col-md-4"><input type="contact" id="hrs" name="hrs" placeholder="No. of hrs" class="form-control"></div>
               <div class="col-12 col-md-4">
                 <select name="type" id="type" class="form-control">
-                  <option value="Laboratory">Laboratory</option>
-                  <option value="Lecture">Lecture</option>
+                  <option value="">Select Type</option>
+                  <?php echo $type ?>
                 </select>
               </div>
 
               <div class="col-12 col-md-4">
                 <select name="department" id="dep" class="form-control" >
-                      <?php
-                          foreach($department as $rows) { ?>
-                          <option value="<?php echo $row->DepartmentCode ?>"><?php echo $rows->DepartmentName ?></option>
-                      <?php
-                          }
-                      ?>
-                  </select>
+                  <option value="">Select Department</option>
+                  <?php echo $depart ?>
+                </select>
               </div>
             </div>
           </div> 
@@ -250,7 +337,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title"><strong>Edit Subject <?php echo $row->SubjectCode; ?></strong></h5>
+            <h5 class="modal-title"><strong>Edit Subject</strong></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -261,29 +348,35 @@
                 <div class="alert alert-danger" align="center" style="display: none;"></div>
             </div>
             <div class="row form-group">
-              <div class="col-12 col-md-4"><input type="text" id="upsubcode" name="upsubcode" placeholder="Subject Code" class="form-control">
+              <div class="col-12 col-md-4">
+                <label class="col-md-12"><h6>Subject Code</h6></label>
+                <input type="text" id="upsubcode" name="upsubcode" placeholder="Subject Code" class="form-control" disabled>
               </div>
-              <div class="col-12 col-md-4"><input type="text" id="upsubname" name="upsubname" placeholder="Subject Name" class="form-control">
+              <div class="col-12 col-md-4">
+                <label class="col-md-12"><h6>Subject Name</h6></label>
+                <input type="text" id="upsubname" name="upsubname" placeholder="Subject Name" class="form-control">
               </div>
-              <div class="col-12 col-md-4"><input type="text" id="upunits" name="upunits" placeholder="No. of units" class="form-control">
+              <div class="col-12 col-md-4">
+                <label class="col-md-12"><h6>No. of units</h6></label>
+                <input type="text" id="upunits" name="upunits" placeholder="No. of units" class="form-control">
               </div>
             </div> 
             <div class="row form-group">
-              <div class="col-12 col-md-4"><input type="contact" id="uphrs" name="uphrs" placeholder="No. of hrs" class="form-control"></div>
               <div class="col-12 col-md-4">
+                <label class="col-md-12"><h6>No. of hours</h6></label>
+                <input type="contact" id="uphrs" name="uphrs" placeholder="No. of hrs" class="form-control"></div>
+              <div class="col-12 col-md-4">
+                <label class="col-md-12"><h6>Subject Type</h6></label>
+
                 <select name="uptype" id="uptype" class="form-control">
-                  <option value="Laboratory">Laboratory</option>
-                  <option value="Lecture">Lecture</option>
+                  <?php echo $type ?>
                 </select>
               </div>
               <div class="col-12 col-md-4">
+                <label class="col-md-12"><h6>Department Name</h6></label>
+
                 <select name="updepartment" id="updepartment" class="form-control" >
-                  <?php
-                      foreach($department as $rows) { ?>
-                      <option value="<?php echo $rows->DepartmentCode ?>"><?php echo $rows->DepartmentName ?></option>
-                  <?php
-                      }
-                  ?>
+                  <?php echo $depart ?>
                 </select>
               </div>
             </div>
