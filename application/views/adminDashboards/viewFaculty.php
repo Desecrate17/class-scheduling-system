@@ -116,7 +116,7 @@ foreach($subjects as $row) {
         <button type="button" class="btn btn-outline-danger delete_all"><i class="fa fa-trash"></i> Delete Subjects</button>
         <button type="button" class="btn btn-outline-danger delete_all2"><i class="fa fa-trash"></i> Delete Time</button>
         <button type="button" class="btn btn-outline-danger" data-target="#infosub" data-toggle="modal" data-backdrop="static" title="Add Subject"><i class="fa fa-plus-circle"></i> Add Subject</button>
-        <button type="button" class="btn btn-outline-danger" data-target="#infotime" data-toggle="modal" data-backdrop="static" title="Add Subject"><i class="fa fa-plus-circle"></i> Add Time</button>
+        <button type="button" class="btn btn-outline-danger" data-target="#infotime" data-toggle="modal" data-backdrop="static" title="Add Time"><i class="fa fa-plus-circle"></i> Add Time</button>
       </div>
     </div>
     </div>
@@ -232,6 +232,8 @@ foreach($subjects as $row) {
             </div>
             <div class="row form-group">
               <div class="col-12 col-md-4">
+            <input type="hidden" name="prof_id" id="profid" value="<?php echo $data[0]->ProfID;?>">
+                
                   <select name="day" id="day" class="form-control">
                     <option value="">Select Day</option>
                     <?php echo $dayz ?>
@@ -255,7 +257,6 @@ foreach($subjects as $row) {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="hidden" name="prof_id" id="profid" value="<?php echo $data[0]->ProfID;?>">
             <button type="button" class="btn btn-outline-info" style="border-radius: 3px;" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-outline-info" style="border-radius: 3px;" id="btn_faculty_time" name="btn_faculty">Confirm</button>
           </div>

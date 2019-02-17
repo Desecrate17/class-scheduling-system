@@ -3,7 +3,7 @@ $policy = '';
 foreach($data as $row){
   $policy .= '<div class="col-12 col-md-4">'.
   '<label class="form-control-label col-12">'.$row->policyName.
-  '<input name="'.$row->id.'" class="form-control" id="'.$row->policyName.'" value="'.$row->policyValue.'" >'.'</div>';  
+  '<input name="'.$row->id.'" class="form-control" id="'.$row->id.'" value="'.$row->policyValue.'">'.'</div>';  
   }
 
 ?>
@@ -29,49 +29,16 @@ foreach($data as $row){
   </div>
 
   <div class="card-body card-block">
-      <div class="form-group">
-          <?php echo $policy ?>          
+    <div class="card">
+      <div class="card-body">
+        <div class="form-group">
+            <?php echo $policy ?>          
+        </div>
       </div>
-      <div class="modal-footer">
-      </div>
-  </div>
-  <input type="submit" name="edit" value="Edit" />  
+      <div class="card-footer">
 
-<script type="text/javascript">
-  $('#btnupd_faculty').on('click', function(){
-      var ffname = $('#ffname_upd').val();
-      var fmname = $('#fmname_upd').val();
-      var flname = $('#flname_upd').val();
-      var fcontact = $('#fcontact_upd').val();
-      var fposition = $('#fposition_upd').val();
-      var fdepCode = $('#fdepCode_upd').val();
-      var fid = $('#profid').val();
-      $.ajax({
-          type: 'post',
-          url: "<?php echo site_url('welcome_admin/editFaculty'); ?>",
-          data: {
-                fname: ffname,
-                mname: fmname,
-                lname: flname,
-                contact: fcontact,
-                position: fposition,
-                depCode: fdepCode,
-                fid : fid
-          },
-        dataType: 'JSON',
-        success: function(data){
-            if (data.status) {
-                alert("Update Succesful!");
-                location.reload();
-                $('#editfaculty').modal('hide');
-            }else{
-                $('.alert').css('display', 'block');
-                $('.alert').html(data.notif);   
-            }
-        },
-        error: function(request, status, error){
-          alert(request.responseText);
-        }
-    });return false;
-  });        
-</script>
+      <button type="button" class="btn btn-outline-info" style="border-radius: 3px;" id="btn_policy" name="btn_policy">Edit</button>
+      </div>
+    </div>
+  </div>
+

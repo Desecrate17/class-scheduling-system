@@ -80,9 +80,11 @@ class welcome_admin extends CI_Controller {
 
 	}
 
-	public function facutime($id){
+	public function facutime(){
+		$id = $this->input->post('tid');
+		$day = $this->input->post('day');
 		$shift = $this->input->post('shift');
-		$result = $this->Admin_model->view_faculty_time2($shift);
+		$result = $this->Admin_model->view_faculty_time2($id, $day, $shift);
 		if(count($result)>0){
 			$data = '';
 			foreach($result as $rows ){
@@ -380,12 +382,25 @@ class welcome_admin extends CI_Controller {
     }
 
 
-    public function update_policy(){
+    public function editPolicy(){
 		$response = array();
-		$data = $this->Admin_model->update_policy();
-		$response['status'] = TRUE;
-		$response[] = $data;
-		echo json_encode($response);
+		$this->form_validation->set_rules('pure', 'Pure Teaching', 'required|numeric');
+		$this->form_validation->set_rules('admin', 'Administrative', 'required|numeric');
+		$this->form_validation->set_rules('ext', 'Research and Extension', 'required|numeric');
+		$this->form_validation->set_rules('head', 'Head', 'required|numeric');
+		$this->form_validation->set_rules('semester', 'Semester', 'required|numeric');
+		$this->form_validation->set_rules('morning', 'Morning', 'required|numeric');
+		$this->form_validation->set_rules('afternoon', 'Afternoon', 'required|numeric');
+		if ($this->form_validation->run() == TRUE) {
+			$data = $this->Admin_model->update_policy();
+			$response['status'] = TRUE;
+			$response[] = $data;
+		}
+		else {
+			$response['status'] = FALSE;
+	    	$response['notif']	= validation_errors();
+		}
+		echo json_encode($response); 
     }
 	
 }

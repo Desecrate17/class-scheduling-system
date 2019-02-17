@@ -80,10 +80,11 @@
 
           $('#day').on('change', function(){
             var day = $(this).val();
-            if(day == ''){
+            if(day == '' || day != '' && shift == ''){
               // $('#shift').attr('disabled', true);
-              $('#time').data('plugin_lwMultiSelect').updateList();    
               $('#time').data('plugin_lwMultiSelect').removeAll();    
+              
+              $('#time').data('plugin_lwMultiSelect').updateList();    
               $('#timezone')[0].reset();
 
 
@@ -110,6 +111,7 @@
 
           $('#time').lwMultiSelect();
           $('#shift').on('change', function(){
+            var tid = $('#profid').val();
             var day = $('#day').val();
             var shift = $(this).val();
             if(day == '' || shift == ''){
@@ -122,7 +124,7 @@
               $.ajax({
                 url: "<?php echo site_url('welcome_admin/facutime'); ?>",
                 type: "POST",
-                data: {'shift':shift},
+                data: {'shift':shift, 'day':day, 'tid':tid},
                 dataType: 'html',
 
                 success: function(data){
@@ -445,6 +447,42 @@
                 });
             });
 
+
+          $('#btn_policy').on('click', function(){
+              var pure = $('#4').val();
+              var admin = $('#5').val();
+              var ext = $('#6').val();
+              var head = $('#16').val();
+              var semester = $('#20').val();
+              var morning = $('#21').val();
+              var afternoon = $('#22').val();
+              $.ajax({
+                  type: 'post',
+                  url: "<?php echo site_url('welcome_admin/editPolicy'); ?>",
+                  data: {
+                        pure : pure,
+                        admin : admin,
+                        ext : ext,
+                        head : head,
+                        semester : semester,
+                        morning : morning,
+                        afternoon : afternoon
+                  },
+                dataType: 'JSON',
+                success: function(data){
+                    if (data.status) {
+                        alert("Update Succesful!");
+                        location.reload();
+                    }else{
+                        $('.alert').css('display', 'block');
+                        $('.alert').html(data.notif);   
+                    }
+                },
+                error: function(request, status, error){
+                  alert(request.responseText);
+                }
+            });return false;
+          });
 
           $('#roombut').on('click', function(){
              var r = document.getElementById('rooms');

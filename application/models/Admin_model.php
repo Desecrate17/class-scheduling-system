@@ -157,16 +157,16 @@ class Admin_model extends CI_Model{
 		}
 	}
 	
-	public function view_faculty_time2($shift){
+	public function view_faculty_time2($tid, $day, $shift){
 		// $query = $this->db->get_where('timee', array('Shift' => $shift));
 		$query = $this->db->query("
-			SELECT DISTINCT t.Time
+			SELECT DISTINCT *
 			FROM timee as t
 			WHERE NOT EXISTS(
-				SELECT * FROM time_list AS tl 
-				INNER JOIN faculty as f ON tl.ProfID = f.ProfID
-			WHERE tl.Time = T.time AND tl.ProfID <> f.ProfID OR t.Shift <> '$shift'
-			GROUP BY tl.Days
+				SELECT * FROM time_list as tl
+				LEFT JOIN faculty as f ON tl.ProfID = f.ProfID
+				WHERE tl.TimeID = t.TimeID AND tl.ProfID = '$tid' OR t.Day <> '$day' OR t.Shift <> '$shift'
+				ORDER BY t.TimeID
 			)
 			");
 		if ($query->num_rows() > 0){
@@ -375,6 +375,20 @@ class Admin_model extends CI_Model{
 		$this->db->where('DepartmentID', $department_id);
 
 		$result = $this->db->update('department');
+		return $result;
+	}
+
+	public function edit_policy(){
+
+		$pure = $this->input->post('pure');
+		$admin = $this->input->post('admin');
+		$ext = $this->input->post('ext');
+		$head = $this->input->post('head');
+		$semester = $this->input->post('semester');
+		$morning = $this->input->post('morning');
+		$afternoon = $this->input->post('afternoon');
+
+		$result = $this->db->update('policy');
 		return $result;
 	}
 
