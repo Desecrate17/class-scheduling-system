@@ -182,7 +182,7 @@
 
 
      $('#btn_faculty').on('click', function(){
-              var ffname = $('#ffname').val();
+              var ffname = $('#ffname').val().trim();
               var fmname = $('#fmname').val();
               var flname = $('#flname').val();
               var fcontact = $('#fcontact').val();

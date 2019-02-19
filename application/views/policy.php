@@ -3,7 +3,7 @@ $policy = '';
 foreach($data as $row){
   $policy .= '<div class="col-12 col-md-4">'.
   '<label class="form-control-label col-12">'.$row->policyName.
-  '<input name="'.$row->id.'" class="form-control" id="'.$row->id.'" value="'.$row->policyValue.'">'.'</div>';  
+  '<input name="'.$row->policyName.'" class="form-control" id="'.$row->id.'" value="'.$row->policyValue.'">'.'</div>';  
   }
 
 ?>

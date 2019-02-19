@@ -61,7 +61,6 @@ class welcome_admin extends CI_Controller {
 		
 		$data['position'] = $this->Admin_model->view_position();
 		$data['day'] = $this->Admin_model->view_faculty_day();
-		$data['time'] = $this->Admin_model->view_faculty_time($id);
 		$this->load->view('template/header');
 		$this->load->view('adminDashboards/viewFaculty',$data);
 		$this->load->view('template/footer');
@@ -88,7 +87,8 @@ class welcome_admin extends CI_Controller {
 		if(count($result)>0){
 			$data = '';
 			foreach($result as $rows ){
-				$data .= '<option value="'.$rows->Time.'">'.$rows->Time.'</option>';
+				$data .= 
+				'<option value="'.$rows->TimeID.'">'.$rows->Time.'</option>';
 			}
 			echo $data;
 		}
@@ -97,9 +97,9 @@ class welcome_admin extends CI_Controller {
 
 	public function addFaculty(){
 		$response = array();
-		$this->form_validation->set_rules('fname', 'First Name', 'required|alpha');
-		$this->form_validation->set_rules('mname', 'Middle Name', 'required|alpha');
-		$this->form_validation->set_rules('lname', 'Last Name', 'required|alpha');
+		$this->form_validation->set_rules('fname', 'First Name', 'required');
+		$this->form_validation->set_rules('mname', 'Middle Name', 'required');
+		$this->form_validation->set_rules('lname', 'Last Name', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			$data = $this->Admin_model->add_faculty();
 			$response['status'] = TRUE;

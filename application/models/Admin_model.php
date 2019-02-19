@@ -71,9 +71,9 @@ class Admin_model extends CI_Model{
 			SELECT DISTINCT tl.TimeLID, t.Time, f.Status, tl.Days
 			FROM faculty as f
 		 	LEFT JOIN time_list as tl ON f.ProfID = tl.ProfID
-		 	LEFT JOIN timee as t ON tl.Time = t.Time
+		 	LEFT JOIN timee as t ON tl.TimeID = t.TimeID
 			WHERE f.ProfID = '$id'
-		 	ORDER BY tl.Days
+		 	ORDER BY tl.TimeID
 
 			");
 		if ($query->num_rows() > 0){
@@ -139,28 +139,11 @@ class Admin_model extends CI_Model{
 			return NULL;
 		}
 	}
-
-	public function view_faculty_time($id){
-		$query = $this->db->query("
-			SELECT DISTINCT t.Time
-			FROM timee as t
-			WHERE NOT EXISTS(
-				SELECT * FROM time_list AS tl 
-				LEFT JOIN faculty as f ON tl.ProfID = f.ProfID
-    			WHERE tl.time = t.time AND tl.ProfID = '$id'
-			)
-			");
-		if ($query->num_rows() > 0){
-			return $query->result();
-		}else{
-			return NULL;
-		}
-	}
 	
 	public function view_faculty_time2($tid, $day, $shift){
 		// $query = $this->db->get_where('timee', array('Shift' => $shift));
 		$query = $this->db->query("
-			SELECT DISTINCT *
+			SELECT DISTINCT t.Time, t.TimeID
 			FROM timee as t
 			WHERE NOT EXISTS(
 				SELECT * FROM time_list as tl
@@ -336,9 +319,10 @@ class Admin_model extends CI_Model{
 		$this->db->set('ProfID', $faculty_id);
 		$this->db->set('Days', $day);
 		$this->db->set('Shift', $shift);
-		$this->db->set('Time', $time);
+		$this->db->set('TimeID', $time);
 		$this->db->insert('time_list');
 	}
+
 //-- ADD MODEL END
 
 
@@ -387,6 +371,7 @@ class Admin_model extends CI_Model{
 		$semester = $this->input->post('semester');
 		$morning = $this->input->post('morning');
 		$afternoon = $this->input->post('afternoon');
+
 
 		$result = $this->db->update('policy');
 		return $result;
